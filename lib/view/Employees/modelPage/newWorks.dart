@@ -1,11 +1,14 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
-import 'package:homesefty/core/Colors%20,%20Width%20,%20Hight/colors&size.dart';
+import 'package:homesefty/core/size/colors&size.dart';
 
 class NewworkModel extends StatelessWidget {
   const NewworkModel({super.key});
 
   @override
   Widget build(BuildContext context) {
+    // ignore: no_leading_underscores_for_local_identifiers
     var _mediaQury = MediaQuery.of(context);
     return Padding(
       padding: const EdgeInsets.all(8.0),
@@ -31,18 +34,18 @@ class NewworkModel extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Container(
+                  const Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: SizedBox(
                       width: 80,
                       height: 90,
                       // color: Colors.amber,
-                      child: const CircleAvatar(
+                      child: CircleAvatar(
                         radius: 90,
                       ),
                     ),
                   ),
-                  Container(
+                  SizedBox(
                     // color: Colors.amber,
                     width: 260,
                     height: _mediaQury.size.height * .2,
@@ -83,14 +86,14 @@ class NewworkModel extends StatelessWidget {
                   ),
                 ],
               ),
-              Container(
+              SizedBox(
                 width: double.infinity,
                 // color: Colors.black,
                 height: _mediaQury.size.height * .05,
                 child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Container(
+                      SizedBox(
                         width: _mediaQury.size.width * 0.4,
                         child: ElevatedButton(
                             style: ElevatedButton.styleFrom(

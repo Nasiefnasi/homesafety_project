@@ -1,5 +1,7 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
-import 'package:homesefty/core/Colors%20,%20Width%20,%20Hight/colors&size.dart';
+import 'package:homesefty/core/size/colors&size.dart';
 import 'package:homesefty/core/textFromFild/textFormfiledWidget.dart';
 import 'package:homesefty/view/Employees/mainEmployeeDesignPage/home.dart';
 
@@ -8,9 +10,10 @@ class WalletPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // ignore: no_leading_underscores_for_local_identifiers
     var _mediaqury = MediaQuery.of(context);
     return Scaffold(
-      drawer: NewDrawer(),
+      drawer: const NewDrawer(),
       body: SafeArea(
           child: SizedBox(
         width: _mediaqury.size.width,
@@ -31,10 +34,9 @@ class WalletPage extends StatelessWidget {
             Stack(
               children: [
                 SizedBox(
-                  child: Image.asset('asset/animation/6081546-01-01.png'),
-                  // color: Colors.amber,
                   width: _mediaqury.size.width * .85,
                   height: _mediaqury.size.height * .29,
+                  child: Image.asset('asset/animation/6081546-01-01.png'),
                 ),
                 const Padding(
                   padding: EdgeInsets.only(top: 100, left: 190),
@@ -61,14 +63,6 @@ class WalletPage extends StatelessWidget {
             hight20,
             Expanded(
               child: Container(
-                child: ListView.builder(
-                  itemCount: 11,
-                  itemBuilder: (context, index) {
-                    return SuccessfulPaymentListModel(
-                      indexss: index * 26 - 1,
-                    );
-                  },
-                ),
                 decoration: const BoxDecoration(
                   color: Color.fromARGB(255, 10, 67, 58),
                   borderRadius: BorderRadius.vertical(
@@ -77,6 +71,14 @@ class WalletPage extends StatelessWidget {
                 ),
                 // color: Colors.amberAccent,
                 width: _mediaqury.size.width,
+                child: ListView.builder(
+                  itemCount: 11,
+                  itemBuilder: (context, index) {
+                    return SuccessfulPaymentListModel(
+                      indexss: index * 26 - 1,
+                    );
+                  },
+                ),
               ),
             )
           ],

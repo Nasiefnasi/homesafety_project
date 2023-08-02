@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:homesefty/core/Colors%20,%20Width%20,%20Hight/colors&size.dart';
+import 'package:homesefty/core/size/colors&size.dart';
 
 import 'package:homesefty/core/textFromFild/textFormfiledWidget.dart';
 import 'package:homesefty/view/Design%20Page/sign_inPage.dart';
-import 'package:homesefty/view/Employees/mainEmployeeDesignPage/profilAddres.dart';
+import 'package:homesefty/view/Employees/mainEmployeeDesignPage/employeprofiledetailspage.dart';
 import 'package:lottie/lottie.dart';
 
 class AdminLoginPage extends StatelessWidget {
@@ -98,7 +98,7 @@ class AdminLoginPage extends StatelessWidget {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => const SignPage(),
+                              builder: (context) =>  SignPage(),
                             ));
                       },
                       child: const Text(

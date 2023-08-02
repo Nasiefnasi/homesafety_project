@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1083915279701",
+    "project_id": "homesafety-a9702",
+    "storage_bucket": "homesafety-a9702.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1083915279701:android:0d7d628511fe8b743863dc",
+        "android_client_info": {
+          "package_name": "com.example.homesefty"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1083915279701-13dik357albpgub0tpt78ks61oqescbb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA1_RdZwfwgLp4qNqtwujBT2_3nlWfFw5g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1083915279701-13dik357albpgub0tpt78ks61oqescbb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,13 +1,16 @@
+// ignore_for_file: prefer_typing_uninitialized_variables
+
 import 'package:flutter/material.dart';
 // import 'package:flutter_chat_ui/flutter_chat_ui.dart';
-import 'package:homesefty/core/Colors%20,%20Width%20,%20Hight/colors&size.dart';
+import 'package:homesefty/core/size/colors&size.dart';
 import 'package:homesefty/view/Employees/mainEmployeeDesignPage/chatPage.dart';
 
 class TextFormfildWidget extends StatelessWidget {
   const TextFormfildWidget(
-      {super.key, required this.hinttext, required this.Iconss});
+      {super.key, required this.hinttext, required this.Iconss, this.contro});
   final hinttext;
   final Iconss;
+  final contro;
 
   @override
   Widget build(BuildContext context) {
@@ -19,6 +22,7 @@ class TextFormfildWidget extends StatelessWidget {
           shadowColor: Colors.blue,
           elevation: 5,
           child: TextFormField(
+            controller: contro,
             decoration: InputDecoration(
               border: InputBorder.none,
               hintText: hinttext,
@@ -41,39 +45,48 @@ class TextFormfildWidget extends StatelessWidget {
 //   }
 // }
 
-class DetailsProfilepage extends StatefulWidget {
+class DetailsProfilepage extends StatelessWidget {
   const DetailsProfilepage({
     super.key,
-    required this.hinttext,
+     this.hinttext,
     this.line,
     this.widths,
+    this.validatormessage, this.keybord, this.initialvalu, required this.contros,
   });
   final hinttext;
   final line;
   final widths;
+  final TextEditingController  contros;
+  final validatormessage;
+  final keybord;
+  final initialvalu;
 
-  @override
-  State<DetailsProfilepage> createState() => _DetailsProfilepageState();
-}
-
-class _DetailsProfilepageState extends State<DetailsProfilepage> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
+      padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
       child: Container(
-        width: widget.widths ?? double.infinity,
+        width: widths ?? double.infinity,
+        
         child: Card(
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
-          shadowColor: Colors.blue,
+          // shadowColor: const Color.fromARGB(255, 161, 161, 161),
           elevation: 5,
           child: Padding(
-            padding: const EdgeInsets.only(left: 15),
-            child: TextField(
-              decoration: InputDecoration(
-                  border: InputBorder.none, hintText: widget.hinttext),
-              maxLines: widget.line ?? null,
+            padding: EdgeInsets.all(15),
+            child: TextFormField( 
+              validator:  (value) {
+                  if (value == null || value.isEmpty) {
+                    return validatormessage ;
+                  }
+                  return null;
+                },
+              controller: contros,
+              decoration:
+                  InputDecoration( border: InputBorder.none, hintText: hinttext, hintStyle: TextStyle()),
+              maxLines: line ?? 1,
+              keyboardType: keybord ,
             ),
           ),
         ),
@@ -116,6 +129,7 @@ class _ChosseOptionPageState extends State<ChosseOptionPage> {
                   child: Text(valueitem),
                 );
               }).toList(),
+              // ignore: non_constant_identifier_names
               onChanged: (Newvalue) {
                 setState(() {
                   valuechoose = Newvalue;
@@ -136,6 +150,7 @@ class UserStatusLevel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // ignore: no_leading_underscores_for_local_identifiers
     void _showbottomStatusLeve() {
       showModalBottomSheet(
         shape: const RoundedRectangleBorder(
@@ -147,16 +162,22 @@ class UserStatusLevel extends StatelessWidget {
         context: context,
         builder: (context) {
           return Container(
-            decoration: BoxDecoration(
-                color: Colors.green,
+            decoration: const BoxDecoration(
+                color: Color.fromARGB(255, 241, 246, 242),
                 borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
             width: double.infinity,
             height: 200,
             child: Column(children: [
+              hight20,
               Text(
                 'Status Level',
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-              )
+              ),
+              hight20,
+              Container(
+                  height: 100,
+                  width: 500,
+                  child: Image.asset('asset/animation/status 2.png'))
             ]),
           );
         },
@@ -190,7 +211,7 @@ class UserStatusLevel extends StatelessWidget {
                     context: context,
                     builder: (BuildContext context) {
                       return AlertDialog(
-                        title: Text('Select your Option'),
+                        title: const Text('Select your Option'),
                         shadowColor: Colors.black,
                         actions: [
                           Row(
@@ -199,22 +220,22 @@ class UserStatusLevel extends StatelessWidget {
                                   onPressed: () {
                                     _showbottomStatusLeve();
                                   },
-                                  child: Text(
+                                  child: const Text(
                                     "Status Level",
                                     style: TextStyle(
                                         color: Color.fromARGB(255, 3, 108, 6),
                                         fontSize: 20),
                                   )),
-                              Divider(thickness: 2),
+                              const Divider(thickness: 2),
                               TextButton(
                                   onPressed: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (context) => Chatpage(),
-                                        ));
+                                    // Navigator.push(
+                                    //     context,
+                                    //     // MaterialPageRoute(
+                                    //     //   // builder: (context) => ,
+                                    // ));
                                   },
-                                  child: Text(
+                                  child: const Text(
                                     "   Chat",
                                     style: TextStyle(
                                         color: Color.fromARGB(255, 3, 108, 6),
@@ -331,7 +352,7 @@ class WorkEmployeesAvailable extends StatelessWidget {
                 // ),
                 Spacer(),
                 Text(
-                  'Status',
+                  'Details',
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 15,

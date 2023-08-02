@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:homesefty/view/Design%20Page/loginpage.dart';
-import 'package:homesefty/view/Employees/mainEmployeeDesignPage/hiddenDrawer.dart';
-import 'package:homesefty/view/Employees/mainEmployeeDesignPage/home.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -16,7 +14,7 @@ class _SplashScreenState extends State<SplashScreen> {
     // TODO: implement initState
     super.initState();
     Future.delayed(
-      Duration(seconds: 5),
+      const Duration(seconds: 1),
       () => Navigator.push(
           context,
           MaterialPageRoute(

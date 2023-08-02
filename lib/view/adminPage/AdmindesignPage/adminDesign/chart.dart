@@ -1,10 +1,12 @@
+// import 'package:fl_chart/fl_chart.dart';?
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
 class MyPieChart extends StatelessWidget {
   final List<double> data; // List of data values for the pie chart
 
-  MyPieChart(this.data);
+  // ignore: use_key_in_widget_constructors
+  const MyPieChart(this.data);
 
   @override
   Widget build(BuildContext context) {

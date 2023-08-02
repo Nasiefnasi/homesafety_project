@@ -2,24 +2,18 @@
 
 import 'package:flutter/material.dart';
 import 'package:homesefty/view/Employees/bottomNavBar/bottomNavBarModel.dart';
-import 'package:homesefty/view/Employees/mainEmployeeDesignPage/paymentRequestPage.dart';
-import 'package:homesefty/view/User/designPage/employeesDetailsPage.dart';
 import 'package:homesefty/view/User/designPage/history.dart';
-import 'package:homesefty/view/User/designPage/homepage.dart';
+import 'package:homesefty/view/User/designPage/homePage/homepage.dart';
 import 'package:homesefty/view/User/designPage/paymentRequest.dart';
 import 'package:homesefty/provider/navBar.dart';
 import 'package:provider/provider.dart';
 
 class BottoNavBar extends StatelessWidget {
   BottoNavBar({super.key});
-  List<Widget> pageList = const [
-    UserHomePage(), UserPaymentRequestPage(), UserHistoryPage(),
-
-    // Home(),
-    // Favorite(),
-    // // All_songlist(),
-    // All_songlist(),
-    // history_listt(),
+  List<Widget> pageList = [
+    const UserHomePage(),
+    const UserPaymentRequestPage(),
+    const UserHistoryPage(),
   ];
 
   @override
@@ -27,14 +21,15 @@ class BottoNavBar extends StatelessWidget {
     return Consumer<NavBar>(
       builder: (context, value, child) {
         return Scaffold(
+            drawer: UserNewDrawer(),
             body: pageList[value.pageIndex],
             // backgroundColor: Color.fromARGB(0, 76, 76, 76),
             bottomNavigationBar: SafeArea(
                 child: Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.symmetric(horizontal: 10),
               child: Container(
                 height: 65,
-                margin: const EdgeInsets.all(12),
+                margin: const EdgeInsets.only(bottom: 15),
                 padding: const EdgeInsets.symmetric(horizontal: 10),
                 decoration: const BoxDecoration(
                     gradient: LinearGradient(

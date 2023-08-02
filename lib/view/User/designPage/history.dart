@@ -9,7 +9,7 @@ class UserHistoryPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text('History'),
+        title: const Text('History'),
       ),
       body: SafeArea(
           child: ListView.builder(

@@ -1,9 +1,14 @@
+// ignore_for_file: must_be_immutable, file_names
+
 import 'package:flutter/material.dart';
-import 'package:homesefty/Core/Colors%20,%20Width%20,%20Hight/colors&size.dart';
-import 'package:homesefty/view/adminPage/AdmindesignPage/adminDesign/chart.dart';
+// import 'package:homesefty/Core/Colors%20,%20Width%20,%20Hight/colors&size.dart';
+import 'package:homesefty/core/size/colors&size.dart';
+// import 'package:homesefty/view/adminPage/AdmindesignPage/adminDesign/chart.dart';
 import 'package:lottie/lottie.dart';
 
 class AdminHomePage extends StatelessWidget {
+  
+  
   AdminHomePage({super.key});
 
   @override
@@ -23,11 +28,11 @@ class AdminHomePage extends StatelessWidget {
               ),
               const Spacer(),
               const CircleAvatar(
+                radius: 30,
                 child: CircleAvatar(
                   radius: 25,
                   backgroundColor: Colors.amber,
                 ),
-                radius: 30,
               ),
             ],
           ),
@@ -41,10 +46,12 @@ class AdminHomePage extends StatelessWidget {
                 color: Colors.white,
               ),
               width: double.infinity,
+              height: 160,
               child: Row(
                 children: [
                   Expanded(
                     child: Container(
+                      color: Colors.white,
                       child: Column(
                         children: [
                           Container(
@@ -69,26 +76,27 @@ class AdminHomePage extends StatelessWidget {
                           )
                         ],
                       ),
-                      color: Colors.white,
                     ),
                   ),
                   Expanded(
                     child: Container(
+                      color: Colors.white,
                       child: Padding(
                         padding: const EdgeInsets.all(15.0),
                         child: Lottie.asset(
                             'asset/animation/animation_lk3s1v1o.json'),
                       ),
-                      color: Colors.white,
                     ),
                   ),
                 ],
               ),
-              height: 160,
             ),
           ),
           hight20,
           Container(
+            height: 50,
+            width: double.infinity,
+            color: const Color.fromARGB(103, 158, 158, 158),
             child: const Padding(
               padding: EdgeInsets.all(8.0),
               child: SingleChildScrollView(
@@ -104,19 +112,18 @@ class AdminHomePage extends StatelessWidget {
                 ),
               ),
             ),
-            height: 50,
-            width: double.infinity,
-            color: const Color.fromARGB(103, 158, 158, 158),
           ),
           Expanded(
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Container(
-                child: Column(
-                  children: [MyPieChart(data)],
-                ),
-                color: Color.fromARGB(37, 245, 245, 245),
+                color: const Color.fromARGB(37, 245, 245, 245),
                 width: double.infinity,
+                child: const Column(
+                  children: [
+                    
+                  ],
+                ),
               ),
             ),
           ),
@@ -125,7 +132,7 @@ class AdminHomePage extends StatelessWidget {
             children: [
               Wrap(
                 children: [
-                  Text(
+                  const Text(
                     'Blue',
                     style: TextStyle(
                         fontSize: 20,
@@ -142,7 +149,7 @@ class AdminHomePage extends StatelessWidget {
               ),
               Wrap(
                 children: [
-                  Text(
+                  const Text(
                     'Blue',
                     style: TextStyle(
                         fontSize: 20,
@@ -159,7 +166,7 @@ class AdminHomePage extends StatelessWidget {
               ),
               Wrap(
                 children: [
-                  Text(
+                  const Text(
                     'Blue',
                     style: TextStyle(
                         fontSize: 20,
@@ -176,7 +183,7 @@ class AdminHomePage extends StatelessWidget {
               ),
               Wrap(
                 children: [
-                  Text(
+                  const Text(
                     'Blue',
                     style: TextStyle(
                         fontSize: 20,
@@ -211,11 +218,11 @@ class AdminHomePageScrollModel extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 2),
       child: Container(
-        child: const Center(child: Text("data")),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10), color: Colors.amber),
         width: 130,
         height: double.infinity,
+        child: const Center(child: Text("data")),
       ),
     );
   }

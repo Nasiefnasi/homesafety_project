@@ -1,5 +1,7 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
-import 'package:homesefty/core/Colors%20,%20Width%20,%20Hight/colors&size.dart';
+import 'package:homesefty/core/size/colors&size.dart';
 
 import 'package:homesefty/core/textFromFild/textFormfiledWidget.dart';
 import 'package:homesefty/view/Design%20Page/loginpage.dart';
@@ -10,6 +12,7 @@ class AdminSignPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // ignore: no_leading_underscores_for_local_identifiers
     var _mediaqury = MediaQuery.of(context);
     return Scaffold(
       // resizeToAvoidBottomInset: false,
@@ -24,6 +27,7 @@ class AdminSignPage extends StatelessWidget {
               children: [
                 hight30, hight30,
 
+                // ignore: sized_box_for_whitespace
                 Container(
                   width: _mediaqury.size.width * 0.80,
                   height: _mediaqury.size.width * 0.50,
@@ -73,7 +77,7 @@ class AdminSignPage extends StatelessWidget {
                     hinttext: 'Name', Iconss: Icon(Icons.mail)),
                 const TextFormfildWidget(
                     hinttext: 'E-mail', Iconss: Icon(Icons.mail)),
-                TextFormfildWidget(
+                const TextFormfildWidget(
                     hinttext: 'Password', Iconss: Icon(Icons.lock)),
 
                 hight10,

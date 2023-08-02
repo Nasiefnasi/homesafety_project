@@ -1,8 +1,12 @@
+// ignore_for_file: non_constant_identifier_names, prefer_typing_uninitialized_variables
+
 import 'package:flutter/material.dart';
+import 'package:homesefty/view/Employees/mainEmployeeDesignPage/ratingPage.dart';
+
 
 import 'package:homesefty/view/Employees/modelPage/PandingWorkmodel.dart';
 import 'package:homesefty/view/Employees/modelPage/employeRatingModelPage.dart';
-import 'package:homesefty/core/Colors%20,%20Width%20,%20Hight/colors&size.dart';
+import 'package:homesefty/core/size/colors&size.dart';
 
 class EmployesHome extends StatefulWidget {
   const EmployesHome({super.key});
@@ -15,10 +19,11 @@ class _EmployesHomeState extends State<EmployesHome> {
   @override
   Widget build(BuildContext context) {
     bool ischange = false;
+    // ignore: no_leading_underscores_for_local_identifiers
     var _mediaqury = MediaQuery.of(context);
     return Scaffold(
       // backgroundColor: const Color.fromARGB(255, 22, 58, 61),
-      drawer: NewDrawer(),
+      drawer: const NewDrawer(),
       // appBar: AppBar(
       //   backgroundColor: Color.fromARGB(255, 9, 88, 97),
       //   title: const Center(child: Text('Home')),
@@ -39,6 +44,7 @@ class _EmployesHomeState extends State<EmployesHome> {
               decoration: const BoxDecoration(
                   color: Color.fromARGB(205, 3, 110, 120),
                   borderRadius: BorderRadius.all(Radius.circular(50))),
+              // ignore: sort_child_properties_last
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Row(
@@ -75,22 +81,43 @@ class _EmployesHomeState extends State<EmployesHome> {
           //     itemCount: 10,
           //   ),
           // ),
+          const Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                'Rating',
+                style: TextStyle(
+                    fontWeight: FontWeight.w600,
+                    fontSize: 20,
+                    color: Color.fromARGB(255, 87, 89, 90)),
+              ),
+            ),
+          ),
 
           Container(
             decoration: const BoxDecoration(
                 color: Color.fromARGB(8, 18, 255, 69),
                 borderRadius: BorderRadius.all(Radius.circular(1))),
+            height: _mediaqury.size.height * .25,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
               itemBuilder: (context, index) {
                 return SizedBox(
                     width: _mediaqury.size.width * 1,
-                    child: const RatingEmployessPage());
+                    child: GestureDetector(
+                        onTap: () {
+                          Navigator.push(context, MaterialPageRoute(
+                            builder: (context) {
+                              return const RatingPag();
+                            },
+                          ));
+                        },
+                        child: const RatingEmployessPage()));
               },
               itemCount: 10,
               shrinkWrap: false,
             ),
-            height: _mediaqury.size.height * .25,
             // color: const Color.fromARGB(71, 21, 236, 129),
           ),
           hight10,
@@ -141,7 +168,7 @@ class NewDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      backgroundColor: Color.fromARGB(255, 4, 73, 57),
+      backgroundColor: const Color.fromARGB(255, 3, 55, 64),
       child: Column(children: [
         hight30,
         hight30,
@@ -160,7 +187,7 @@ class NewDrawer extends StatelessWidget {
         hight20,
         const ListTile(
           leading: Icon(
-            Icons.abc,
+            Icons.person,
             size: 35,
             color: Colors.white,
           ),
@@ -174,7 +201,7 @@ class NewDrawer extends StatelessWidget {
         ),
         const ListTile(
           leading: Icon(
-            Icons.abc,
+            Icons.room_preferences_outlined,
             size: 35,
             color: Colors.white,
           ),

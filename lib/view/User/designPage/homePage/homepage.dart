@@ -1,63 +1,66 @@
+// ignore_for_file: prefer_typing_uninitialized_variables
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_chat_ui/flutter_chat_ui.dart';
-import 'package:homesefty/core/Colors%20,%20Width%20,%20Hight/colors&size.dart';
-// import 'package:homesefty/Core/Colors%20,%20Width%20,%20Hight/colors&size.dart';
+import 'package:get/get.dart';
+import 'package:homesefty/controller/user/getxController/authcontroler/authcontroler.dart';
+import 'package:homesefty/core/size/colors&size.dart';
 import 'package:homesefty/core/textFromFild/textFormfiledWidget.dart';
-import 'package:homesefty/view/Employees/mainEmployeeDesignPage/home.dart';
 import 'package:homesefty/view/User/designPage/setDatenadtime.dart';
+import 'package:homesefty/view/User/userpersonaletailspage/userpersonaldetails.dart';
 import 'package:lottie/lottie.dart';
 
 class UserHomePage extends StatelessWidget {
   const UserHomePage({super.key});
-
   @override
   Widget build(BuildContext context) {
-    var _mediaqury = MediaQuery.of(context);
+    var mediaqury = MediaQuery.of(context);
     return Scaffold(
-      drawer: const UserNewDrawer(Colorss: Colors.accents),
+      drawer: UserNewDrawer(colorss: Colors.accents),
       appBar: AppBar(),
       body: SafeArea(
         child: Column(
-          // mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
-              width: 120,
-              height: 80,
-              color: Colors.green,
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: Container(
+                width: 80,
+                height: 80,
+                child: Image.asset('asset/animation/LOGO-01.png'),
+              ),
             ),
             SizedBox(
               width: double.infinity,
-              height: _mediaqury.size.height * .10,
+              height: mediaqury.size.height * .10,
               // color: Colors.amber,
               child: const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 10),
                 child: Text(
                   'Which service do you \nneed?',
-                  style: TextStyle(fontSize: 36, fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                 ),
               ),
             ),
             SizedBox(
-              width: _mediaqury.size.width * 9,
+              width: mediaqury.size.width * 9,
               // color: Colors.red,
-              height: _mediaqury.size.height * .35,
+              height: mediaqury.size.height * .35,
               child: GridView.count(
                   crossAxisCount: 3,
                   crossAxisSpacing: 4.0,
                   mainAxisSpacing: 8.0,
                   children: [
                     UserHomePageWorks(
-                        mediaqury: _mediaqury, workname: 'Electronics'),
+                        mediaqury: mediaqury, workname: 'Electronics'),
                     UserHomePageWorks(
-                        mediaqury: _mediaqury, workname: 'Painter'),
+                        mediaqury: mediaqury, workname: 'Painter'),
                     UserHomePageWorks(
-                        mediaqury: _mediaqury, workname: 'Plumber'),
+                        mediaqury: mediaqury, workname: 'Plumber'),
+                    UserHomePageWorks(mediaqury: mediaqury, workname: 'Driver'),
                     UserHomePageWorks(
-                        mediaqury: _mediaqury, workname: 'Driver'),
-                    UserHomePageWorks(
-                        mediaqury: _mediaqury, workname: 'Gardener'),
-                    UserHomePageWorks(mediaqury: _mediaqury, workname: 'Cook'),
+                        mediaqury: mediaqury, workname: 'Gardener'),
+                    UserHomePageWorks(mediaqury: mediaqury, workname: 'Cook'),
                   ]),
             ),
             const Padding(
@@ -74,13 +77,13 @@ class UserHomePage extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Container(
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                       color: Colors.amber,
                       borderRadius:
-                          BorderRadius.vertical(top: Radius.circular(20))),
+                          BorderRadius.vertical(top: Radius.circular(10))),
                   child: ListView.builder(
                     itemBuilder: (context, index) {
-                      return UserStatusLevel();
+                      return const UserStatusLevel();
                     },
                     itemCount: 10,
                   ),
@@ -95,7 +98,7 @@ class UserHomePage extends StatelessWidget {
 }
 
 class UserHomePageWorks extends StatelessWidget {
-  const UserHomePageWorks({
+  UserHomePageWorks({
     super.key,
     required MediaQueryData mediaqury,
     required this.workname,
@@ -106,16 +109,18 @@ class UserHomePageWorks extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // ignore: unused_local_variable
+    var mediaqury = MediaQuery.of(context).size;
     return GestureDetector(
       onTap: () {
         Navigator.push(context, MaterialPageRoute(
           builder: (context) {
-            return ScheduleTimeAndDate();
+            return const ScheduleTimeAndDate();
           },
         ));
       },
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(10.0),
         child: Container(
           clipBehavior: Clip.hardEdge,
           child: Wrap(
@@ -153,39 +158,48 @@ class UserHomePageWorks extends StatelessWidget {
 }
 
 class UserNewDrawer extends StatelessWidget {
-  const UserNewDrawer({
+  UserNewDrawer({
     super.key,
-    this.Colorss,
+    this.colorss,
   });
-  final Colorss;
+  final colorss;
+  final control = Get.put(Authcontroller());
 
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      backgroundColor: Color.fromARGB(255, 4, 73, 57),
+      backgroundColor: const Color.fromARGB(255, 166, 126, 4),
       child: Column(children: [
         hight30,
         hight30,
         hight30,
-        Container(
-          decoration: BoxDecoration(
-              border: Border.all(
-                width: 6,
-                color: Colors.white,
-              ),
-              color: const Color.fromARGB(255, 5, 112, 92),
-              borderRadius: BorderRadius.circular(20)),
-          width: 160,
-          height: 160,
+        StreamBuilder<QuerySnapshot>(
+          stream:FirebaseFirestore.instance.collection('userdetails').snapshots(),
+          builder: (context,AsyncSnapshot<QuerySnapshot> snapshot) {
+            return Container(
+              decoration: BoxDecoration(
+                  border: Border.all(
+                    width: 6,
+                    color: Colors.white,
+                  ),
+                  color: const Color.fromARGB(255, 5, 112, 92),
+                  borderRadius: BorderRadius.circular(20)),
+              width: 160,
+              height: 160,
+              child: Image.network(snapshot.data!.docs.first['imageUrl'],fit: BoxFit.cover,),
+            );
+          }
         ),
         hight20,
-        const ListTile(
-          leading: Icon(
-            Icons.abc,
+        ListTile(onTap: () {
+          Get.to(PersonalDetailsPage() );
+        },
+          leading: const Icon(
+            Icons.person,
             size: 25,
             color: Colors.white,
           ),
-          title: Text(
+          title: const Text(
             'Personal Details',
             style: TextStyle(
               fontSize: 18,
@@ -195,7 +209,7 @@ class UserNewDrawer extends StatelessWidget {
         ),
         const ListTile(
           leading: Icon(
-            Icons.abc,
+            Icons.payments_rounded,
             size: 25,
             color: Colors.white,
           ),
@@ -209,7 +223,7 @@ class UserNewDrawer extends StatelessWidget {
         ),
         const ListTile(
           leading: Icon(
-            Icons.abc,
+            Icons.room_preferences_outlined,
             size: 25,
             color: Colors.white,
           ),
@@ -235,13 +249,56 @@ class UserNewDrawer extends StatelessWidget {
             ),
           ),
         ),
-        const ListTile(
-          leading: Icon(
+        ListTile(
+          onTap: () {
+            Get.bottomSheet(
+                Wrap(
+                  children: [
+                    ListTile(
+                      leading: const Icon(Icons.abc),
+                      title: const Text('Light Theme',
+                          style: TextStyle(fontWeight: FontWeight.bold)),
+                      onTap: () {
+                        Get.changeTheme(ThemeData.light());
+                      },
+                    ),
+                    ListTile(
+                      leading: const Icon(Icons.abc),
+                      title: const Text(
+                        'Dark Theme',
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      onTap: () {
+                        Get.changeTheme(ThemeData.dark());
+                      },
+                    ),
+                  ],
+                ),
+                backgroundColor: Colors.amber);
+          },
+          leading: const Icon(
+            Icons.sunny,
+            size: 25,
+            color: Colors.white,
+          ),
+          title: const Text(
+            'Theme change',
+            style: TextStyle(
+              fontSize: 18,
+              color: Colors.white,
+            ),
+          ),
+        ),
+        ListTile(
+          onTap: () {
+            control.signout(context);
+          },
+          leading: const Icon(
             Icons.logout,
             size: 25,
             color: Colors.white,
           ),
-          title: Text(
+          title: const Text(
             'Log Out',
             style: TextStyle(
               fontSize: 18,

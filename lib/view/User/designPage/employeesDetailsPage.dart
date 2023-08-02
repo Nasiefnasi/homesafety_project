@@ -1,8 +1,11 @@
 // import 'dart:js';
 
+// ignore_for_file: no_leading_underscores_for_local_identifiers, file_names
+
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 // import 'package:flutter_chat_ui/flutter_chat_ui.dart';
-import 'package:homesefty/core/Colors%20,%20Width%20,%20Hight/colors&size.dart';
+import 'package:homesefty/core/size/colors&size.dart';
 
 class EmployeesDetailsPage extends StatelessWidget {
   const EmployeesDetailsPage({super.key});
@@ -12,7 +15,7 @@ class EmployeesDetailsPage extends StatelessWidget {
     var _mediaqury = MediaQuery.of(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text('Employees info'),
+        title: const Text('Employees info'),
       ),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -36,9 +39,9 @@ class EmployeesDetailsPage extends StatelessWidget {
                     ),
                   ),
                 ),
-                Center(
-                    child: ElevatedButton(
-                        onPressed: () {}, child: Text('Add image'))),
+                // Center(
+                //     child: ElevatedButton(
+                //         onPressed: () {}, child: Text('Add image'))),
                 const Padding(
                   padding: EdgeInsets.all(8.0),
                   child: Text(
@@ -79,8 +82,8 @@ class EmployeesDetailsPage extends StatelessWidget {
                         borderRadius: BorderRadius.circular(20),
                         //set border radius more than 50% of height and width to make circle
                       ),
-                      color: Color.fromARGB(131, 185, 212, 247),
-                      child: Column(
+                      color: const Color.fromARGB(131, 185, 212, 247),
+                      child: const Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Padding(
@@ -102,10 +105,10 @@ class EmployeesDetailsPage extends StatelessWidget {
                   width: _mediaqury.size.width * .5,
                   // height: _mediaqury.size.height * .1,
                   child: ElevatedButton(
-                      style: ButtonStyle(
+                      style: const ButtonStyle(
                           backgroundColor: MaterialStatePropertyAll(
-                              const Color.fromARGB(255, 3, 67, 120))),
-                      onPressed: () {},
+                              Color.fromARGB(255, 3, 67, 120))),
+                      onPressed: () {Get.snackbar("Message Success", "message");},
                       child: const Text(
                         'Conform',
                         style: TextStyle(fontSize: 25),

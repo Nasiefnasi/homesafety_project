@@ -1,10 +1,9 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_chat_ui/flutter_chat_ui.dart';
-import 'package:homesefty/core/Colors%20,%20Width%20,%20Hight/colors&size.dart';
-import 'package:homesefty/view/Employees/mainEmployeeDesignPage/notcompletedlist.dart';
-import 'package:homesefty/view/Employees/mainEmployeeDesignPage/paymentRequestPage.dart';
-import 'package:lottie/lottie.dart';
+// ignore_for_file: no_leading_underscores_for_local_identifiers
 
+import 'package:flutter/material.dart';
+// import 'package:flutter_chat_ui/flutter_chat_ui.dart';
+import 'package:homesefty/core/size/colors&size.dart';import 'package:homesefty/view/Employees/mainEmployeeDesignPage/paymentRequestPage.dart';
+import 'package:lottie/lottie.dart';
 class PandingworkStatusPPage extends StatelessWidget {
   const PandingworkStatusPPage({super.key});
 
@@ -30,7 +29,7 @@ class PandingworkStatusPPage extends StatelessWidget {
             child: Stack(
               alignment: Alignment.centerLeft,
               children: [
-                Container(
+                SizedBox(
                   height: 300,
                   width: 300,
                   child: Image.asset(
@@ -43,7 +42,7 @@ class PandingworkStatusPPage extends StatelessWidget {
                     style: TextStyle(fontSize: 33, fontWeight: FontWeight.w900),
                   ),
                 ),
-                Container(
+                SizedBox(
                   width: 600,
                   height: 600,
                   child: Column(
@@ -73,11 +72,11 @@ class PandingworkStatusPPage extends StatelessWidget {
                           padding: const EdgeInsets.only(
                             right: 50,
                           ),
-                          child: Container(
-                            child: Lottie.asset(
-                                'asset/animation/animation_lk3s1v1o.json'),
+                          child: SizedBox(
                             width: 110,
                             height: 110,
+                            child: Lottie.asset(
+                                'asset/animation/animation_lk3s1v1o.json'),
                             // color: Colors.amberAccent,
                           ),
                         ),
@@ -89,6 +88,7 @@ class PandingworkStatusPPage extends StatelessWidget {
                           //     MaterialPageRoute(
                           //       builder: (context) =>,
                           //     )),
+                          
                           child: const Padding(
                             padding: EdgeInsets.only(right: 50),
                             child: Text(
@@ -113,12 +113,12 @@ class PandingworkStatusPPage extends StatelessWidget {
                                       Color.fromARGB(255, 17, 181, 240),
                                     ),
                                   ),
-                                  onPressed: () => Navigator.pushAndRemoveUntil(
+                                  onPressed: () => Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                        builder: (context) => PaymentRequest(),
+                                        builder: (context) => const PaymentRequest(),
                                       ),
-                                      (route) => false),
+                                      ),
                                   child: const Text(
                                     'End',
                                     style: TextStyle(fontSize: 20),
@@ -139,11 +139,11 @@ class PandingworkStatusPPage extends StatelessWidget {
       },
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 5),
-        child: Container(
+        child: SizedBox(
           width: double.infinity,
           height: 90,
           child: Card(
-            color: Color.fromARGB(255, 227, 227, 227),
+            color: const Color.fromARGB(255, 227, 227, 227),
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
             shadowColor: Colors.grey,
@@ -152,11 +152,11 @@ class PandingworkStatusPPage extends StatelessWidget {
               children: [
                 Width10,
                 CircleAvatar(
+                  radius: 30,
                   child: CircleAvatar(
                     radius: 27,
                     backgroundColor: Colors.white,
                   ),
-                  radius: 30,
                 ),
                 Width20,
                 Column(

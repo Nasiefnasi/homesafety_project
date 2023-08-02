@@ -1,6 +1,9 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
-import 'package:homesefty/core/Colors%20,%20Width%20,%20Hight/colors&size.dart';
+import 'package:homesefty/core/size/colors&size.dart';
 import 'package:homesefty/core/textFromFild/textFormfiledWidget.dart';
+import 'package:homesefty/view/Employees/mainEmployeeDesignPage/hiddenDrawer.dart';
 import 'package:homesefty/view/Employees/mainEmployeeDesignPage/home.dart';
 
 class WorkConformationpage extends StatelessWidget {
@@ -8,27 +11,31 @@ class WorkConformationpage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    DateTime _seletetimedate = DateTime.now();
+    DateTime seletetimedate = DateTime.now();
+    // ignore: unused_element
     void selecttimeand() {
       showDatePicker(
               textDirection: TextDirection.rtl,
               context: context,
-              initialDate: _seletetimedate,
+              initialDate: seletetimedate,
               firstDate: DateTime(2000),
               lastDate: DateTime(2025))
           .then((value) {
-        _seletetimedate = value!;
+        seletetimedate = value!;
       });
     }
 
-    var _mediaQury = MediaQuery.of(context);
+    var mediaQury = MediaQuery.of(context);
     return Scaffold(
         drawer: const NewDrawer(),
         appBar: AppBar(
           title: const Center(child: Text('Conformation')),
-          actions: [const Icon(Icons.dashboard_customize_rounded)],
+          actions: const [Icon(Icons.dashboard_customize_rounded)],
           leading: IconButton(
-              onPressed: () {},
+              onPressed: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) {
+                return const HiddenDrawer();
+              },)) ;},
               icon: const Icon(Icons.arrow_circle_left_sharp)),
         ),
         body: SafeArea(
@@ -42,7 +49,7 @@ class WorkConformationpage extends StatelessWidget {
                   padding: const EdgeInsets.all(8.0),
                   child: SizedBox(
                     // color: Colors.amber,
-                    height: _mediaQury.size.height * .1,
+                    height: mediaQury.size.height * .1,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
@@ -83,9 +90,9 @@ class WorkConformationpage extends StatelessWidget {
                 ),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Container(
+                  child: SizedBox(
                     // color: Colors.amber,
-                    height: _mediaQury.size.height * .2,
+                    height: mediaQury.size.height * .2,
                     width: double.infinity,
                     child: Card(
                       color: Colors.grey[300],
@@ -136,7 +143,7 @@ class WorkConformationpage extends StatelessWidget {
                                   child: Card(
                                     child: Center(
                                       child: Text(
-                                        '${_seletetimedate.day}/${_seletetimedate.month}/${_seletetimedate.year}',
+                                        '${seletetimedate.day}/${seletetimedate.month}/${seletetimedate.year}',
                                         style: const TextStyle(fontSize: 22),
                                       ),
                                     ),
@@ -151,7 +158,7 @@ class WorkConformationpage extends StatelessWidget {
                                   child: Card(
                                     child: Center(
                                       child: Text(
-                                        '${_seletetimedate.hour} : ${_seletetimedate.minute}',
+                                        '${seletetimedate.hour} : ${seletetimedate.minute}',
                                         style: const TextStyle(fontSize: 22),
                                       ),
                                     ),
@@ -196,21 +203,21 @@ class WorkConformationpage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     SizedBox(
-                      height: 40,
-                      width: 150,
+                      height: 50,
+                      width: 180,
                       child: ElevatedButton(
                         style: ButtonStyle(
                             backgroundColor:
                                 MaterialStateProperty.all(Colors.orange[600])),
                         onPressed: () {},
                         child: const Text(
-                          'data',
+                          'Not Complete',
                           style: TextStyle(fontSize: 20),
                         ),
                       ),
                     ),
                     SizedBox(
-                      height: 40,
+                      height: 50,
                       width: 150,
                       child: ElevatedButton(
                         style: ButtonStyle(
@@ -218,7 +225,7 @@ class WorkConformationpage extends StatelessWidget {
                                 Colors.lightGreenAccent[700])),
                         onPressed: () {},
                         child: const Text(
-                          'data',
+                          'Complete',
                           style: TextStyle(fontSize: 20),
                         ),
                       ),

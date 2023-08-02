@@ -1,7 +1,9 @@
+// ignore_for_file: prefer_typing_uninitialized_variables, non_constant_identifier_names, use_build_context_synchronously
+
 import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:homesefty/core/Colors%20,%20Width%20,%20Hight/colors&size.dart';
+import 'package:homesefty/core/size/colors&size.dart';
 import 'package:homesefty/core/textFromFild/textFormfiledWidget.dart';
 
 class UserPaymentRequestListModel extends StatelessWidget {
@@ -14,13 +16,13 @@ class UserPaymentRequestListModel extends StatelessWidget {
       onTap: () {
         Navigator.push(context, MaterialPageRoute(
           builder: (context) {
-            return UserPaymentPage();
+            return const UserPaymentPage();
           },
         ));
       },
       child: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Container(
+        child: SizedBox(
           width: double.infinity,
           height: 80,
           // color: Colors.amber,
@@ -33,21 +35,21 @@ class UserPaymentRequestListModel extends StatelessWidget {
               child: Row(
                 children: [
                   Width20,
-                  Column(
+                  const Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Container(
+                      SizedBox(
                         // color: Colors.amber,
                         width: 150,
-                        child: const Text(
+                        child: Text(
                           'User Name',
                           style: TextStyle(color: Colors.black, fontSize: 20),
                         ),
                       ),
-                      Container(
+                      SizedBox(
                         // color: Colors.amber,
                         width: 150,
-                        child: const Text(
+                        child: Text(
                           'Work',
                           style: TextStyle(color: Colors.grey, fontSize: 15),
                         ),
@@ -55,10 +57,11 @@ class UserPaymentRequestListModel extends StatelessWidget {
                     ],
                   ),
                   const Spacer(),
-                  Container(
+                  SizedBox(
                     // color: Colors.amber,
                     width: 70,
                     child: Text(
+                      // ignore: unnecessary_brace_in_string_interps
                       '+₹ ${indexss}',
                       style: const TextStyle(
                           fontSize: 15,
@@ -96,7 +99,7 @@ class _UserPaymentPageState extends State<UserPaymentPage> {
             children: [
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Container(
+                child: SizedBox(
                   height: 180,
                   width: double.infinity,
                   // color: Colors.amber,
@@ -113,6 +116,12 @@ class _UserPaymentPageState extends State<UserPaymentPage> {
                     Column(
                       children: [
                         Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            color: const Color.fromARGB(248, 207, 207, 213),
+                          ),
+                          height: 60,
+                          width: double.infinity,
                           child: const Padding(
                             padding: EdgeInsets.all(8.0),
                             child: Row(children: [
@@ -129,18 +138,12 @@ class _UserPaymentPageState extends State<UserPaymentPage> {
                               )
                             ]),
                           ),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            color: const Color.fromARGB(248, 207, 207, 213),
-                          ),
-                          height: 60,
-                          width: double.infinity,
                           // color: Color.fromARGB(250, 244, 26, 11),
                         ),
                         hight10,
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 10),
-                          child: Container(
+                          child: SizedBox(
                             width: double.infinity,
                             height: 36,
                             child: RatingBar.builder(
@@ -157,12 +160,12 @@ class _UserPaymentPageState extends State<UserPaymentPage> {
                             ),
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 10),
-                          child: Container(
+                        const Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 10),
+                          child: SizedBox(
                               width: double.infinity,
                               height: 63,
-                              child: const EmployesWorkConformation(
+                              child: EmployesWorkConformation(
                                   hinttext: "hinttext")),
                         )
                       ],
@@ -192,27 +195,27 @@ class _UserPaymentPageState extends State<UserPaymentPage> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(),
-      backgroundColor: Color.fromARGB(255, 255, 234, 170),
+      backgroundColor: const Color.fromARGB(255, 255, 234, 170),
       body: SafeArea(
           child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           hight30,
-          Container(
+          const SizedBox(
             width: 150,
             height: 150,
-            child: const CircleAvatar(
+            child: CircleAvatar(
+              radius: 90,
               child: CircleAvatar(
                 radius: 70,
                 backgroundColor: Colors.white,
               ),
-              radius: 90,
             ),
           ),
           hight30,
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Container(
+            child: SizedBox(
               width: double.infinity,
               height: 60,
               // color: Colors.amber,
@@ -232,7 +235,7 @@ class _UserPaymentPageState extends State<UserPaymentPage> {
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Container(
+            child: SizedBox(
               width: double.infinity,
               height: 60,
               // color: Colors.amber,
@@ -252,7 +255,7 @@ class _UserPaymentPageState extends State<UserPaymentPage> {
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Container(
+            child: SizedBox(
               width: double.infinity,
               height: 130,
               // color: Colors.amber,
@@ -272,7 +275,7 @@ class _UserPaymentPageState extends State<UserPaymentPage> {
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Container(
+            child: SizedBox(
               width: double.infinity,
               height: 60,
               // color: Colors.amber,
@@ -300,7 +303,7 @@ class _UserPaymentPageState extends State<UserPaymentPage> {
                         Color.fromARGB(255, 4, 91, 8))),
                 onPressed: () async {
                   await Paymentafter();
-                  await Future.delayed(Duration(seconds: 2));
+                  await Future.delayed(const Duration(seconds: 2));
 
                   // await rating();
                   showDialog(
@@ -309,7 +312,7 @@ class _UserPaymentPageState extends State<UserPaymentPage> {
                             title: Padding(
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 10),
-                              child: Container(
+                              child: SizedBox(
                                 width: double.infinity,
                                 height: 36,
                                 child: RatingBar.builder(
@@ -328,7 +331,7 @@ class _UserPaymentPageState extends State<UserPaymentPage> {
                             ),
                             content: TextFormField(
                                 decoration:
-                                    InputDecoration(hintText: 'rating')),
+                                    const InputDecoration(hintText: 'rating')),
                           ));
                 },
                 child: const Text('Pay',

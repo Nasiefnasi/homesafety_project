@@ -1,11 +1,13 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
-import 'package:flutter_chat_ui/flutter_chat_ui.dart';
-import 'package:homesefty/core/Colors%20,%20Width%20,%20Hight/colors&size.dart';
+// import 'package:flutter_chat_ui/flutter_chat_ui.dart';
+import 'package:homesefty/core/size/colors&size.dart';
 import 'package:homesefty/core/textFromFild/textFormfiledWidget.dart';
 import 'package:homesefty/view/User/designPage/employeesDetailsPage.dart';
 
 class ScheduleTimeAndDate extends StatefulWidget {
-  ScheduleTimeAndDate({super.key});
+  const ScheduleTimeAndDate({super.key});
 
   @override
   State<ScheduleTimeAndDate> createState() => _ScheduleTimeAndDateState();
@@ -33,8 +35,9 @@ class _ScheduleTimeAndDateState extends State<ScheduleTimeAndDate> {
       });
     }
 
+    // ignore: no_leading_underscores_for_local_identifiers
     var _mediaQury = MediaQuery.of(context);
-    return Scaffold(
+    return Scaffold(resizeToAvoidBottomInset: false,
         appBar: AppBar(),
         body: SafeArea(
             child: Column(
@@ -54,7 +57,7 @@ class _ScheduleTimeAndDateState extends State<ScheduleTimeAndDate> {
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Container(
+              child: SizedBox(
                 // color: Colors.amber,
                 height: _mediaQury.size.height * .24,
                 width: double.infinity,
@@ -138,7 +141,7 @@ class _ScheduleTimeAndDateState extends State<ScheduleTimeAndDate> {
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Container(
+              child: SizedBox(
                 height: _mediaQury.size.height * .3,
                 width: double.infinity,
                 // color: Colors.grey,
@@ -149,11 +152,10 @@ class _ScheduleTimeAndDateState extends State<ScheduleTimeAndDate> {
                       hight10,
                       Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Container(
-                          child: const Card(),
-                          // color: Color.fromARGB(242, 247, 243, 243),
+                        child: SizedBox(
                           width: _mediaQury.size.width * .9,
                           height: _mediaQury.size.height * .1,
+                          child: const Card(),
                         ),
                       ),
                       Row(
@@ -173,10 +175,10 @@ class _ScheduleTimeAndDateState extends State<ScheduleTimeAndDate> {
                                 const MaterialStatePropertyAll(Colors.white60),
                             checkColor: Colors.greenAccent,
                             activeColor: Colors.teal[800],
-                            value: this.valuefirst,
+                            value: valuefirst,
                             onChanged: (bool? value) {
                               setState(() {
-                                this.valuefirst = value!;
+                                valuefirst = value!;
                               });
                             },
                           ),
@@ -195,10 +197,10 @@ class _ScheduleTimeAndDateState extends State<ScheduleTimeAndDate> {
                                 const MaterialStatePropertyAll(Colors.white60),
                             checkColor: Colors.greenAccent,
                             activeColor: Colors.teal[800],
-                            value: this.valuesecond,
+                            value: valuesecond,
                             onChanged: (bool? value) {
                               setState(() {
-                                this.valuesecond = value!;
+                                valuesecond = value!;
                               });
                             },
                           ),
@@ -221,14 +223,14 @@ class _ScheduleTimeAndDateState extends State<ScheduleTimeAndDate> {
               ),
             ),
             Expanded(
-              child: Container(
+              child: SizedBox(
                 child: ListView.builder(
                   itemBuilder: (context, index) {
                     return GestureDetector(
                         onTap: () {
                           Navigator.push(context, MaterialPageRoute(
                             builder: (context) {
-                              return EmployeesDetailsPage();
+                              return const EmployeesDetailsPage();
                             },
                           ));
                         },

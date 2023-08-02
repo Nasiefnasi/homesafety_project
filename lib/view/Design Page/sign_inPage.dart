@@ -1,18 +1,28 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
-import 'package:homesefty/core/Colors%20,%20Width%20,%20Hight/colors&size.dart';
+import 'package:get/get.dart';
+// import 'package:get/get.dart';
+import 'package:homesefty/controller/user/getxController/authcontroler/authcontroler.dart';
+import 'package:homesefty/core/size/colors&size.dart';
 
 import 'package:homesefty/core/textFromFild/textFormfiledWidget.dart';
 import 'package:homesefty/view/Design%20Page/loginpage.dart';
+import 'package:homesefty/view/Employees/mainEmployeeDesignPage/employeprofiledetailspage.dart';
+import 'package:homesefty/view/User/userpersonaletailspage/presonalDetalsInsertpage.dart';
 import 'package:lottie/lottie.dart';
+// import 'package:provider/provider.dart';
 
 class SignPage extends StatelessWidget {
-  const SignPage({super.key});
-
+  SignPage({super.key});
+  final cortl = Get.put(Authcontroller());
   @override
   Widget build(BuildContext context) {
-    var _mediaqury = MediaQuery.of(context);
-    return Scaffold(
-      // resizeToAvoidBottomInset: false,
+    var mediaqury = MediaQuery.of(context);
+    return
+        // Consumer<Authcontroler>(builder: (context, authcnrolobj, child) { return
+        Scaffold(
+      // resizeToAvoidBotto     mInset: false,
 
       body: SafeArea(
           child: ListView(
@@ -24,9 +34,10 @@ class SignPage extends StatelessWidget {
               children: [
                 hight30, hight30,
 
+                // ignore: sized_box_for_whitespace
                 Container(
-                  width: _mediaqury.size.width * 0.80,
-                  height: _mediaqury.size.width * 0.50,
+                  width: mediaqury.size.width * 0.80,
+                  height: mediaqury.size.width * 0.50,
                   child:
                       Lottie.asset('asset/animation/animation_lk3s1v1o.json'),
                 ),
@@ -69,26 +80,47 @@ class SignPage extends StatelessWidget {
                 //             ))),
                 //   ],
                 // ),
-                const TextFormfildWidget(
-                    hinttext: 'Name', Iconss: Icon(Icons.mail)),
-                const TextFormfildWidget(
-                    hinttext: 'E-mail', Iconss: Icon(Icons.mail)),
                 TextFormfildWidget(
-                    hinttext: 'Password', Iconss: Icon(Icons.lock)),
+                  contro: cortl.username,
+                  hinttext: 'Name',
+                  Iconss: const Icon(Icons.person),
+                ),
+                TextFormfildWidget(
+                  contro: cortl.email,
+                  hinttext: 'E-mail',
+                  Iconss: const Icon(Icons.mail),
+                ),
+                TextFormfildWidget(
+                  contro: cortl.password,
+                  hinttext: 'Password',
+                  Iconss: const Icon(Icons.lock),
+                ),
 
                 hight10,
-                SizedBox(
-                  width: _mediaqury.size.width * 0.9,
-                  height: _mediaqury.size.height * 0.05,
-                  child: ElevatedButton(
-                    onPressed: () {},
-                    child: const Text(
-                      "Sign Up",
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+
+                Obx(
+                  () => SizedBox(
+                    width: mediaqury.size.width * 0.9,
+                    height: mediaqury.size.height * 0.05,
+                    child: ElevatedButton(
+                      onPressed: () async {
+                        // Provider.of<Authcontroler>(context,listen: false).singup(context);
+                        // await cortl.signup();
+                        _showbottomsheett(context);
+                      },
+                      child: cortl.loading.value
+                          ? const CircularProgressIndicator(
+                              color: Colors.white,
+                            )
+                          : const Text(
+                              "Sign Up",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 20),
+                            ),
                     ),
                   ),
                 ),
+
                 hight20,
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -118,6 +150,67 @@ class SignPage extends StatelessWidget {
           ),
         ],
       )),
+    );
+  }
+
+  void _showbottomsheett(BuildContext context) {
+    showModalBottomSheet(
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+            topRight: Radius.circular(40.0), topLeft: Radius.circular(40.0)),
+      ),
+      elevation: 50,
+      backgroundColor: const Color.fromARGB(38, 22, 23, 23),
+      context: context,
+      builder: (context) {
+        return Container(
+          decoration: const BoxDecoration(
+              borderRadius: BorderRadius.only(
+                  topRight: Radius.circular(50.0),
+                  topLeft: Radius.circular(50.0)),
+              color: Color.fromARGB(255, 254, 254, 254)),
+          height: 150,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              SizedBox(
+                  height: 50,
+                  width: 150,
+                  child: ElevatedButton(
+                      onPressed: () async {
+                         await cortl.usersignup('user');
+                        // Get.to(const EmployeProfilePage());
+                      },
+                      child: const Text('Employess'),
+                      style: ButtonStyle(
+                          backgroundColor: const MaterialStatePropertyAll(
+                              Color.fromARGB(255, 8, 105, 134)),
+                          shape:
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                                  RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ))))),
+              SizedBox(
+                  height: 50,
+                  width: 150,
+                  child: ElevatedButton(
+                      onPressed: ()async {
+                        await cortl.usersignup('employ');
+                        // Get.to(UserpersonalDetailesPage());
+                      },
+                      child: const Text('User'),
+                      style: ButtonStyle(
+                          backgroundColor:
+                              const MaterialStatePropertyAll(Colors.amber),
+                          shape:
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                                  RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ))))),
+            ],
+          ),
+        );
+      },
     );
   }
 }

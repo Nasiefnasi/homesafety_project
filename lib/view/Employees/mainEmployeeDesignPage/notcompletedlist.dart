@@ -8,7 +8,7 @@ class NotCompletedlist extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: NewDrawer(),
+      drawer: const NewDrawer(),
       resizeToAvoidBottomInset: false,
       body: SafeArea(
           child: ListView.builder(
