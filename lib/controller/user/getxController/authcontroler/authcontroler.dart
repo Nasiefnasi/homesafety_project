@@ -1,12 +1,13 @@
+// ignore_for_file: avoid_print
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:homesefty/controller/user/getxController/authcontroler/usermodel.dart';
 import 'package:homesefty/view/Design%20Page/loginpage.dart';
-import 'package:homesefty/view/Design%20Page/selectionaccount.dart';
-import 'package:homesefty/view/Employees/mainEmployeeDesignPage/employeprofiledetailspage.dart';
-import 'package:homesefty/view/User/designPage/navBar/navbar.dart';
+import 'package:homesefty/view/Employees/profilePage/employeprofiledetailspageinsert.dart';
+// import 'package:homesefty/view/User/designPage/navBar/navbar.dart';
 import 'package:homesefty/view/User/userpersonaletailspage/presonalDetalsInsertpage.dart';
 
 class Authcontroller extends GetxController {
@@ -22,7 +23,7 @@ class Authcontroller extends GetxController {
   var loading = false.obs;
   // setp 2 create the funtion
   // create account with email and password
-   usersignup(String value) async {
+  usersignup(String value) async {
     try {
       loading.value = true;
       await auth.createUserWithEmailAndPassword(
@@ -31,12 +32,12 @@ class Authcontroller extends GetxController {
       await addUser(value);
       await verifyemail();
       // Get.to(() => SelectAccount());
-      if(value=='user'){
-  Get.to(UserpersonalDetailesPage());
-      }else{
-         Get.to(EmployeProfilePage() );
+      if (value == 'user') {
+        Get.to(UserpersonalDetailesPage());
+      } else {
+        Get.to(const EmployeProfilePage());
       }
-    
+
       loading.value = false;
     } catch (e) {
       Get.snackbar("error", "this isj error$e");
@@ -44,50 +45,32 @@ class Authcontroller extends GetxController {
       loading.value = false;
     }
   }
-  // employesignup() async {
-  //   try {
-  //     loading.value = true;
-  //     await auth.createUserWithEmailAndPassword(
-  //         email: email.text, password: password.text);
-
-  //     await addemployes();
-  //     await verifyemail();
-  //     // Get.to(() => SelectAccount());
-  //     Get.to(const EmployeProfilePage());
-  //     loading.value = false;
-  //   } catch (e) {
-  //     Get.snackbar("error", "this isj error$e");
-  //     print('i$e');
-  //     loading.value = false;
-  //   }
-  // }
 
   // add user to database
   addUser(String value) async {
-    if(value=='user'){
+    if (value == 'user') {
       UserModel user = UserModel(
-      Username: username.text,
-      email: auth.currentUser?.email,
-    );
-    await db
-        .collection("User")
-        .doc(auth.currentUser?.uid)
-        .collection("profile")
-        .add(user.toMap());
-    }else{
-      UserModel user = UserModel(
-      Username: username.text,
-      email: auth.currentUser?.email,
-    );
-    await db
-        .collection("Employes")
-        .doc(auth.currentUser?.uid)
-        .collection("profile")
-        .add(user.toMap());
+        Username: username.text,
+        email: auth.currentUser?.email,
+      );
+      await db
+          .collection("User")
+          .doc(auth.currentUser?.uid)
+          .collection("profile")
+          .add(user.toMap());
+    } else {
+      UserModel employ = UserModel(
+        Username: username.text,
+        email: auth.currentUser?.email,
+      );
+      await db
+          .collection("Employes")
+          .doc(auth.currentUser?.uid)
+          .collection("profile")
+          .add(employ.toMap());
     }
-    
   }
- // add Employes to database
+  // add Employes to database
   // addemployes() async {
   //   UserModel user = UserModel(
   //     Username: username.text,
@@ -119,7 +102,7 @@ class Authcontroller extends GetxController {
       // Get.put( SelectAccount());
       loading.value = false;
       // _showbottomsheett(context);
-    } catch (e) { 
+    } catch (e) {
       Get.snackbar("error", "$e");
       loading.value = false;
     }

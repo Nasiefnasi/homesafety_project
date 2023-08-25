@@ -19,60 +19,44 @@ class ForgotPasswordPage extends StatelessWidget {
       body: SafeArea(
           // ignore: sized_box_for_whitespace
           child: Container(height: mediaquery.height,width: mediaquery.width,
-            child: Column(
-                  children: [
-            Stack(
-              alignment: Alignment.topCenter,
+            child: Column(mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Align(
-                  alignment: Alignment.topCenter,
-                  child: Container(
-                    height: mediaquery.height * .5,
-                    color: const Color.fromARGB(255, 247, 214, 94),
-                  ),
+                Container(
+                  clipBehavior: Clip.none,
+                  decoration: BoxDecoration(
+                      // color: Color.fromARGB(127, 252, 251, 251),
+                      borderRadius: BorderRadius.circular(20)),
+                  height: mediaquery.height * .30,
+                  width: mediaquery.width * .9,
+                  child: Card(
+                      // ignore: sort_child_properties_last
+                      child: Column(
+                        children: [
+                          hight30,
+                          const Text(
+                            'Enter Your Email',
+                            style: TextStyle( 
+                                fontSize: 20, fontWeight: FontWeight.bold),
+                          ),
+                          hight20,
+                          TextFormfildWidget( contro: cntrol.resetmail,
+                              hinttext: "E-mail", Iconss: const Icon(Icons.mail)),
+                          ElevatedButton(
+                              onPressed: () {
+                                cntrol.resetpassword();
+                               
+                              
+                              },
+                              child:cntrol.loading.value? const CircularProgressIndicator(color: Colors.white,) : const Text("Send Rest Link")),
+                        ],
+                      ),
+                      elevation: 5,
+                      color: const Color.fromARGB(171, 254, 254, 253),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20))),
                 ),
-                Padding(
-                  padding:
-                      EdgeInsets.symmetric(vertical: mediaquery.height * .35),
-                  child: Container(
-                    clipBehavior: Clip.none,
-                    decoration: BoxDecoration(
-                        // color: Color.fromARGB(127, 252, 251, 251),
-                        borderRadius: BorderRadius.circular(20)),
-                    height: mediaquery.height * .30,
-                    width: mediaquery.width * .9,
-                    child: Card(
-                        // ignore: sort_child_properties_last
-                        child: Column(
-                          children: [
-                            hight30,
-                            const Text(
-                              'Enter Your Email',
-                              style: TextStyle( 
-                                  fontSize: 20, fontWeight: FontWeight.bold),
-                            ),
-                            hight20,
-                            TextFormfildWidget( contro: cntrol.resetmail,
-                                hinttext: "E-mail", Iconss: const Icon(Icons.mail)),
-                            ElevatedButton(
-                                onPressed: () {
-                                  cntrol.resetpassword();
-                                 
-                                
-                                },
-                                child:cntrol.loading.value? const CircularProgressIndicator(color: Colors.white,) : const Text("Send Rest Link")),
-                          ],
-                        ),
-                        elevation: 5,
-                        color: const Color.fromARGB(171, 254, 254, 253),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20))),
-                  ),
-                )
               ],
-            )
-                  ],
-                ),
+            ),
           )),
     );
   }

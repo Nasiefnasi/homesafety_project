@@ -8,7 +8,7 @@ import 'package:homesefty/core/size/colors&size.dart';
 
 import 'package:homesefty/core/textFromFild/textFormfiledWidget.dart';
 import 'package:homesefty/view/Design%20Page/loginpage.dart';
-import 'package:homesefty/view/Employees/mainEmployeeDesignPage/employeprofiledetailspage.dart';
+import 'package:homesefty/view/Employees/profilePage/employeprofiledetailspageinsert.dart';
 import 'package:homesefty/view/User/userpersonaletailspage/presonalDetalsInsertpage.dart';
 import 'package:lottie/lottie.dart';
 // import 'package:provider/provider.dart';
@@ -178,7 +178,7 @@ class SignPage extends StatelessWidget {
                   width: 150,
                   child: ElevatedButton(
                       onPressed: () async {
-                         await cortl.usersignup('user');
+                        await cortl.usersignup('employess');
                         // Get.to(const EmployeProfilePage());
                       },
                       child: const Text('Employess'),
@@ -194,8 +194,8 @@ class SignPage extends StatelessWidget {
                   height: 50,
                   width: 150,
                   child: ElevatedButton(
-                      onPressed: ()async {
-                        await cortl.usersignup('employ');
+                      onPressed: () async {
+                        await cortl.usersignup('user');
                         // Get.to(UserpersonalDetailesPage());
                       },
                       child: const Text('User'),

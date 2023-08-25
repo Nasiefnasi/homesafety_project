@@ -10,9 +10,8 @@ import 'package:get/get.dart';
 import 'package:homesefty/controller/getxemployessprofile/employessmoder.dart';
 import 'package:homesefty/view/Employees/mainEmployeeDesignPage/hiddenDrawer.dart';
 import 'package:image_picker/image_picker.dart';
-// import 'package:provider/provider.dart';
 
-class EmployesDetailsControl extends GetxController {
+class EmployesDetailsControl extends ChangeNotifier {
   //step 1 create instamce
 
   FirebaseFirestore edb = FirebaseFirestore.instance;
@@ -27,38 +26,55 @@ class EmployesDetailsControl extends GetxController {
   String sex = '';
   TextEditingController ages = TextEditingController();
   TextEditingController address = TextEditingController();
-  List<String> works = [];
+  List<Map<dynamic, dynamic>> works = [];
   TextEditingController experience = TextEditingController();
-  TextEditingController district = TextEditingController();
+  String? district = '';
+  String employId = '';
   TextEditingController state = TextEditingController();
-  var loading = false;
+  var loading = false.obs;
+
+  getSex(String data) {
+    sex = data;
+    notifyListeners();
+  }
+
+  getworklist(Map<dynamic, dynamic> datas) {
+    works.add(datas);
+  }
 
   addemployea() async {
     // ignore: unused_local_variable
     try {
-      loading = true;
+      loading.value = true;
       await imageuplode();
       EmployesDetailsModel employeobj = EmployesDetailsModel(
-          imageUrl: image!.path,
-          fullname: name.text,
-          phonenumber: phone.text,
-          sex: sex,
-          age: ages.text,
-          address: address.text,
-          experience: experience.text,
-          district: district.text,
-          state: state.text);
+        id: auth.currentUser?.uid,
+        work: works,
+        imageUrl: selectimagepath,
+        fullname: name.text,
+        phonenumber: phone.text,
+        sex: sex,
+        age: ages.text,
+        address: address.text,
+        experience: experience.text,
+        district: district,
+        state: state.text,
+      );
       await edb
+          // .collection('Employes')
+          // .doc(auth.currentUser?.uid)
+          // .collection('EmployesDetails')
+          // .doc('name')
+          // .set(employeobj.ttomap());
           .collection('Employes')
-          .doc(auth.currentUser!.uid)
-          .collection('userDetails')
-          .add(employeobj.tomap());
-      loading = false;
+          .doc(auth.currentUser?.uid)
+          .set(employeobj.ttomap());
+      loading.value = false;
       Get.snackbar("Successful ", "Your Data");
+      Get.to(const HiddenDrawer());
     } catch (e) {
       // ignore: unnecessary_brace_in_string_interps
       Get.snackbar("Error", '${e}');
-      Get.to(const HiddenDrawer());
     }
   }
 
@@ -93,58 +109,85 @@ class EmployesDetailsControl extends GetxController {
     }
   }
 
+  // updateemployea(BuildContext context) async {
+  //   // ignore: unused_local_variable
+  //   try {
+  //     loading.value = true;
+  //     await imageuplode();
+  //     EmployesDetailsModel employeobj = EmployesDetailsModel(
+  //       work: works,
+  //         imageUrl: image!.path,
+  //         fullname: name.text,
+  //         phonenumber: phone.text,
+  //         sex: sex,
+  //         age: ages.text,
+  //         address: address.text,
+  //         experience: experience.text,
+  //         district: district.text,
+  //         state: state.text);
+  //     await edb
+  //         .collection('Employes')
+  //         .doc(auth.currentUser?.uid)
+  //         .collection('EmployesDetails')
+  //         .add(employeobj.ttomap());
+  //     loading.value = false;
+  //     Get.snackbar("Successful ", "Your Data");
+  //      Navigator.pop(context);
+  //   } catch (e) {
+  //     // ignore: unnecessary_brace_in_string_interps
+  //     Get.snackbar("Error", '${e}');
+  selectdestrict(String data) {
+    district = data;
+  }
+
+  //   }
+  // }
   updateemployea() async {
     // ignore: unused_local_variable
     try {
-      loading = true;
+      loading.value = true;
       await imageuplode();
       EmployesDetailsModel employeobj = EmployesDetailsModel(
-          imageUrl: image!.path,
+          work: works,
+          imageUrl: selectimagepath,
           fullname: name.text,
           phonenumber: phone.text,
           sex: sex,
           age: ages.text,
           address: address.text,
           experience: experience.text,
-          district: district.text,
+          district: district,
           state: state.text);
       await edb
           .collection('Employes')
-          .doc(auth.currentUser!.uid)
-          .collection('userDetails')
-          .add(employeobj.tomap());
-      loading = false;
+          .doc(auth.currentUser?.uid)
+          .collection('EmployesDetails')
+          .doc('name')
+          .set(employeobj.ttomap());
+      loading.value = false;
       Get.snackbar("Successful ", "Your Data");
+      Get.to(const HiddenDrawer());
     } catch (e) {
       // ignore: unnecessary_brace_in_string_interps
-      Get.snackbar("Error", '${e}');
-      Get.to(const HiddenDrawer());
+      Get.snackbar("Error", 'b${e}');
     }
   }
 
-  // List<Map> categories = [
-  //   {'name': 'plumber', 'ischecked': false},
-  //   {'name': 'dssdmber', 'ischecked': false},
-  //   {'name': 'dsdsvdser', 'ischecked': false},
-  //   {'name': 'plsdvsdver', 'ischecked': false},
-  //   {'name': 'bnfr', 'ischecked': false},
-  //   {'name': 'ppdsdsumber', 'ischecked': false},
-  //   {'name': 'wmber', 'ischecked': false},
-  // ].obs;
-  // Column Employeeswork(List<Map> hello) {
-  //   return Column(
-  //       children: hello.obs.map(
-  //     (favoritevalu) {
-  //       return CheckboxListTile(
-  //         checkboxShape:
-  //             RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
-  //         title: Text(favoritevalu['name']),
-  //         value: favoritevalu['ischecked'],
-  //         onChanged: (val) {
-  //           favoritevalu['ischecked'] = val;
-  //         },
-  //       );
-  //     },
-  //   ).toList());
-  // }
+  Stream<QuerySnapshot> getEmployeesDetailsStream() {
+    try {
+      // Build the reference to the collection and document
+      final collectionReference =
+          FirebaseFirestore.instance.collection('Employes');
+      final documentReference = collectionReference.doc(auth.currentUser?.uid);
+      final subcollectionReference =
+          documentReference.collection('EmployesDetails');
+
+      // Return the snapshots stream
+      return subcollectionReference.snapshots();
+    } catch (e) {
+      // Handle any errors that occur during the stream creation
+      Get.snackbar("Error", "$e");
+      return Stream.empty();
+    }
+  }
 }

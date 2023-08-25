@@ -5,7 +5,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:homesefty/controller/user/getxController/gextuserprofile/userdetailsstoredb.dart';
-import 'package:homesefty/view/User/designPage/homePage/homepage.dart';
+import 'package:homesefty/view/User/drewer/drawer.dart';
+// import 'package:homesefty/view/User/designPage/homePage/homepage.dart';
+
 import 'package:homesefty/view/User/userpersonaletailspage/userprofileUpdatepage.dart';
 
 class PersonalDetailsPage extends StatelessWidget {

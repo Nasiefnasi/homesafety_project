@@ -52,24 +52,23 @@ class UpdateUserProfilePage extends StatelessWidget {
                         ),
                       ),
                       hight10,
-                     Container(
-                  clipBehavior: Clip.none,
-                  width: mediaqury.width * 0.4,
-                  height: mediaqury.height * 0.2,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      border: Border.all(
-                          width: 5,
-                          color: const Color.fromARGB(255, 71, 33, 33))),
-                  child: Obx(
-                    () => cotrol.imageshow.value == ''
-                        ? const Center(child: Text('Select mage'))
-                        // :Image.network(cotrol.selectimagepath),
-                        : Image.file(File(cotrol.imageshow.value),
-                            fit: BoxFit.cover),
-                            
-                  ),
-                ),
+                      Container(
+                        clipBehavior: Clip.none,
+                        width: mediaqury.width * 0.4,
+                        height: mediaqury.height * 0.2,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            border: Border.all(
+                                width: 5,
+                                color: const Color.fromARGB(255, 71, 33, 33))),
+                        child: Obx(
+                          () => cotrol.imageshow.value == ''
+                              ? const Center(child: Text('Select mage'))
+                              // :Image.network(cotrol.selectimagepath),
+                              : Image.file(File(cotrol.imageshow.value),
+                                  fit: BoxFit.cover),
+                        ),
+                      ),
                       SizedBox(
                         width: mediaqury.width * 0.4,
                         child: ElevatedButton(

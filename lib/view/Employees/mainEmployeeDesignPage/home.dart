@@ -1,12 +1,15 @@
 // ignore_for_file: non_constant_identifier_names, prefer_typing_uninitialized_variables
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:homesefty/view/Employees/mainEmployeeDesignPage/ratingPage.dart';
 
 
 import 'package:homesefty/view/Employees/modelPage/PandingWorkmodel.dart';
 import 'package:homesefty/view/Employees/modelPage/employeRatingModelPage.dart';
 import 'package:homesefty/core/size/colors&size.dart';
+import 'package:homesefty/view/Employees/profilePage/profilepagedetails.dart';
+import 'package:homesefty/view/User/userpersonaletailspage/userpersonaldetails.dart';
 
 class EmployesHome extends StatefulWidget {
   const EmployesHome({super.key});
@@ -185,7 +188,12 @@ class NewDrawer extends StatelessWidget {
           height: 160,
         ),
         hight20,
-        const ListTile(
+         ListTile(onTap: () {
+          Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+            return EmployeesProfilePage();
+          }, ));
+          
+        },
           leading: Icon(
             Icons.person,
             size: 35,

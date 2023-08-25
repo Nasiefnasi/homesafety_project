@@ -65,7 +65,7 @@ class UserDetailscontroler extends GetxController {
     UserDetails userdetils = UserDetails(
         imageUrl: selectimagepath,
         fullname: uesrfullname.text,
-        address: address.text,
+        address: address.text, 
         phonenumber: phonenumber.text,
         email: email.text,
         district: district.text,
@@ -85,9 +85,7 @@ class UserDetailscontroler extends GetxController {
     // Store the image fs
   }
 
-  cloudAdd(File? file) async {
-    // FirebaseStorage.instance
-  }
+  
 
   updateuserdetails(BuildContext context) async {
     // ignore: unused_local_variable

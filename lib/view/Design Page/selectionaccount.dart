@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:homesefty/view/Employees/mainEmployeeDesignPage/employeprofiledetailspage.dart';
+import 'package:homesefty/view/Employees/profilePage/employeprofiledetailspageinsert.dart';
 import 'package:homesefty/view/User/userpersonaletailspage/presonalDetalsInsertpage.dart';
 
 class SelectAccount{

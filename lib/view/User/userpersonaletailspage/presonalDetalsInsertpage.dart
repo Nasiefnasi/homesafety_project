@@ -101,21 +101,6 @@ class UserpersonalDetailesPage extends StatelessWidget {
                   hinttext: 'State',
                 ),
 
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      SizedBox(
-                        width: mediaqury.width * .4,
-                        child: ElevatedButton(
-                          onPressed: () {},
-                          child: const Text('Current Location'),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
                 hight30,
 
                 SizedBox(
@@ -127,13 +112,7 @@ class UserpersonalDetailesPage extends StatelessWidget {
                         await buttononcheck();
                       } else {
                         Get.snackbar("Error", "Enter your Details");
-                        // Navigator.pushAndRemoveUntil(
-                        //     context,
-                        //     MaterialPageRoute(
-                        //       builder: (context) => BottoNavBar(),
-                        //     ),
-                        //     (route) => false);
-                        //  await cotrol.adduserdetails();
+                  
                       }
                     },
                     child: cotrol.loading.value
@@ -149,7 +128,7 @@ class UserpersonalDetailesPage extends StatelessWidget {
                 ),
                 hight30,
 
-                // TextFormfildWidget(hinttext: '', Iconss: Icons.abc_outlined)
+                
               ],
             ),
           ],
