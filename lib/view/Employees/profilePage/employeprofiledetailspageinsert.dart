@@ -30,13 +30,12 @@ class _EmployeProfilePageState extends State<EmployeProfilePage> {
   // }
 
   List<Map> categories = [
+    {'name': 'election', 'ischecked': false},
     {'name': 'plumber', 'ischecked': false},
-    {'name': 'dssdmber', 'ischecked': false},
-    {'name': 'dsdsvdser', 'ischecked': false},
-    {'name': 'plsdvsdver', 'ischecked': false},
-    {'name': 'bnfr', 'ischecked': false},
-    {'name': 'ppdsdsumber', 'ischecked': false},
-    {'name': 'wmber', 'ischecked': false},
+    {'name': 'driver', 'ischecked': false},
+    {'name': 'cook', 'ischecked': false},
+    {'name': 'cook', 'ischecked': false},
+    
   ];
   @override
   Widget build(BuildContext context) {
@@ -213,7 +212,7 @@ class _EmployeProfilePageState extends State<EmployeProfilePage> {
                               }).toList(),
                             ),
                           ],
-                        ),
+                        ),  
                       ),
                     ),
                   ),
@@ -233,22 +232,22 @@ class _EmployeProfilePageState extends State<EmployeProfilePage> {
                   // const DetailsProfilepage(
                   //   hinttext: 'hinttext',
                   // ),
-                  const LicationPage(),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        SizedBox(
-                          width: _mediaqury.width * .4,
-                          child: ElevatedButton(
-                            onPressed: () {},
-                            child: const Text('Current Location'),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+                  // const LicationPage(),
+                  // Padding(
+                  //   padding: const EdgeInsets.symmetric(horizontal: 10),
+                  //   child: Row(
+                  //     mainAxisAlignment: MainAxisAlignment.end,
+                  //     children: [
+                  //       SizedBox(
+                  //         width: _mediaqury.width * .4,
+                  //         child: ElevatedButton(
+                  //           onPressed: () {},
+                  //           child: const Text('Current Location'),
+                  //         ),
+                  //       ),
+                  //     ],
+                  //   ),
+                  // ),
                   hight30,
 
                   SizedBox(

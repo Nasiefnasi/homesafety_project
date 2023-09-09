@@ -6,9 +6,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:homesefty/controller/user/getxController/authcontroler/usermodel.dart';
 import 'package:homesefty/view/Design%20Page/loginpage.dart';
+import 'package:homesefty/view/Employees/mainEmployeeDesignPage/hiddenDrawer.dart';
 import 'package:homesefty/view/Employees/profilePage/employeprofiledetailspageinsert.dart';
+// import 'package:homesefty/view/User/designPage/homePage/homepage.dart';
+import 'package:homesefty/view/User/designPage/navBar/navbar.dart';
 // import 'package:homesefty/view/User/designPage/navBar/navbar.dart';
 import 'package:homesefty/view/User/userpersonaletailspage/presonalDetalsInsertpage.dart';
+// import 'package:homesefty/view/adminPage/AdmindesignPage/adminDesign/AdminHomePage.dart';
 
 class Authcontroller extends GetxController {
   // step 1 create instance
@@ -21,6 +25,9 @@ class Authcontroller extends GetxController {
   TextEditingController loginpassword = TextEditingController();
   TextEditingController resetmail = TextEditingController();
   var loading = false.obs;
+
+  String? user;
+
   // setp 2 create the funtion
   // create account with email and password
   usersignup(String value) async {
@@ -28,6 +35,11 @@ class Authcontroller extends GetxController {
       loading.value = true;
       await auth.createUserWithEmailAndPassword(
           email: email.text, password: password.text);
+      Map<String, dynamic> userData = {'type': value};
+      await FirebaseFirestore.instance
+          .collection('all_users')
+          .doc(auth.currentUser!.uid)
+          .set(userData);
 
       await addUser(value);
       await verifyemail();
@@ -88,17 +100,64 @@ class Authcontroller extends GetxController {
     Navigator.popUntil(context, (route) => false);
   }
 
+  // if (value == 'user') {
+  //       Get.to(BottoNavBar());
+  //     } else {
+  //       Get.to(HiddenDrawer());
+  //     }
+
   signIn(BuildContext context) async {
     try {
       loading.value = true;
       await auth.signInWithEmailAndPassword(
           email: loginemail.text, password: loginpassword.text);
 
+      DocumentSnapshot<Map<String, dynamic>> emplyData = await FirebaseFirestore
+          .instance
+          .collection('all_users')
+          .doc(auth.currentUser!.uid)
+          .get();
+      final document = emplyData.data() as Map<String, dynamic>;
+      if (document['type'] == 'employess') {
+        // DocumentSnapshot<Map<String, dynamic>> userProfile =
+        //     await FirebaseFirestore.instance
+        //         .collection('User')
+        //         .doc(auth.currentUser!.uid)
+        //         .get();
+        // final userdocument = userProfile.data() as Map<String, dynamic>;
+        // user = userdocument['fullname'];
+        await Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(builder: (context) => HiddenDrawer()),
+            (route) => false);
+      } else {
+        await Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(builder: (context) => BottoNavBar()),
+            (route) => false);
+      }
+      // if(emplyData==null){
+      //    await Navigator.pushAndRemoveUntil(
+      //       context,
+      //       MaterialPageRoute(builder: (context) => UserpersonalDetailesPage()),
+      //       (route) => false);
+      // }else{
+      //    await Navigator.pushAndRemoveUntil(
+      //       context,
+      //       MaterialPageRoute(builder: (context) => UserHomePage()),
+      //       (route) => false);
+      // }
       // ignore: use_build_context_synchronously
-      await Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(builder: (context) => UserpersonalDetailesPage()),
-          (route) => false);
+      // if(loginemail.text ==  emplyData ){
+
+      // }else if (loginemail.text == ){
+
+      // }
+
+      // await Navigator.pushAndRemoveUntil(
+      //     context,
+      //     MaterialPageRoute(builder: (context) => UserpersonalDetailesPage()),
+      //     (route) => false);
       // Get.put( SelectAccount());
       loading.value = false;
       // _showbottomsheett(context);
@@ -184,4 +243,6 @@ class Authcontroller extends GetxController {
 //       },
 //     );
 //   }
+
+  StreamBuilder() async* {}
 }

@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:homesefty/core/size/colors&size.dart';
 
 class NewworkModel extends StatelessWidget {
-  const NewworkModel({super.key});
+  NewworkModel({super.key, required this.details});
+  final Map<String, dynamic> details;
 
   @override
   Widget build(BuildContext context) {
@@ -34,49 +35,59 @@ class NewworkModel extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  const Padding(
+                  Padding(
                     padding: EdgeInsets.all(8.0),
                     child: SizedBox(
-                      width: 80,
-                      height: 90,
-                      // color: Colors.amber,
-                      child: CircleAvatar(
-                        radius: 90,
-                      ),
-                    ),
+                        width: 80,
+                        height: 90,
+                        // color: Colors.amber,
+                        child: ClipRRect(
+                          borderRadius:
+                              BorderRadius.circular(20), // Image border
+                          child: SizedBox.fromSize(
+                            size: Size.fromRadius(48), // Image radius
+                            child: Image.network(details['userimagurl'],
+                                fit: BoxFit.cover),
+                          ),
+                        )
+                        // CircleAvatar(  child: ClipOval(child: Image.network(details['userimagurl'] ,)),
+                        //   radius: 90,
+                        // ),
+                        ),
                   ),
+                  Width10,
                   SizedBox(
                     // color: Colors.amber,
                     width: 260,
                     height: _mediaQury.size.height * .2,
-                    child: const Column(
+                    child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         hight20,
                         Text(
-                          'Name :',
+                          'Name :  ${details['username']}',
                           style: TextStyle(
                             fontSize: 15,
                           ),
                         ),
                         hight10,
                         Text(
-                          'Location :',
+                          'Location :  ${details['address']}',
                           style: TextStyle(
                             fontSize: 15,
                           ),
                         ),
                         hight10,
                         Text(
-                          'Time :',
+                          'Time :   ${details['date']}',
                           style: TextStyle(
                             fontSize: 15,
                           ),
                         ),
                         hight10,
                         Text(
-                          'Works:',
+                          'Works:  ${details['work']} ',
                           style: TextStyle(
                             fontSize: 15,
                           ),

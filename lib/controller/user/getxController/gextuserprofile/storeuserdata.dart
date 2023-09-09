@@ -22,6 +22,7 @@ class UserDetails {
   });
   factory UserDetails.fremMap(DocumentSnapshot map) {
     return UserDetails(
+      id: map['id'],
         imageUrl: map['imageUrl'],
         fullname: map['fullname'],
         address: map['adress'],
@@ -32,6 +33,7 @@ class UserDetails {
   }
   Map<String, dynamic> tomap() {
     return {
+      'id':id,
       "imageUrl": imageUrl,
       'fullname': fullname,
       'address': address,

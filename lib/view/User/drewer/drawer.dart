@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:homesefty/controller/user/getxController/authcontroler/authcontroler.dart';
 import 'package:homesefty/core/size/colors&size.dart';
+import 'package:homesefty/view/User/designPage/homePage/selectWork.dart';
 import 'package:homesefty/view/User/userpersonaletailspage/userpersonaldetails.dart';
 
 class UserNewDrawer extends StatelessWidget {
@@ -62,17 +63,24 @@ class UserNewDrawer extends StatelessWidget {
             ),
           ),
         ),
-        const ListTile(
-          leading: Icon(
-            Icons.payments_rounded,
-            size: 25,
-            color: Colors.white,
-          ),
-          title: Text(
-            'Payment Request',
-            style: TextStyle(
-              fontSize: 18,
+        GestureDetector(
+          onTap: () {
+            Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+              return SelectWork();
+            },));
+          },
+          child: const ListTile(
+            leading: Icon(
+              Icons.webhook_rounded,
+              size: 25,
               color: Colors.white,
+            ),
+            title: Text(
+              'Select Work',
+              style: TextStyle(
+                fontSize: 18,
+                color: Colors.white,
+              ),
             ),
           ),
         ),

@@ -28,8 +28,7 @@ class LoginPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 hight30,
-                hight30,
-                hight30,
+            
                 // ignore: sized_box_for_whitespace
                 Container(
                   width: mediaqury.size.width * 0.80,
@@ -38,7 +37,7 @@ class LoginPage extends StatelessWidget {
                       Lottie.asset('asset/animation/animation_lk3s1v1o.json'),
                 ),
                 hight30,
-                hight30,
+             
 
                 // https://asset-cdn.lottiefiles
                 const Text(
@@ -130,6 +129,7 @@ class LoginPage extends StatelessWidget {
                     )
                   ],
                 ),
+                hight30,
               ],
             ),
           ),

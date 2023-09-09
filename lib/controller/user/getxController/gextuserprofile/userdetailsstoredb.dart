@@ -42,7 +42,6 @@ class UserDetailscontroler extends GetxController {
   }
 
   imageuplode() async {
-   
     Reference referenceRoot = FirebaseStorage.instance.ref();
     Reference referenceDicImage = referenceRoot.child("image");
     Reference referenceImageUplod =
@@ -63,9 +62,10 @@ class UserDetailscontroler extends GetxController {
     loading.value = true;
     await imageuplode();
     UserDetails userdetils = UserDetails(
+        id: auth.currentUser?.uid,
         imageUrl: selectimagepath,
         fullname: uesrfullname.text,
-        address: address.text, 
+        address: address.text,
         phonenumber: phonenumber.text,
         email: email.text,
         district: district.text,
@@ -85,13 +85,12 @@ class UserDetailscontroler extends GetxController {
     // Store the image fs
   }
 
-  
-
   updateuserdetails(BuildContext context) async {
     // ignore: unused_local_variable
     loading.value = true;
     await imageuplode();
     UserDetails userdetils = UserDetails(
+        id: auth.currentUser?.uid,
         imageUrl: selectimagepath,
         fullname: uesrfullname.text,
         address: address.text,

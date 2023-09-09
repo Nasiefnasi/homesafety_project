@@ -39,6 +39,7 @@ class EmployesDetailsControl extends ChangeNotifier {
   }
 
   getworklist(Map<dynamic, dynamic> datas) {
+    works.clear();
     works.add(datas);
   }
 
@@ -49,7 +50,7 @@ class EmployesDetailsControl extends ChangeNotifier {
       await imageuplode();
       EmployesDetailsModel employeobj = EmployesDetailsModel(
         id: auth.currentUser?.uid,
-        work: works,
+        work: works.first['name'],
         imageUrl: selectimagepath,
         fullname: name.text,
         phonenumber: phone.text,
@@ -148,7 +149,7 @@ class EmployesDetailsControl extends ChangeNotifier {
       loading.value = true;
       await imageuplode();
       EmployesDetailsModel employeobj = EmployesDetailsModel(
-          work: works,
+          work: works.first['name'],
           imageUrl: selectimagepath,
           fullname: name.text,
           phonenumber: phone.text,
@@ -173,17 +174,23 @@ class EmployesDetailsControl extends ChangeNotifier {
     }
   }
 
-  Stream<QuerySnapshot> getEmployeesDetailsStream() {
+  Stream<DocumentSnapshot> getEmployeesDetailsStream() {
     try {
       // Build the reference to the collection and document
-      final collectionReference =
-          FirebaseFirestore.instance.collection('Employes');
-      final documentReference = collectionReference.doc(auth.currentUser?.uid);
-      final subcollectionReference =
-          documentReference.collection('EmployesDetails');
+      // final collectionReference = FirebaseFirestore.instance
+      //     .collection('Employes')
+      //     .doc(auth.currentUser?.uid)
+      //     .collection('EmployesDetails');
+      // final documentReference = collectionReference.doc(auth.currentUser?.uid);
+      // final subcollectionReference =
+      //     documentReference.collection('EmployesDetails');
 
-      // Return the snapshots stream
-      return subcollectionReference.snapshots();
+      // // Return the snapshots stream
+      // return subcollectionReference.snapshots();
+      final collectionReference = FirebaseFirestore.instance
+          .collection('Employes')
+          .doc(auth.currentUser?.uid).snapshots();
+      return collectionReference;    
     } catch (e) {
       // Handle any errors that occur during the stream creation
       Get.snackbar("Error", "$e");

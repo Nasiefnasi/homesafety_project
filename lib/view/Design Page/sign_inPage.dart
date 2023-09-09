@@ -32,7 +32,7 @@ class SignPage extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                hight30, hight30,
+                hight30, 
 
                 // ignore: sized_box_for_whitespace
                 Container(

@@ -2,6 +2,9 @@
 
 // ignore_for_file: no_leading_underscores_for_local_identifiers, file_names
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:homesefty/controller/user/allwork/selectwork.dart';
@@ -15,6 +18,8 @@ class EmployeesDetailsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    FirebaseAuth auth = FirebaseAuth.instance;
+
     var _mediaqury = MediaQuery.of(context);
     return Consumer<SelectWorkPage>(builder: (context, value, child) {
       return Scaffold(
@@ -125,10 +130,33 @@ class EmployeesDetailsPage extends StatelessWidget {
                             backgroundColor: MaterialStatePropertyAll(
                                 Color.fromARGB(255, 3, 67, 120))),
                         onPressed: () async {
+                        
+                            final DocumentSnapshot snapshot = await  FirebaseFirestore.instance.collection('userdetails').doc(auth.currentUser!.uid).get();
+                            if(snapshot.exists){
+                              // ignore: unused_local_variable
+                              final Map<String, dynamic> data = snapshot.data() as Map<String, dynamic>;
+                              value.userdetails(data['fullname'],data['imageUrl'],data['id']);
+                              print('Full Name: ${data['fullname']}');
+                              print('jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj');
+
+                            }else{
+                              print("document snapshot is error");
+                            }
+
+                          // final datsa = (FirebaseFirestore.instance
+                          //   ..collection('userdetails')
+                          //       .doc(auth.currentUser?.uid).get()
+                          //      );
+                          // final document = datsa as Map<String, dynamic>;
+                          // print(
+                          //   document['fullname'],
+                          // );
+                         
+                          // value. userdetails(, work, workurl)
                           await value.employId(data['id']);
                           await value.addData(value.onclick);
-                          Get.snackbar("Message Success", "message");
                           Navigator.of(context).pop();
+                          Get.snackbar("Message Success", "message");
                         },
                         child: const Text(
                           'Conform',

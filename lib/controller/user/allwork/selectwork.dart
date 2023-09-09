@@ -12,20 +12,39 @@ class SelectWorkPage extends ChangeNotifier {
   String? districtlss;
   TextEditingController phone = TextEditingController();
   TextEditingController address = TextEditingController();
-  String employeesid='';
+  String? username;
+  String? userwork;
+  String? userimageurl;
+  String employeesid = '';
   String? district;
   String onclick = '';
+  String? day = '';
+  String? userid = '';
 
+  userdetails(String name, String workurl, String userids) {
+    userid = userids;
+    username = name;
+    // userwork = work;
+    userimageurl = workurl;
+    userwork = onclick;
+    notifyListeners();
+  }
 
-  employId(String data){
+  employId(String data) {
     employeesid = data;
+  }
 
+  selecrwork(String value) {
+    onclick = value;
   }
 
   addData(String value) {
-    onclick = value;
     if (value == 'Electronics') {
       UserSelectWork worksselect = UserSelectWork(
+          userid: userid,
+          username: username,
+          work: userwork,
+          userimagurl: userimageurl,
           employid: employeesid,
           phone: phone.text,
           workaddress: address.text,
@@ -33,11 +52,16 @@ class SelectWorkPage extends ChangeNotifier {
           workdistrict: district);
       db
           .collection('SelectWork')
-          .doc(auth.currentUser?.uid)
+          .doc("selct")
           .collection('Electronics')
-          .add(worksselect.tomap());
+          .doc(day)
+          .set(worksselect.tomap());
     } else if (value == 'Plumber') {
       UserSelectWork worksselect = UserSelectWork(
+          userid: userid,
+          username: username,
+          work: userwork,
+          userimagurl: userimageurl,
           employid: employeesid,
           phone: phone.text,
           workaddress: address.text,
@@ -45,11 +69,16 @@ class SelectWorkPage extends ChangeNotifier {
           workdistrict: district);
       db
           .collection('SelectWork')
-          .doc(auth.currentUser?.uid)
+          .doc("selct")
           .collection('plumber')
-          .add(worksselect.tomap());
+          .doc(day)
+          .set(worksselect.tomap());
     } else if (value == 'painter') {
       UserSelectWork worksselect = UserSelectWork(
+          userid: userid,
+          username: username,
+          work: userwork,
+          userimagurl: userimageurl,
           employid: employeesid,
           phone: phone.text,
           workaddress: address.text,
@@ -57,11 +86,16 @@ class SelectWorkPage extends ChangeNotifier {
           workdistrict: district);
       db
           .collection('SelectWork')
-          .doc(auth.currentUser?.uid)
+          .doc("selct")
           .collection('painter')
-          .add(worksselect.tomap());
+          .doc(day)
+          .set(worksselect.tomap());
     } else if (value == 'driver') {
       UserSelectWork worksselect = UserSelectWork(
+          userid: userid,
+          username: username,
+          work: userwork,
+          userimagurl: userimageurl,
           employid: employeesid,
           phone: phone.text,
           workaddress: address.text,
@@ -69,11 +103,16 @@ class SelectWorkPage extends ChangeNotifier {
           workdistrict: district);
       db
           .collection('SelectWork')
-          .doc(auth.currentUser?.uid)
+          .doc("selct")
           .collection('dirver')
-          .add(worksselect.tomap());
+          .doc(day)
+          .set(worksselect.tomap());
     } else if (value == 'gardeneer') {
       UserSelectWork worksselect = UserSelectWork(
+          userid: userid,
+          username: username,
+          work: userwork,
+          userimagurl: userimageurl,
           employid: employeesid,
           phone: phone.text,
           workaddress: address.text,
@@ -81,11 +120,16 @@ class SelectWorkPage extends ChangeNotifier {
           workdistrict: district);
       db
           .collection('SelectWork')
-          .doc(auth.currentUser?.uid)
+          .doc("selct")
           .collection('gardeneer')
-          .add(worksselect.tomap());
+          .doc(day)
+          .set(worksselect.tomap());
     } else if (value == 'cook') {
       UserSelectWork worksselect = UserSelectWork(
+          userid: userid,
+          username: username,
+          work: userwork,
+          userimagurl: userimageurl,
           employid: employeesid,
           phone: phone.text,
           workaddress: address.text,
@@ -93,14 +137,18 @@ class SelectWorkPage extends ChangeNotifier {
           workdistrict: district);
       db
           .collection('SelectWork')
-          .doc(auth.currentUser?.uid)
+          .doc("selct")
           .collection('cook')
-          .add(worksselect.tomap());
+          .doc(day)
+          .set(worksselect.tomap());
     }
   }
 
-  void addDate(String value) {
+  void addDate(String value, String selectday) {
+    //
     date = value;
+    day = selectday;
+
     notifyListeners();
   }
 

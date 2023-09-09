@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_typing_uninitialized_variables
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 // import 'package:homesefty/model/User/homepage/homeScreeenTotalWork.dart';
 import 'package:homesefty/model/User/homepage/statusleve.dart';
@@ -11,6 +13,7 @@ class UserHomePage extends StatelessWidget {
   const UserHomePage({super.key});
   @override
   Widget build(BuildContext context) {
+    FirebaseAuth auth = FirebaseAuth.instance;
     var mediaqury = MediaQuery.of(context);
     return Scaffold(
       drawer: UserNewDrawer(colorss: Colors.accents),
@@ -62,11 +65,31 @@ class UserHomePage extends StatelessWidget {
                       color: Colors.amber,
                       borderRadius:
                           BorderRadius.vertical(top: Radius.circular(10))),
-                  child: ListView.builder(
-                    itemBuilder: (context, index) {
-                      return const UserStatusLevel();
+                  child: StreamBuilder<QuerySnapshot>(
+                    stream: FirebaseFirestore.instance
+                                  .collection('conformwork')
+                                  .where("userid",
+                                      isEqualTo: auth.currentUser?.uid)
+                                  .snapshots(),
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return CircularProgressIndicator();
+                      }
+                      if (snapshot.connectionState == ConnectionState.active) {
+                        if (snapshot.hasData) {
+                          return ListView.builder(
+                            itemBuilder: (context, index) {
+                              return const UserStatusLevel();
+                            },
+                            itemCount: snapshot.data!.docs.length,
+                          );
+                        } else {
+                          return Text("Error");
+                        }
+                      } else {
+                        return Text("Error");
+                      }
                     },
-                    itemCount: 10,
                   ),
                 ),
               ),

@@ -2,10 +2,13 @@
 
 import 'package:flutter/material.dart';
 // import 'package:flutter_chat_ui/flutter_chat_ui.dart';
-import 'package:homesefty/core/size/colors&size.dart';import 'package:homesefty/view/Employees/mainEmployeeDesignPage/paymentRequestPage.dart';
+import 'package:homesefty/core/size/colors&size.dart';
+import 'package:homesefty/view/Employees/mainEmployeeDesignPage/paymentRequestPage.dart';
 import 'package:lottie/lottie.dart';
+
 class PandingworkStatusPPage extends StatelessWidget {
-  const PandingworkStatusPPage({super.key});
+  PandingworkStatusPPage({super.key, required this.data});
+  Map<String, dynamic> data = {};
 
   @override
   Widget build(BuildContext context) {
@@ -88,7 +91,7 @@ class PandingworkStatusPPage extends StatelessWidget {
                           //     MaterialPageRoute(
                           //       builder: (context) =>,
                           //     )),
-                          
+
                           child: const Padding(
                             padding: EdgeInsets.only(right: 50),
                             child: Text(
@@ -114,10 +117,11 @@ class PandingworkStatusPPage extends StatelessWidget {
                                     ),
                                   ),
                                   onPressed: () => Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => const PaymentRequest(),
-                                      ),
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              const PaymentRequest(),
+                                        ),
                                       ),
                                   child: const Text(
                                     'End',
@@ -148,48 +152,52 @@ class PandingworkStatusPPage extends StatelessWidget {
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
             shadowColor: Colors.grey,
             elevation: 5,
-            child: const Row(
+            child: Row(
               children: [
-                Width10,
-                CircleAvatar(
-                  radius: 30,
-                  child: CircleAvatar(
-                    radius: 27,
-                    backgroundColor: Colors.white,
-                  ),
-                ),
                 Width20,
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      'Name :',
+                      'Name : ${data['username']}',
                       style: TextStyle(fontWeight: FontWeight.w600),
                     ),
                     hight5,
                     Text(
-                      'Address :',
+                      'Address : ${data['useraddress']}',
                       style: TextStyle(fontWeight: FontWeight.w600),
                     ),
                     hight5,
                     Text(
-                      'Age :',
+                      'Work Date : ${data['workdate']}',
                       style: TextStyle(fontWeight: FontWeight.w600),
                     ),
                   ],
                 ),
                 Spacer(),
+                Width10,
                 Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Column(
-                    children: [
-                      CircleAvatar(
-                        backgroundColor: Colors.green,
-                        radius: 8,
-                      ),
-                    ],
-                  ),
-                )
+                  padding: const EdgeInsets.all(8.0),
+                  child: CircleAvatar(
+                      radius: 30,
+                      child: CircleAvatar(
+                        radius: 30.0,
+                        backgroundImage:
+                            NetworkImage("${data['userimageurl']}"),
+                        backgroundColor: Colors.transparent,
+                      )),
+                ),
+                // Padding(
+                //   padding: EdgeInsets.all(8.0),
+                //   child: Column(
+                //     children: [
+                //       CircleAvatar(
+                //         backgroundColor: Colors.green,
+                //         radius: 8,
+                //       ),
+                //     ],
+                //   ),
+                // )
               ],
             ),
           ),

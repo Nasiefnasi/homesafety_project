@@ -32,13 +32,11 @@ class _EmployeProdilrUpdatePageState extends State<EmployeProdilrUpdatePage> {
   // }
 
   List<Map> categories = [
+    {'name': 'election', 'ischecked': false},
     {'name': 'plumber', 'ischecked': false},
-    {'name': 'dssdmber', 'ischecked': false},
-    {'name': 'dsdsvdser', 'ischecked': false},
-    {'name': 'plsdvsdver', 'ischecked': false},
-    {'name': 'bnfr', 'ischecked': false},
-    {'name': 'ppdsdsumber', 'ischecked': false},
-    {'name': 'wmber', 'ischecked': false},
+    {'name': 'driver', 'ischecked': false},
+    {'name': 'cook', 'ischecked': false},
+    {'name': 'cook', 'ischecked': false},
   ];
   @override
   Widget build(BuildContext context) {
@@ -205,10 +203,12 @@ class _EmployeProdilrUpdatePageState extends State<EmployeProdilrUpdatePage> {
                     contros: employcontrl.experience,
                     hinttext: widget.details['experience'],
                   ),
-                  DetailsProfilepage(
-                    contros: employcontrl.district,
-                    hinttext: widget.details['district'],
-                  ),
+                  UpfateDistrictSelectionWidget(text:widget.details['district'], )
+                  ,
+                  // DetailsProfilepage(
+                  //   contros: employcontrl.district,
+                  //   hinttext: widget.details['district'],
+                  // ),
                   DetailsProfilepage(
                     contros: employcontrl.state,
                     hinttext: widget.details['state'],
@@ -246,8 +246,8 @@ class _EmployeProdilrUpdatePageState extends State<EmployeProdilrUpdatePage> {
                         }
                       },
                       child: employcontrl.loading.value
-                          ? CircularProgressIndicator()
-                          : Text(
+                          ? const CircularProgressIndicator()
+                          : const Text(
                               "Save Details",
                               style: TextStyle(
                                   fontWeight: FontWeight.bold, fontSize: 20),
@@ -307,7 +307,9 @@ class _EmployeProdilrUpdatePageState extends State<EmployeProdilrUpdatePage> {
         cstate.isEmpty) {
       return;
     } else {
-      Get.snackbar("Successfull", 'Ditails');
+      await Provider.of<EmployesDetailsControl>(context, listen: false)
+          .addemployea();
+      Get.snackbar("Update", 'Successfull');
     }
   }
 
@@ -328,5 +330,67 @@ class _EmployeProdilrUpdatePageState extends State<EmployeProdilrUpdatePage> {
         );
       },
     ).toList());
+  }
+
+  
+}
+class UpfateDistrictSelectionWidget extends StatefulWidget {
+
+  const UpfateDistrictSelectionWidget({super.key, this.text, });
+  final text;
+
+
+
+  @override
+  State<UpfateDistrictSelectionWidget> createState() => _UpfateDistrictSelectionWidgetState();
+}
+
+class _UpfateDistrictSelectionWidgetState extends State<UpfateDistrictSelectionWidget> {
+  String? valuechoose;
+  
+  
+
+   String? sex;
+  List<String> listitem = [ 'Alappuzha', 'Ernakulam', 'Kozhikode', 'Palakkad', 'Kollam', 'Kannur', 'Kasaragod', 'Idukki', 'Kottayam', 'Thrissur', 'Pathanamthitta', 'Malappuram', 'Wayanad', 'Thiruvananthapuram'];
+  @override
+  Widget build(BuildContext context) {
+ 
+    return Padding(
+      padding:  const EdgeInsets.all(8.0),
+      child: SizedBox(
+        width: double.infinity,
+        child: Card(
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+          shadowColor: Colors.blue,
+          elevation: 5,
+          child: Padding(
+            padding:  const EdgeInsets.only(left: 10, right: 10),
+            child: DropdownButton(
+              isExpanded: true,
+              underline:  const SizedBox(),
+              hint:  Text(widget. text),
+              value: valuechoose,
+              items: listitem.map((valueitem) {
+                return DropdownMenuItem(
+                  value: valueitem,
+                  child: Text(valueitem),
+                );
+              }).toList(),
+              // ignore: non_constant_identifier_names
+              onChanged: (Newvalue) {
+                setState(() {
+                  valuechoose = Newvalue;
+                 
+                   Provider.of<EmployesDetailsControl>(context, listen: false).selectdestrict(valuechoose!);
+        
+
+                });
+              },
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }

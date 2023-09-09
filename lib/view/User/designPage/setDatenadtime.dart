@@ -96,7 +96,10 @@ class _ScheduleTimeAndDateState extends State<ScheduleTimeAndDate> {
                                     onPressed: () async {
                                       await selecttimeand();
                                       value.addDate(
-                                          '${dateTimes.day.toString()}/ ${dateTimes.month}/${dateTimes.year}');
+                                          '${dateTimes.day.toString()}/ ${dateTimes.month}/${dateTimes.year}',
+                                          '${dateTimes.day.toString()}');
+                                      // value.addDate(
+                                      //     '${dateTimes.day.toString()}/ ${dateTimes.month}/${dateTimes.year}',);
                                       //DateTime dateTimes = DateTime.now();
                                     },
                                     child: const Text(
@@ -197,7 +200,7 @@ class _ScheduleTimeAndDateState extends State<ScheduleTimeAndDate> {
                       .snapshots(),
                   builder: (context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
-                      return CircularProgressIndicator();
+                      return const CircularProgressIndicator();
                     }
                     if (snapshot.connectionState == ConnectionState.active) {
                       if (snapshot.hasData) {
@@ -207,21 +210,24 @@ class _ScheduleTimeAndDateState extends State<ScheduleTimeAndDate> {
                             final document = snapshot.data!.docs[index];
                             final data =
                                 document.data() as Map<String, dynamic>;
-                            return GestureDetector( onTap: () {
-                               Navigator.push(context, MaterialPageRoute(
+                            return GestureDetector(
+                                onTap: () {
+                                  Navigator.push(context, MaterialPageRoute(
                                     builder: (context) {
-                                      return EmployeesDetailsPage(data: data,);
+                                      return EmployeesDetailsPage(
+                                        data: data,
+                                      );
                                     },
                                   ));
-                            },
-                              child: EmployeeList(data: data));
+                                },
+                                child: EmployeeList(data: data));
                           },
                         );
                       } else {
-                        return Text('error');
+                        return const Text('error');
                       }
                     } else {
-                      return Text('error');
+                      return const Text('error');
                     }
                   },
                 )),
@@ -243,22 +249,20 @@ class EmployeeList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(
-          vertical: 5, horizontal: 15),
+      padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 15),
       child: SizedBox(
         height: 60,
         // color: Colors.amber,
         width: double.infinity,
         child: Card(
-          shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10)),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
           color: Colors.blue[100],
           child: Padding(
-            padding: EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(8.0),
             child: Row(
               // mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment:
-                  CrossAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Width10,
                 Container(
@@ -266,8 +270,7 @@ class EmployeeList extends StatelessWidget {
                   height: 30,
                   decoration: BoxDecoration(
                       border: Border.all(),
-                      borderRadius: BorderRadius.all(
-                          Radius.circular(3))),
+                      borderRadius: const BorderRadius.all(Radius.circular(3))),
                   child: Image.network(
                     data['imageUrl'],
                     fit: BoxFit.cover,
@@ -279,7 +282,7 @@ class EmployeeList extends StatelessWidget {
                   width: 120,
                   child: Text(
                     data['fullname'],
-                    style: TextStyle(
+                    style: const TextStyle(
                         fontWeight: FontWeight.w600,
                         fontSize: 15,
                         color: Colors.grey),
@@ -289,14 +292,13 @@ class EmployeeList extends StatelessWidget {
                 //   'Date',
                 //   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
                 // ),
-                Spacer(),
-                Text(
+                const Spacer(),
+                const Text(
                   'Details',
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 15,
-                      color: Color.fromARGB(
-                          255, 43, 100, 147)),
+                      color: Color.fromARGB(255, 43, 100, 147)),
                 ),
                 Width10,
               ],

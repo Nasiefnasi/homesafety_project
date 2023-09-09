@@ -27,17 +27,20 @@ class EmployeesProfilePage extends StatelessWidget {
       //   title: const Text('Personal Details'),
       // ),
       body: SafeArea(
-        child: StreamBuilder<QuerySnapshot>(
-          stream: Provider.of<EmployesDetailsControl>(context)
+        child: StreamBuilder<DocumentSnapshot>(
+          stream:
+           Provider.of<EmployesDetailsControl>(context)
               .getEmployeesDetailsStream(),
           builder:
-              (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+              (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const CircularProgressIndicator();
             }
-            if (snapshot.hasError) {
+            if (!snapshot.hasData) {
               return const Text('Error');
             }
+            final data=snapshot.data!.data()as Map<String,dynamic>;
+            final name=data['fullname'];
             return ListView(
               children: [
                 Row(
@@ -45,24 +48,24 @@ class EmployeesProfilePage extends StatelessWidget {
                   children: [
                     IconButton(
                         onPressed: () {
+                          print(name);
                           Map<String, dynamic> personalDetails = {
-                            'name': snapshot.data!.docs.first['fullname']
+                            'name': data['fullname']
                                 .toString(),
                             'address':
-                                snapshot.data!.docs.first['address'].toString(),
-                            'phone': snapshot.data!.docs.first['phonenumber']
+                                data['address'].toString(),
+                            'phone': data['phonenumber']
                                 .toString(),
-                            'age': snapshot.data!.docs.first['age'].toString(),
-                            'sex': snapshot.data!.docs.first['sex'].toString(),
+                            'age': data['age'].toString(),
+                            'sex': data['sex'].toString(),
                             'work':
-                                snapshot.data!.docs.first['works'].toString(),
-                            'experience': snapshot
-                                .data!.docs.first['experience']
+                                data['works'].toString(),
+                            'experience':data['experience']
                                 .toString(),
-                            'district': snapshot.data!.docs.first['district']
+                            'district': data['district']
                                 .toString(),
                             'state':
-                                snapshot.data!.docs.first['state'].toString(),
+                                data['state'].toString(),
                           };
                           Get.to(EmployeProdilrUpdatePage(
                               details: personalDetails));
@@ -84,40 +87,40 @@ class EmployeesProfilePage extends StatelessWidget {
                             width: 5,
                             color: const Color.fromARGB(255, 71, 33, 33))),
                     child: Image.network(
-                      '${snapshot.data!.docs.first['imageUrl']}',
+                     data['imageUrl'].toString(),
                       fit: BoxFit.cover,
                     ),
                   ),
                 ),
                 ShowDetailWidget(
-                  text: '${snapshot.data!.docs.first['fullname'].toString()}',
+                  text: data['fullname'].toString()
                 ),
                 ShowDetailWidget(
                   cusmeheight: 150,
-                  text: '${snapshot.data!.docs.first['address'].toString()}',
+                  text: data['address'].toString()
                 ),
                 ShowDetailWidget(
                   text:
-                      '${snapshot.data!.docs.first['phonenumber'].toString()}',
+                     data['phonenumber'].toString()
                 ),
                 ShowDetailWidget(
-                  text: '${snapshot.data!.docs.first['age'].toString()}',
+                  text: data['age'].toString()
                 ),
                 ShowDetailWidget(
-                  text: '${snapshot.data!.docs.first['sex'].toString()}',
+                  text: data['sex'].toString()
                 ),
                 ShowDetailWidget(
-                  text: '${snapshot.data!.docs.first['works'] }',
+                  text: data['works'].toString(),
                   cusmeheight: 150,
                 ),
                 ShowDetailWidget(
-                  text: '${snapshot.data!.docs.first['experience'].toString()}',
+                  text: data['experience'].toString()
                 ),
                 ShowDetailWidget(
-                  text: '${snapshot.data!.docs.first['district'].toString()}',
+                  text: data['district'].toString()
                 ),
                 ShowDetailWidget(
-                  text: '${snapshot.data!.docs.first['state'].toString()}',
+                  text: data['state'].toString()
                 ),
               ],
             );

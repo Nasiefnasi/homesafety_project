@@ -11,7 +11,7 @@ class EmployesDetailsModel {
   String? experience;
   String? district;
   
-  List<Map<dynamic, dynamic>> work;
+  String work;
   // List< String> work;
   String? state;
   EmployesDetailsModel({

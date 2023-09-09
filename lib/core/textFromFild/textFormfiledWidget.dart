@@ -539,7 +539,7 @@ class NotCompletedListModel extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: Container(
         width: double.infinity,
-        height: 80,
+        height: 70,
         // color: Colors.amber,
         child: Card(
             shape:
@@ -551,9 +551,9 @@ class NotCompletedListModel extends StatelessWidget {
               children: [
                 Width10,
                 const CircleAvatar(
-                  radius: 30,
+                  radius: 25,
                   child: CircleAvatar(
-                    radius: 27,
+                    radius: 23,
                     backgroundColor: Colors.white,
                   ),
                 ),
