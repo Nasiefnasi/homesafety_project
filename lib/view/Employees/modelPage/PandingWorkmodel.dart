@@ -3,11 +3,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:homesefty/controller/employes/chat/chat.dart';
 // import 'package:flutter_chat_ui/flutter_chat_ui.dart';
 import 'package:homesefty/core/size/colors&size.dart';
 import 'package:homesefty/view/Employees/mainEmployeeDesignPage/chatPage.dart';
 import 'package:homesefty/view/Employees/mainEmployeeDesignPage/paymentRequestPage.dart';
 import 'package:lottie/lottie.dart';
+import 'package:provider/provider.dart';
 
 class PandingworkStatusPPage extends StatelessWidget {
   PandingworkStatusPPage({super.key, required this.data});
@@ -141,86 +143,91 @@ class PandingworkStatusPPage extends StatelessWidget {
       );
     }
 
-    return GestureDetector(
-      onTap: () {
-        _showbottomsheet();
-      },
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 5),
-        child: SizedBox(
-          width: double.infinity,
-          height: 90,
-          child: Card(
-            color: const Color.fromARGB(255, 227, 227, 227),
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-            shadowColor: Colors.grey,
-            elevation: 5,
-            child: Row(
-              children: [
-                Width20,
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'Name : ${data['username']}',
-                      style: TextStyle(fontWeight: FontWeight.w600),
-                    ),
-                    hight5,
-                    Text(
-                      'Address : ${data['useraddress']}',
-                      style: TextStyle(fontWeight: FontWeight.w600),
-                    ),
-                    hight5,
-                    Text(
-                      'Work Date : ${data['workdate']}',
-                      style: TextStyle(fontWeight: FontWeight.w600),
-                    ),
-                  ],
-                ),
-                Spacer(),
-                IconButton(
-                    onPressed: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => ChatPage(
-                            receiverUserEmail:
-                                auth.currentUser!.displayName.toString(),
-                            receiverUserId: auth.currentUser!.uid),
-                      ));
-                    },
-                    icon: Icon(
-                      Icons.wechat_sharp,
-                      size: 40,
-                      color: Colors.green,
-                    )),
-                Width10,
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: CircleAvatar(
-                      radius: 30,
-                      child: CircleAvatar(
-                        radius: 30.0,
-                        backgroundImage:
-                            NetworkImage("${data['userimageurl']}"),
-                        backgroundColor: Colors.transparent,
+    return Consumer<EmployeChating>(builder: (context, value, child) {
+      return GestureDetector(
+        onTap: () {
+          _showbottomsheet();
+        },
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 5),
+          child: SizedBox(
+            width: double.infinity,
+            height: 90,
+            child: Card(
+              color: const Color.fromARGB(255, 227, 227, 227),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20)),
+              shadowColor: Colors.grey,
+              elevation: 5,
+              child: Row(
+                children: [
+                  Width20,
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Name : ${data['username']}',
+                        style: TextStyle(fontWeight: FontWeight.w600),
+                      ),
+                      hight5,
+                      Text(
+                        'Address : ${data['useraddress']}',
+                        style: TextStyle(fontWeight: FontWeight.w600),
+                      ),
+                      hight5,
+                      Text(
+                        'Work Date : ${data['workdate']}',
+                        style: TextStyle(fontWeight: FontWeight.w600),
+                      ),
+                    ],
+                  ),
+                  Spacer(),
+                  IconButton(
+                      onPressed: () async {
+                      await  value.getreceiverId(data['userid'].toString());
+                      print("${data['userid'].toString()}eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeereeeeeeeeeeeeeeeeeeeeeeeeeeeefasdfsadf");
+                      print(data['userid'].toString());
+                        Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => EmployChatPage(
+                              receiverUserEmail:
+                                  auth.currentUser!.email.toString(),
+                              receiverUserId: data['userid'].toString()),
+                        ));
+                      },
+                      icon: Icon(
+                        Icons.wechat_sharp,
+                        size: 40,
+                        color: Colors.green,
                       )),
-                ),
-                // Padding(
-                //   padding: EdgeInsets.all(8.0),
-                //   child: Column(
-                //     children: [
-                //       CircleAvatar(
-                //         backgroundColor: Colors.green,
-                //         radius: 8,
-                //       ),
-                //     ],
-                //   ),
-                // )
-              ],
+                  Width10,
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: CircleAvatar(
+                        radius: 30,
+                        child: CircleAvatar(
+                          radius: 30.0,
+                          backgroundImage:
+                              NetworkImage("${data['userimageurl']}"),
+                          backgroundColor: Colors.transparent,
+                        )),
+                  ),
+                  // Padding(
+                  //   padding: EdgeInsets.all(8.0),
+                  //   child: Column(
+                  //     children: [
+                  //       CircleAvatar(
+                  //         backgroundColor: Colors.green,
+                  //         radius: 8,
+                  //       ),
+                  //     ],
+                  //   ),
+                  // )
+                ],
+              ),
             ),
           ),
         ),
-      ),
-    );
+      );
+    });
   }
 }

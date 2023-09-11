@@ -1,8 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:homesefty/controller/user/chatpage/chating.dart';
 import 'package:homesefty/core/size/colors&size.dart';
 import 'package:homesefty/view/Employees/mainEmployeeDesignPage/chatPage.dart';
+import 'package:homesefty/view/User/designPage/chatinguser.dart';
+import 'package:provider/provider.dart';
 
 class UserStatusLevel extends StatelessWidget {
   UserStatusLevel({super.key, required this.datas});
@@ -47,131 +50,146 @@ class UserStatusLevel extends StatelessWidget {
       );
     }
 
-    return SizedBox(
-      height: 90,
-      // color: Colors.amber,
-      width: double.infinity,
-      child: Card(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-        color: Colors.white,
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: ListTile(
-            leading: CircleAvatar(
-              radius: 40,
-              backgroundColor: Color.fromARGB(255, 29, 26, 1),
-              child: CircleAvatar(
-                radius: 30.0,
-                backgroundImage: NetworkImage(datas['employimageurl']),
-                backgroundColor: const Color.fromARGB(0, 111, 8, 8),
+    return Consumer<UserChating>(builder: (context, value, child) {
+      return SizedBox(
+        height: 90,
+        // color: Colors.amber,
+        width: double.infinity,
+        child: Card(
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+          color: Colors.white,
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ListTile(
+              leading: CircleAvatar(
+                radius: 40,
+                backgroundColor: Color.fromARGB(255, 29, 26, 1),
+                child: CircleAvatar(
+                  radius: 30.0,
+                  backgroundImage: NetworkImage(datas['employimageurl']),
+                  backgroundColor: const Color.fromARGB(0, 111, 8, 8),
+                ),
               ),
-            ),
-            title: Text(
-              '${datas['employename']} ',
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-            ),
-            subtitle: Text(
-              'Date: ${datas['workdate']}',
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
-            ),
-            trailing: IconButton(
-                onPressed: () async {
-                  showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return AlertDialog(
-                        title: const Text('Select your Option'),
-                        shadowColor: Colors.black,
-                        actions: [
-                          Row(
-                            children: [
-                              TextButton(
-                                  onPressed: () {
-                                    _showbottomStatusLeve();
-                                  },
-                                  child: const Text(
-                                    "Status Level",
-                                    style: TextStyle(
-                                        color: Color.fromARGB(255, 3, 108, 6),
-                                        fontSize: 20),
-                                  )),
-                              const Divider(thickness: 2),
-                              TextButton(
-                                  onPressed: () {
-                                 Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-                                 return  ChatPage(receiverUserEmail:auth.currentUser!.email.toString() , receiverUserId: auth.currentUser!.uid);
+              title: Text(
+                '${datas['employename']} ',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              ),
+              subtitle: Text(
+                'Date: ${datas['workdate']}',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+              ),
+              trailing: IconButton(
+                  onPressed: () async {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: const Text('Select your Option'),
+                          shadowColor: Colors.black,
+                          actions: [
+                            Row(
+                              children: [
+                                TextButton(
+                                    onPressed: () {
+                                      _showbottomStatusLeve();
+                                    },
+                                    child: const Text(
+                                      "Status Level",
+                                      style: TextStyle(
+                                          color: Color.fromARGB(255, 3, 108, 6),
+                                          fontSize: 20),
+                                    )),
+                                const Divider(thickness: 2),
+                                TextButton(
+                                    onPressed: () async {
+                                      // await value.getuserreceiverId(
+                                      //     datas['employid'].toString());
+                                      print(
+                                          "${datas['employid'].toString()}UUUUUUUUUUUUUUUUUUUUUUUUUUUUUeeereeeeeeeeeeeeeeeeeeeeeeeeeeeefasdfsadf");
 
-                                 },));
-                                  },
-                                  child: const Text(
-                                    "   Chat",
-                                    style: TextStyle(
-                                        color: Color.fromARGB(255, 3, 108, 6),
-                                        fontSize: 20),
-                                  )),
-                            ],
-                          )
-                        ],
-                      );
-                      // );
-                      // child: AlertDialog(
-                      //   title: Text('Welcome'),
-                      //   content: Text('GeeksforGeeks'),
-                      //   actions: [
-                      //     ElevatedButton(
-                      //       // textColor: Colors.black,
-                      //       onPressed: () {},
-                      //       child: Text('CANCEL'),
-                      //     ),
-                      //     ElevatedButton(
-                      //       // textColor: Colors.black
-                      //       onPressed: () {},
-                      //       child: Text('ACCEPT'),
-                      //     ),
-                      //   ],
-                      // ),
-                      // );
-                    },
-                  );
-                },
-                icon: const Icon(Icons.more_vert_rounded)),
+                                      Navigator.of(context)
+                                          .push(MaterialPageRoute(
+                                        builder: (context) {
+                                          return USerChatPage(
+                                              receiverUserEmail: 
+                                             datas['employename'].toString(),
+                                                 
+                                              receiverUserId:
+                                                   datas['employid'].toString(),);
+                                        },
+                                      ));
+                                    },
+                                    child: const Text(
+                                      "   Chat",
+                                      style: TextStyle(
+                                          color: Color.fromARGB(255, 3, 108, 6),
+                                          fontSize: 20),
+                                    )),
+                              ],
+                            )
+                          ],
+                        );
+                        // );
+                        // child: AlertDialog(
+                        //   title: Text('Welcome'),
+                        //   content: Text('GeeksforGeeks'),
+                        //   actions: [
+                        //     ElevatedButton(
+                        //       // textColor: Colors.black,
+                        //       onPressed: () {},
+                        //       child: Text('CANCEL'),
+                        //     ),
+                        //     ElevatedButton(
+                        //       // textColor: Colors.black
+                        //       onPressed: () {},
+                        //       child: Text('ACCEPT'),
+                        //     ),
+                        //   ],
+                        // ),
+                        // );
+                      },
+                    );
+                  },
+                  icon: const Icon(Icons.more_vert_rounded)),
+            ),
+            // child: Row(
+            //   mainAxisAlignment: MainAxisAlignment.start,
+            //   children: [
+            //     Width10,
+            //     CircleAvatar(
+            //       child: CircleAvatar(
+            //         radius: 30,
+            //         backgroundColor: Colors.amber,
+            //       ),
+            //       radius: 35,
+            //     ),
+            //     Width10,
+            //     SizedBox(
+            //       width: 120,
+            //       child: Text(
+            //         'Name',
+            //         style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+            //       ),
+            //     ),
+            //     Text(
+            //       'Date',
+            //       style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+            //     ),
+            //     Spacer(),
+            //     Text(
+            //       'Status',
+            //       style: TextStyle(
+            //           fontWeight: FontWeight.bold,
+            //           fontSize: 15,
+            //           color: Color.fromARGB(255, 43, 100, 147)),
+            //     ),
+            //     Width10,
+            //   ],
+            // ),
           ),
-          // child: Row(
-          //   mainAxisAlignment: MainAxisAlignment.start,
-          //   children: [
-          //     Width10,
-          //     CircleAvatar(
-          //       child: CircleAvatar(
-          //         radius: 30,
-          //         backgroundColor: Colors.amber,
-          //       ),
-          //       radius: 35,
-          //     ),
-          //     Width10,
-          //     SizedBox(
-          //       width: 120,
-          //       child: Text(
-          //         'Name',
-          //         style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
-          //       ),
-          //     ),
-          //     Text(
-          //       'Date',
-          //       style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
-          //     ),
-          //     Spacer(),
-          //     Text(
-          //       'Status',
-          //       style: TextStyle(
-          //           fontWeight: FontWeight.bold,
-          //           fontSize: 15,
-          //           color: Color.fromARGB(255, 43, 100, 147)),
-          //     ),
-          //     Width10,
-          //   ],
-          // ),
         ),
-      ),
-    );
+      );
+    });
   }
 }

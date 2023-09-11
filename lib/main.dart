@@ -1,16 +1,18 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:homesefty/controller/employes/chat/chat.dart';
 import 'package:homesefty/controller/employes/employeWorkConform/employeconformwork.dart';
 import 'package:homesefty/controller/employes/workStatus/level.dart';
 // import 'package:homesefty/controller/employes/getxemployessprofile/heroemployes.dart';
 import 'package:homesefty/controller/getxemployessprofile/heroemployes.dart';
 import 'package:homesefty/controller/user/allwork/selectwork.dart';
+import 'package:homesefty/controller/user/chatpage/chating.dart';
 import 'package:homesefty/provider/navBar.dart';
 import 'package:homesefty/view/Design%20Page/loginpage.dart';
-import 'package:homesefty/view/Employees/profilePage/employeprofiledetailspageinsert.dart';
-import 'package:homesefty/view/User/designPage/homePage/homepage.dart';
-import 'package:homesefty/view/User/designPage/navBar/navbar.dart';
+// import 'package:homesefty/view/Employees/profilePage/employeprofiledetailspageinsert.dart';
+// import 'package:homesefty/view/User/designPage/homePage/homepage.dart';
+// import 'package:homesefty/view/User/designPage/navBar/navbar.dart';
 // import 'package:homesefty/view/Design%20Page/loginpage.dart';
 
 // import 'package:homesefty/view/User/designPage/homePage/homepage.dart';
@@ -24,9 +26,21 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(MultiProvider(providers: [
-    ChangeNotifierProvider(create: (context) => Level(),),
-    ChangeNotifierProvider(create: (context) => conformworkdatasave(),),
-    ChangeNotifierProvider(create: (context) => SelectWorkPage(),),
+    ChangeNotifierProvider(
+      create: (context) => UserChating(),
+    ),
+    ChangeNotifierProvider(
+      create: (context) => EmployeChating(),
+    ),
+    ChangeNotifierProvider(
+      create: (context) => Level(),
+    ),
+    ChangeNotifierProvider(
+      create: (context) => conformworkdatasave(),
+    ),
+    ChangeNotifierProvider(
+      create: (context) => SelectWorkPage(),
+    ),
     ChangeNotifierProvider(create: (context) => EmployesDetailsControl()),
     // ChangeNotifierProvider(create: (context) => EmployeesProfilePage(),),
     // ChangeNotifierProvider(create: (context) =>Authcontroler() ,),
@@ -43,7 +57,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      
 
         // color: Colors.amber,colo
         debugShowCheckedModeBanner: false,

@@ -5,16 +5,16 @@ import 'package:flutter/material.dart';
 import 'package:homesefty/controller/employes/chat/chatmodel.dart';
 import 'package:homesefty/model/User/homepage/chat%20message/message.dart';
 
-class UserChating extends ChangeNotifier {
+class EmployeChating extends ChangeNotifier {
   String? time;
   FirebaseAuth auth = FirebaseAuth.instance;
   FirebaseFirestore db = FirebaseFirestore.instance;
-  // String? resveruid;
-
-  // getuserreceiverId(String id) {
-  //   resveruid = id;
-  //   ;
-  // }
+  String? resveridss;
+  getreceiverId(String id) {
+    resveridss = id;
+    print("${resveridss}hhhhhHhHHHHhHHHhhhhhhhhhhhhhhhhhhhhhhhhkl;h");
+    
+  }
 
   // Stream<DocumentSnapshot> getUserDataAsStream() {
   //   return FirebaseFirestore.instance
@@ -42,32 +42,17 @@ class UserChating extends ChangeNotifier {
 
   //       final Map<String, dynamic> data =
   //           snapshot.data!.data() as Map<String, dynamic>;
-  //       resveruid = data['employid'];
+  //       resveridss = data['userid'];
   //       print(
-  //           "${resveruid}....................................e..............................e........................e");
+  //           "${resveridss}....................................e..............................e........................e");
 
-  //       return Text('User ID: $resveruid');
+  //       return Text('User ID: $resveridss');
   //     },
   //   );
   // }
 
-  Future<void> senduserMessage(String message, String resiverIDs) async {
+  Future<void> sendemployiMessage(String message ,String resiverID) async {
     // ignore: unused_local_variable
-    // String? resveridss;
-
-    // final DocumentSnapshot snapshot =
-    //     await FirebaseFirestore.instance.collection('conformwork').doc().get();
-    // if (snapshot.exists) {
-    //   // ignore: unused_local_variable
-    //   final Map<String, dynamic> data = snapshot.data() as Map<String, dynamic>;
-    //   resveridss = data['employid'];
-    //   // value.userdetails(
-    //   //     data['fullname'], data['imageUrl'], data['id']);
-    //   // print('Full Name: ${data['fullname']}');
-    //   print('jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj');
-    // } else {
-    //   print("document snapshot is error");
-    // }
 
     String currentUserId = auth.currentUser!.uid;
     String currentUserEmail = auth.currentUser!.email.toString();
@@ -76,17 +61,19 @@ class UserChating extends ChangeNotifier {
     Messages newmessage = Messages(
         senderId: currentUserId,
         senderEmail: currentUserEmail,
-        receiverId:resiverIDs,
+        receiverId: resiverID,
         timestamp: time,
         message: message);
 
-    List<String> ids = [currentUserId, resiverIDs.toString()];
+    // List<String> ids = [resveridss.toString(), currentUserId];
 
-    ids.sort();
-    String chatroomIds = ids.join("_");
-    String uid = "$resiverIDs$currentUserId";
-    print("${uid}...........................uuuuuuuuu");
+    String uid = "$currentUserId$resiverID";
+
+    print("${uid}...........................eeeeeeeeeee1");
     print(auth.currentUser!.uid);
+    // ids.sort();
+    // String chatroomIds = ids.join("_");
+
     await db
         .collection("chat_room")
         .doc(uid)
@@ -94,14 +81,22 @@ class UserChating extends ChangeNotifier {
         .add(newmessage.toMap());
   }
 
-  Stream<QuerySnapshot> getuserMessagess(String userId, String otherUserid) {
-    String uid = "$otherUserid${auth.currentUser!.uid}";
-    print("${uid}...........................uuuuuuuuuuuu");
-    print(auth.currentUser!.uid);
-    // List<String> ids = [userId, otherUserid];
+  // Future<void>createChatRoom()async{
+
+  //   Map<String,dynamic>data={};
+  //   db.collection(uid).add()
+  // }
+
+  Stream<QuerySnapshot> getemployMessages(
+   String userId, String otherUserid
+    ) {
+    // List<String> ids = [otherUserid,userId];
     // ids.sort();
-    // String uid = "$otherUserid$userId";
+    // String uid = "$userId$otherUserid";
     // String chatroomIds = ids.join("_");
+    String uid = "${auth.currentUser!.uid}$otherUserid";
+    print("${otherUserid}vbgbvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv");
+    print("${uid}...........................eeeeeeeeeeeeeeeee");
     return db
         .collection("chat_room")
         .doc(uid)
