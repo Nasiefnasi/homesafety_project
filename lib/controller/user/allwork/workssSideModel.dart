@@ -10,6 +10,9 @@ class UserSelectWork {
   String? work;
   String? userimagurl;
   String? userid;
+  String? employName;
+  String? employeAddress;
+  String? employurl;
 
   UserSelectWork({
     this.workdate,
@@ -21,6 +24,9 @@ class UserSelectWork {
     required this.work,
     this.userimagurl,
     this.userid,
+    this.employName,
+    this.employeAddress,
+    this.employurl,
   });
   factory UserSelectWork.formMap(DocumentSnapshot map) {
     return UserSelectWork(
@@ -32,7 +38,10 @@ class UserSelectWork {
         username: map["username"],
         work: map["work"],
         userimagurl: map["userimagurl"],
-        userid: map['userid']);
+        userid: map['userid'],
+        employName: map["employName"],
+        employeAddress: map['employeAddress'],
+        employurl: map['employurl']);
   }
   Map<String, dynamic> tomap() {
     return {
@@ -44,7 +53,10 @@ class UserSelectWork {
       "username": username,
       "work": work,
       "userimagurl": userimagurl,
-      'userid': userid
+      'userid': userid,
+      'employName': employName,
+      'employeAddress': employeAddress,
+      'employurl': employurl
     };
   }
 }

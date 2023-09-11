@@ -37,7 +37,7 @@ class _NewWorkPageState extends State<NewWorkPage> {
               .collection('SelectWork')
               .doc("selct")
               .collection('Electronics')
-              .where('userid', isEqualTo: auth.currentUser!.uid)
+              .where('employid', isEqualTo: auth.currentUser!.uid)
               .snapshots(),
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {

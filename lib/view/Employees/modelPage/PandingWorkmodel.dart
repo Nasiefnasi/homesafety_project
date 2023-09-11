@@ -1,8 +1,11 @@
 // ignore_for_file: no_leading_underscores_for_local_identifiers
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 // import 'package:flutter_chat_ui/flutter_chat_ui.dart';
 import 'package:homesefty/core/size/colors&size.dart';
+import 'package:homesefty/view/Employees/mainEmployeeDesignPage/chatPage.dart';
 import 'package:homesefty/view/Employees/mainEmployeeDesignPage/paymentRequestPage.dart';
 import 'package:lottie/lottie.dart';
 
@@ -12,6 +15,7 @@ class PandingworkStatusPPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    FirebaseAuth auth = FirebaseAuth.instance;
     void _showbottomsheet() {
       showModalBottomSheet(
         shape: const RoundedRectangleBorder(
@@ -175,6 +179,20 @@ class PandingworkStatusPPage extends StatelessWidget {
                   ],
                 ),
                 Spacer(),
+                IconButton(
+                    onPressed: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => ChatPage(
+                            receiverUserEmail:
+                                auth.currentUser!.displayName.toString(),
+                            receiverUserId: auth.currentUser!.uid),
+                      ));
+                    },
+                    icon: Icon(
+                      Icons.wechat_sharp,
+                      size: 40,
+                      color: Colors.green,
+                    )),
                 Width10,
                 Padding(
                   padding: const EdgeInsets.all(8.0),

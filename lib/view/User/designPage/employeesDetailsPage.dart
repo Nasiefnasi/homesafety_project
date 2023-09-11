@@ -13,7 +13,7 @@ import 'package:homesefty/core/size/colors&size.dart';
 import 'package:provider/provider.dart';
 
 class EmployeesDetailsPage extends StatelessWidget {
-  const EmployeesDetailsPage({super.key, required this.data});
+EmployeesDetailsPage({super.key, required this.data});
   final Map<String, dynamic> data;
 
   @override
@@ -130,18 +130,23 @@ class EmployeesDetailsPage extends StatelessWidget {
                             backgroundColor: MaterialStatePropertyAll(
                                 Color.fromARGB(255, 3, 67, 120))),
                         onPressed: () async {
-                        
-                            final DocumentSnapshot snapshot = await  FirebaseFirestore.instance.collection('userdetails').doc(auth.currentUser!.uid).get();
-                            if(snapshot.exists){
-                              // ignore: unused_local_variable
-                              final Map<String, dynamic> data = snapshot.data() as Map<String, dynamic>;
-                              value.userdetails(data['fullname'],data['imageUrl'],data['id']);
-                              print('Full Name: ${data['fullname']}');
-                              print('jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj');
-
-                            }else{
-                              print("document snapshot is error");
-                            }
+                          final DocumentSnapshot snapshot =
+                              await FirebaseFirestore.instance
+                                  .collection('userdetails')
+                                  .doc(auth.currentUser!.uid)
+                                  .get();
+                          if (snapshot.exists) {
+                            // ignore: unused_local_variable
+                            final Map<String, dynamic> data =
+                                snapshot.data() as Map<String, dynamic>;
+                            value.userdetails(
+                                data['fullname'], data['imageUrl'], data['id']);
+                            print('Full Name: ${data['fullname']}');
+                            print(
+                                'jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj');
+                          } else {
+                            print("document snapshot is error");
+                          }
 
                           // final datsa = (FirebaseFirestore.instance
                           //   ..collection('userdetails')
@@ -151,9 +156,14 @@ class EmployeesDetailsPage extends StatelessWidget {
                           // print(
                           //   document['fullname'],
                           // );
-                         
+
                           // value. userdetails(, work, workurl)
-                          await value.employId(data['id']);
+                          await value.employdetails(
+                              data['id'],
+                              data['fullname'],
+                              data['address'],
+                              data['imageUrl'].toString());
+
                           await value.addData(value.onclick);
                           Navigator.of(context).pop();
                           Get.snackbar("Message Success", "message");

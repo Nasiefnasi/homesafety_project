@@ -17,7 +17,7 @@ class homeScreeenTotalWork extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-     final workpage = Provider.of<SelectWorkPage>(context,listen: false);
+    final workpage = Provider.of<SelectWorkPage>(context, listen: false);
     return SizedBox(
       width: mediaqury.size.width * 9,
       // color: Colors.red,
@@ -28,10 +28,9 @@ class homeScreeenTotalWork extends StatelessWidget {
           mainAxisSpacing: 8.0,
           children: [
             GestureDetector(
-              onTap: ()async {
-                
+              onTap: () async {
                 await workpage.selecrwork('Electronics');
-               await Navigator.push(context, MaterialPageRoute(
+                await Navigator.push(context, MaterialPageRoute(
                   builder: (context) {
                     return const ScheduleTimeAndDate();
                   },
@@ -44,8 +43,8 @@ class homeScreeenTotalWork extends StatelessWidget {
                       'asset/animation/animation_llly0n3m (1).json')),
             ),
             GestureDetector(
-              onTap: ()async {
-                 await workpage.selecrwork('Painter');
+              onTap: () async {
+                await workpage.selecrwork('Painter');
                 Navigator.push(context, MaterialPageRoute(
                   builder: (context) {
                     return const ScheduleTimeAndDate();
@@ -59,7 +58,7 @@ class homeScreeenTotalWork extends StatelessWidget {
                       Lottie.asset('asset/animation/animation_lllxttwv.json')),
             ),
             GestureDetector(
-              onTap: ()async {
+              onTap: () async {
                 await workpage.selecrwork('Plumber');
                 Navigator.push(context, MaterialPageRoute(
                   builder: (context) {
@@ -74,7 +73,7 @@ class homeScreeenTotalWork extends StatelessWidget {
                       Lottie.asset('asset/animation/animation_lllxn377.json')),
             ),
             GestureDetector(
-              onTap: ()async {
+              onTap: () async {
                 await workpage.selecrwork('Driver');
                 Navigator.push(context, MaterialPageRoute(
                   builder: (context) {
@@ -89,7 +88,7 @@ class homeScreeenTotalWork extends StatelessWidget {
                       Lottie.asset('asset/animation/animation_llly3tmr.json')),
             ),
             GestureDetector(
-              onTap: ()async {
+              onTap: () async {
                 await workpage.selecrwork('Gardener');
                 Navigator.push(context, MaterialPageRoute(
                   builder: (context) {
@@ -104,7 +103,7 @@ class homeScreeenTotalWork extends StatelessWidget {
                       Lottie.asset('asset/animation/animation_llly9coj.json')),
             ),
             GestureDetector(
-              onTap: ()async {
+              onTap: () async {
                 await workpage.selecrwork('Cook');
                 Navigator.push(context, MaterialPageRoute(
                   builder: (context) {

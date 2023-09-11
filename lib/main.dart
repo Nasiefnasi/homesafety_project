@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:homesefty/controller/employes/employeWorkConform/employeconformwork.dart';
+import 'package:homesefty/controller/employes/workStatus/level.dart';
 // import 'package:homesefty/controller/employes/getxemployessprofile/heroemployes.dart';
 import 'package:homesefty/controller/getxemployessprofile/heroemployes.dart';
 import 'package:homesefty/controller/user/allwork/selectwork.dart';
@@ -23,6 +24,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(MultiProvider(providers: [
+    ChangeNotifierProvider(create: (context) => Level(),),
     ChangeNotifierProvider(create: (context) => conformworkdatasave(),),
     ChangeNotifierProvider(create: (context) => SelectWorkPage(),),
     ChangeNotifierProvider(create: (context) => EmployesDetailsControl()),

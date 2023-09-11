@@ -115,7 +115,7 @@ class NewworkModel extends StatelessWidget {
                               ),
                             ),
                             onPressed: () {},
-                            child: const Icon(Icons.message_sharp)),
+                            child: const Icon(Icons.add_reaction_sharp)),
                       ),
                     ]),
               )

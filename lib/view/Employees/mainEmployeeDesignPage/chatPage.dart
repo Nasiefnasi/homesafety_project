@@ -1,41 +1,124 @@
-// import 'package:flutter/material.dart';
-// // import 'package:flutter_chat_ui/flutter_chat_ui.dart';
-// // import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
-// class Chatpage extends StatefulWidget {
-//   const Chatpage({super.key});
+import 'package:flutter/material.dart';
+import 'package:homesefty/controller/user/chatpage/chating.dart';
+import 'package:homesefty/model/User/homepage/chat%20message/chatmodel.dart';
 
-//   @override
-//   State<Chatpage> createState() => _ChatpageState();
-// }
+class ChatPage extends StatefulWidget {
+  final String receiverUserEmail;
+  final String receiverUserId;
 
-// class _ChatpageState extends State<Chatpage> {
-//   List<types.Message> _messages = [];
-//   final _user = const types.User(
-//     id: '82091008-a484-4a89-ae75-a22bf8d6f3ac',
-//   );
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       body: Chat(
-//           messages: _messages, onSendPressed: _handleSendPressed, user: _user),
-//     );
-//   }
+  ChatPage(
+      {super.key,
+      required this.receiverUserEmail,
+      required this.receiverUserId});
 
-//   void _handleSendPressed(types.PartialText message) {
-//     final textMessage = types.TextMessage(
-//       author: _user,
-//       createdAt: DateTime.now().millisecondsSinceEpoch,
-//       id: "id",
-//       text: message.text,
-//     );
+  @override
+  State<ChatPage> createState() => _ChatPageState();
+}
 
-//     _addMessage(textMessage);
-//   }
+class _ChatPageState extends State<ChatPage> {
+  final TextEditingController messageController = TextEditingController();
+  final Chating chatservises = Chating();
+  final FirebaseAuth auth = FirebaseAuth.instance;
+  void sendMessage() async {
+    if (messageController.text.isNotEmpty) {
+      await chatservises.sendMessage(
+          auth.currentUser!.uid, messageController.text);
+      messageController.clear();
+    }
+  }
 
-//   void _addMessage(types.Message message) {
-//     setState(() {
-//       _messages.insert(0, message);
-//     });
-//   }
-// }
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        title: const Text(
+          "Chating ",
+        ),
+      ),
+      body: Column(children: [
+        Expanded(
+          child: bulidmessageList(),
+        ),
+        bulidmessageInput(),
+      ]),
+    );
+  }
+
+  Widget bulidmessageList() {
+    return StreamBuilder(
+      stream: chatservises.getMessages(
+          widget.receiverUserId, auth.currentUser!.uid),
+      builder: (context, snapshot) {
+        if (snapshot.hasError) {
+          return Text("Error${snapshot.error}");
+        }
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Text("Loading.....");
+        }
+        return ListView(
+          children: snapshot.data!.docs
+              .map((document) => bulidmessageItem(document))
+              .toList(),
+        );
+      },
+    );
+  }
+
+  Widget bulidmessageItem(DocumentSnapshot document) {
+    Map<String, dynamic> data = document.data() as Map<String, dynamic>;
+    var alignment = (data['senderId'] == auth.currentUser!.uid)
+        ? Alignment.centerRight
+        : Alignment.centerLeft;
+    return Container(
+      alignment: alignment,
+      child: Column(
+        crossAxisAlignment: (data['senderId'] == auth.currentUser!.uid)
+            ? CrossAxisAlignment.end
+            : CrossAxisAlignment.start,
+        mainAxisAlignment: (data['senderId'] == auth.currentUser!.uid)
+            ? MainAxisAlignment.end
+            : MainAxisAlignment.start,
+        children: [
+          Text(
+            data['senderEmail'],
+            style: const TextStyle(fontSize: 10),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+            child: ChatBubble(message: data['message']),
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget bulidmessageInput() {
+    return Card(
+      shadowColor: Colors.amber,
+      child: Row(
+        children: [
+          Expanded(
+              child: TextFormField(
+            controller: messageController,
+            obscureText: false,
+            decoration: const InputDecoration(
+                hoverColor: Color.fromARGB(255, 255, 2, 2),
+                fillColor: Colors.amberAccent,
+                hintText: "Enter Message"),
+          )),
+          IconButton(
+              onPressed: sendMessage,
+              icon: const Icon(
+                Icons.send,
+                color: Colors.amber,
+                size: 30,
+              ))
+        ],
+      ),
+    );
+  }
+}

@@ -1,13 +1,18 @@
- import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:homesefty/core/size/colors&size.dart';
+import 'package:homesefty/view/Employees/mainEmployeeDesignPage/chatPage.dart';
 
 class UserStatusLevel extends StatelessWidget {
-  const UserStatusLevel({super.key});
+  UserStatusLevel({super.key, required this.datas});
+  final Map<String, dynamic> datas;
   // final Names;
   // final date;
 
   @override
   Widget build(BuildContext context) {
+    FirebaseAuth auth = FirebaseAuth.instance;
     // ignore: no_leading_underscores_for_local_identifiers
     void _showbottomStatusLeve() {
       showModalBottomSheet(
@@ -52,15 +57,21 @@ class UserStatusLevel extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: ListTile(
-            leading: const CircleAvatar(
-              radius: 30,
+            leading: CircleAvatar(
+              radius: 40,
+              backgroundColor: Color.fromARGB(255, 29, 26, 1),
+              child: CircleAvatar(
+                radius: 30.0,
+                backgroundImage: NetworkImage(datas['employimageurl']),
+                backgroundColor: const Color.fromARGB(0, 111, 8, 8),
+              ),
             ),
-            title: const Text(
-              'Name',
+            title: Text(
+              '${datas['employename']} ',
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
             ),
-            subtitle: const Text(
-              'Date',
+            subtitle: Text(
+              'Date: ${datas['workdate']}',
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
             ),
             trailing: IconButton(
@@ -87,11 +98,10 @@ class UserStatusLevel extends StatelessWidget {
                               const Divider(thickness: 2),
                               TextButton(
                                   onPressed: () {
-                                    // Navigator.push(
-                                    //     context,
-                                    //     // MaterialPageRoute(
-                                    //     //   // builder: (context) => ,
-                                    // ));
+                                 Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+                                 return  ChatPage(receiverUserEmail:auth.currentUser!.email.toString() , receiverUserId: auth.currentUser!.uid);
+
+                                 },));
                                   },
                                   child: const Text(
                                     "   Chat",

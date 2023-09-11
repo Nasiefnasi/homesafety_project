@@ -1,4 +1,3 @@
-
 import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:homesefty/core/size/colors&size.dart';
@@ -31,9 +30,14 @@ class PaymentRequest extends StatelessWidget {
         title: const Center(child: Text('payment')),
         actions: const [Icon(Icons.dashboard_customize_rounded)],
         leading: IconButton(
-            onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return HiddenDrawer();
-              },)) ;}, icon: const Icon(Icons.arrow_circle_left_sharp)),
+            onPressed: () {
+              Navigator.push(context, MaterialPageRoute(
+                builder: (context) {
+                  return HiddenDrawer();
+                },
+              ));
+            },
+            icon: const Icon(Icons.arrow_circle_left_sharp)),
       ),
       body: SafeArea(
         child: Padding(
@@ -65,9 +69,11 @@ class PaymentRequest extends StatelessWidget {
                             MaterialStatePropertyAll(Colors.greenAccent[700])),
                     onPressed: () async {
                       message();
-                      Navigator.push(context, MaterialPageRoute(builder: (context) {
-                        return HiddenDrawer();
-                      },));
+                      Navigator.push(context, MaterialPageRoute(
+                        builder: (context) {
+                          return HiddenDrawer();
+                        },
+                      ));
                       // Map<String, dynamic> data = {
                       //   'name': 'ghhjjk',
                       //   'age': 34,

@@ -20,6 +20,9 @@ class SelectWorkPage extends ChangeNotifier {
   String onclick = '';
   String? day = '';
   String? userid = '';
+  String? employnames = "";
+  String? employeAddresss = "";
+  String ? employimageurl="";
 
   userdetails(String name, String workurl, String userids) {
     userid = userids;
@@ -30,8 +33,11 @@ class SelectWorkPage extends ChangeNotifier {
     notifyListeners();
   }
 
-  employId(String data) {
-    employeesid = data;
+  employdetails(String id,String name, String employAddress,String? employimageUrls) {
+    employeesid = id;
+    employnames = name;
+    employimageurl = employimageUrls;
+    employeAddresss=employAddress;
   }
 
   selecrwork(String value) {
@@ -49,7 +55,10 @@ class SelectWorkPage extends ChangeNotifier {
           phone: phone.text,
           workaddress: address.text,
           workdate: date,
-          workdistrict: district);
+          workdistrict: district,
+          employName: employnames,
+          employeAddress: employeAddresss,
+          employurl:employimageurl);
       db
           .collection('SelectWork')
           .doc("selct")
@@ -66,7 +75,10 @@ class SelectWorkPage extends ChangeNotifier {
           phone: phone.text,
           workaddress: address.text,
           workdate: date,
-          workdistrict: district);
+          workdistrict: district,
+          employName: employnames,
+          employeAddress: employeAddresss,
+           employurl:employimageurl);
       db
           .collection('SelectWork')
           .doc("selct")
@@ -83,7 +95,10 @@ class SelectWorkPage extends ChangeNotifier {
           phone: phone.text,
           workaddress: address.text,
           workdate: date,
-          workdistrict: district);
+          workdistrict: district,
+          employName: employnames,
+          employeAddress: employeAddresss,
+           employurl:employimageurl);
       db
           .collection('SelectWork')
           .doc("selct")
@@ -100,7 +115,10 @@ class SelectWorkPage extends ChangeNotifier {
           phone: phone.text,
           workaddress: address.text,
           workdate: date,
-          workdistrict: district);
+          workdistrict: district,
+          employName: employnames,
+          employeAddress: employeAddresss,
+           employurl:employimageurl);
       db
           .collection('SelectWork')
           .doc("selct")
@@ -117,7 +135,10 @@ class SelectWorkPage extends ChangeNotifier {
           phone: phone.text,
           workaddress: address.text,
           workdate: date,
-          workdistrict: district);
+          workdistrict: district,
+          employName: employnames,
+          employeAddress: employeAddresss,
+           employurl:employimageurl);
       db
           .collection('SelectWork')
           .doc("selct")
@@ -134,7 +155,10 @@ class SelectWorkPage extends ChangeNotifier {
           phone: phone.text,
           workaddress: address.text,
           workdate: date,
-          workdistrict: district);
+          workdistrict: district,
+          employName: employnames,
+          employeAddress: employeAddresss,
+           employurl:employimageurl);
       db
           .collection('SelectWork')
           .doc("selct")

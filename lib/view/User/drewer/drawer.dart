@@ -63,24 +63,23 @@ class UserNewDrawer extends StatelessWidget {
             ),
           ),
         ),
-        GestureDetector(
-          onTap: () {
+        ListTile(onTap: () {
             Navigator.of(context).push(MaterialPageRoute(builder: (context) {
               return SelectWork();
             },));
-          },
-          child: const ListTile(
-            leading: Icon(
-              Icons.webhook_rounded,
-              size: 25,
+          
+          
+        },
+          leading: Icon(
+            Icons.webhook_rounded,
+            size: 25,
+            color: Colors.white,
+          ),
+          title: Text(
+            'Select Work',
+            style: TextStyle(
+              fontSize: 18,
               color: Colors.white,
-            ),
-            title: Text(
-              'Select Work',
-              style: TextStyle(
-                fontSize: 18,
-                color: Colors.white,
-              ),
             ),
           ),
         ),

@@ -77,9 +77,12 @@ class UserHomePage extends StatelessWidget {
                       }
                       if (snapshot.connectionState == ConnectionState.active) {
                         if (snapshot.hasData) {
+                         
                           return ListView.builder(
                             itemBuilder: (context, index) {
-                              return const UserStatusLevel();
+                               final datass = snapshot.data!.docs[index];
+                         final document = datass.data() as Map<String, dynamic>;
+                              return UserStatusLevel(datas: document);
                             },
                             itemCount: snapshot.data!.docs.length,
                           );
