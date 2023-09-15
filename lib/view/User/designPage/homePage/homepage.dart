@@ -88,7 +88,6 @@ class UserHomePage extends StatelessWidget {
                                   final datass = snapshot.data!.docs[index];
                                   final document =
                                       datass.data() as Map<String, dynamic>;
-                                  
 
                                   return UserStatusLevel(datas: document);
                                 },

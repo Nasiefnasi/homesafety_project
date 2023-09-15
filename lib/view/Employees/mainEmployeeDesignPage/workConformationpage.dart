@@ -5,13 +5,14 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:homesefty/controller/employes/employeWorkConform/employeconformwork.dart';
+import 'package:homesefty/controller/employes/notCompleted/workNotCompleted.dart';
 import 'package:homesefty/core/size/colors&size.dart';
 import 'package:homesefty/core/textFromFild/textFormfiledWidget.dart';
 import 'package:homesefty/view/Employees/mainEmployeeDesignPage/hiddenDrawer.dart';
 import 'package:homesefty/view/Employees/mainEmployeeDesignPage/home.dart';
 import 'package:provider/provider.dart';
 
-class WorkConformationpage extends StatelessWidget {
+class WorkConformationpage extends StatefulWidget {
   WorkConformationpage({
     super.key,
     required this.datas,
@@ -19,8 +20,81 @@ class WorkConformationpage extends StatelessWidget {
   final Map<String, dynamic> datas;
 
   @override
+  State<WorkConformationpage> createState() => _WorkConformationpageState();
+}
+
+class _WorkConformationpageState extends State<WorkConformationpage> {
+  @override
+  GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   Widget build(BuildContext context) {
     FirebaseAuth auth = FirebaseAuth.instance;
+    showDialogfuntion(BuildContext context) async {
+                              await showDialog<String>(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return Consumer<WorkNotCompleted>(
+                                      builder: (context, value, child) {
+                                    return AlertDialog(
+                                      contentPadding:
+                                          const EdgeInsets.all(16.0),
+                                      content: Form(
+                                        key:
+                                            _formKey, // Assign the _formKey to the Form
+                                        autovalidateMode: AutovalidateMode
+                                            .onUserInteraction, // Enables auto-validation
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            TextFormField(
+                                              controller: value.comments,
+                                              autofocus: true,
+                                              validator: (text) {
+                                                if (text!.isEmpty) {
+                                                  return 'Please enter a comment';
+                                                }
+                                                return null; // Return null if the input is valid
+                                              },
+                                              decoration: const InputDecoration(
+                                                labelText:
+                                                    'Enter your Comment here',
+                                                hintText: 'Why Not completed',
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      actions: <Widget>[
+                                        TextButton(
+                                          child: const Text('Rejected'),
+                                          onPressed: () async {
+                                            // Check if the form is valid before proceeding
+                                            if (_formKey.currentState!
+                                                .validate()) {
+                                              await value.addOnfirebase(
+                                                      widget.datas['userid'],
+                                                      widget.datas['username'],
+                                                      widget.datas['employName'],
+                                                      widget.datas['userimagurl'],
+                                                      widget.datas['employurl']);
+
+                                              Get.snackbar(
+                                                "${widget.datas['username']}",
+                                                "This Work is Rejected",
+                                                backgroundColor: Color.fromARGB(
+                                                    244, 5, 85, 79),
+                                              );
+                                              value.comments.clear();
+
+                                              Navigator.pop(context);
+                                            }
+                                          },
+                                        )
+                                      ],
+                                    );
+                                  });
+                                },
+                              );
+                            }
     // DateTime seletetimedate = DateTime.now();
     // // ignore: unused_element
     // void selecttimeand() {
@@ -52,7 +126,8 @@ class WorkConformationpage extends StatelessWidget {
             icon: const Icon(Icons.arrow_circle_left_sharp)),
       ),
       body: SafeArea(
-        child: Consumer<conformworkdatasave>(builder: (context, value, child) {
+        child: Consumer2<conformworkdatasave, WorkNotCompleted>(
+            builder: (context, value, notCompletedobj, child) {
           return ListView(
             children: [
               Column(
@@ -80,7 +155,8 @@ class WorkConformationpage extends StatelessWidget {
                                     BorderRadius.circular(50), // Image border
                                 child: SizedBox.fromSize(
                                   size: Size.fromRadius(40), // Image radius
-                                  child: Image.network(datas['userimagurl'],
+                                  child: Image.network(
+                                      widget.datas['userimagurl'],
                                       fit: BoxFit.cover),
                                 ),
                               )
@@ -99,7 +175,7 @@ class WorkConformationpage extends StatelessWidget {
                       style: TextStyle(fontSize: 20, color: Colors.grey),
                     ),
                   ),
-                  EmployesWorkConformation(hinttext: datas['username']),
+                  EmployesWorkConformation(hinttext: widget.datas['username']),
                   Padding(
                     padding: EdgeInsets.only(left: 20),
                     child: Text(
@@ -108,7 +184,7 @@ class WorkConformationpage extends StatelessWidget {
                     ),
                   ),
                   EmployesWorkConformation(
-                    hinttext: datas['address'],
+                    hinttext: widget.datas['address'],
                     line: 160,
                   ),
                   const Padding(
@@ -118,7 +194,7 @@ class WorkConformationpage extends StatelessWidget {
                       style: TextStyle(fontSize: 20, color: Colors.grey),
                     ),
                   ),
-                  EmployesWorkConformation(hinttext: datas['phone']),
+                  EmployesWorkConformation(hinttext: widget.datas['phone']),
                   Padding(
                     padding: EdgeInsets.all(8.0),
                     child: SizedBox(
@@ -174,7 +250,7 @@ class WorkConformationpage extends StatelessWidget {
                                     child: Card(
                                       child: Center(
                                         child: Text(
-                                          datas['date'],
+                                          widget.datas['date'],
                                           style: const TextStyle(fontSize: 22),
                                         ),
                                       ),
@@ -203,32 +279,6 @@ class WorkConformationpage extends StatelessWidget {
                       ),
                     ),
                   ),
-
-                  // const Padding(
-                  //   padding: EdgeInsets.only(left: 20),
-                  //   child: Text(
-                  //     "Payment",
-                  //     style: TextStyle(fontSize: 20, color: Colors.grey),
-                  //   ),
-                  // ),
-                  // const Padding(
-                  //   padding: EdgeInsets.all(8.0),
-                  //   child: SizedBox(
-                  //     height: 60,
-                  //     width: double.infinity,
-                  //     child: Card(
-                  //       shadowColor: Colors.teal,
-                  //       elevation: 5,
-                  //       child: Padding(
-                  //         padding: EdgeInsets.all(8.0),
-                  //         child: Text(
-                  //           'Price',
-                  //           style: TextStyle(color: Colors.grey),
-                  //         ),
-                  //       ),
-                  //     ),
-                  //   ),
-                  // ),
                   hight20,
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -240,7 +290,93 @@ class WorkConformationpage extends StatelessWidget {
                           style: ButtonStyle(
                               backgroundColor: MaterialStateProperty.all(
                                   Colors.orange[600])),
-                          onPressed: () {},
+                          onPressed: ()async {
+
+
+                           await  showDialogfuntion(context);
+
+
+
+
+
+
+
+                            // ignore: unused_element
+                            // showDialogfuntion(BuildContext context) async {
+                            //   await showDialog<String>(
+                            //     context: context,
+                            //     builder: (BuildContext context) {
+                            //       return Consumer<WorkNotCompleted>(
+                            //           builder: (context, value, child) {
+                            //         return AlertDialog(
+                            //           contentPadding:
+                            //               const EdgeInsets.all(16.0),
+                            //           content: Form(
+                            //             key:
+                            //                 _formKey, // Assign the _formKey to the Form
+                            //             autovalidateMode: AutovalidateMode
+                            //                 .onUserInteraction, // Enables auto-validation
+                            //             child: Column(
+                            //               mainAxisSize: MainAxisSize.min,
+                            //               children: [
+                            //                 TextFormField(
+                            //                   controller: value.comments,
+                            //                   autofocus: true,
+                            //                   validator: (text) {
+                            //                     if (text!.isEmpty) {
+                            //                       return 'Please enter a comment';
+                            //                     }
+                            //                     return null; // Return null if the input is valid
+                            //                   },
+                            //                   decoration: const InputDecoration(
+                            //                     labelText:
+                            //                         'Enter your Comment here',
+                            //                     hintText: 'Why Not completed',
+                            //                   ),
+                            //                 ),
+                            //               ],
+                            //             ),
+                            //           ),
+                            //           actions: <Widget>[
+                            //             TextButton(
+                            //               child: const Text('Rejected'),
+                            //               onPressed: () async {
+                            //                 // Check if the form is valid before proceeding
+                            //                 if (_formKey.currentState!
+                            //                     .validate()) {
+                            //                   await notCompletedobj.addOnfirebase(
+                            //                           widget.datas['userid'],
+                            //                           widget.datas['username'],
+                            //                           widget.datas['employName'],
+                            //                           widget.datas['userimagurl'],
+                            //                           widget.datas['employurl']);
+
+                            //                   Get.snackbar(
+                            //                     "${widget.datas['username']}",
+                            //                     "This Work is Rejected",
+                            //                     backgroundColor: Color.fromARGB(
+                            //                         244, 5, 85, 79),
+                            //                   );
+                            //                   value.comments.clear();
+
+                            //                   Navigator.pop(context);
+                            //                 }
+                            //               },
+                            //             )
+                            //           ],
+                            //         );
+                            //       });
+                            //     },
+                            //   );
+                            // }
+
+                            // notCompletedobj.addOnfirebase(
+                            //     datas['userid'],
+                            //     datas['username'],
+                            //     datas['employName'],
+                            //     datas['userimagurl'],
+                            //     datas['employurl']);
+                          },
                           child: const Text(
                             'Not Complete',
                             style: TextStyle(fontSize: 20),
@@ -284,7 +420,13 @@ class WorkConformationpage extends StatelessWidget {
                                 data['phonenumber'],
                               );
                             }
-                            value.userdetails( datas['date'],datas['userimagurl'], datas['username'], datas['address'], datas['employid'],datas['userid']);
+                            value.userdetails(
+                                widget.datas['date'],
+                                widget.datas['userimagurl'],
+                                widget.datas['username'],
+                                widget.datas['address'],
+                                widget.datas['employid'],
+                                widget.datas['userid']);
 
                             // value.userimagurl = datas['userimagurl'];
                             // value.username = datas['username'];

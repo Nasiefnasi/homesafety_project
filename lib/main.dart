@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:homesefty/controller/employes/chat/chat.dart';
 import 'package:homesefty/controller/employes/employeWorkConform/employeconformwork.dart';
+import 'package:homesefty/controller/employes/notCompleted/workNotCompleted.dart';
 import 'package:homesefty/controller/employes/workStatus/level.dart';
 // import 'package:homesefty/controller/employes/getxemployessprofile/heroemployes.dart';
 import 'package:homesefty/controller/getxemployessprofile/heroemployes.dart';
@@ -27,13 +28,16 @@ void main() async {
   await Firebase.initializeApp();
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider(
+      create: (context) => WorkNotCompleted(),
+    ),
+    ChangeNotifierProvider(
       create: (context) => UserChating(),
     ),
     ChangeNotifierProvider(
       create: (context) => EmployeChating(),
     ),
     ChangeNotifierProvider(
-      create: (context) => Level(),
+      create: (context) => EmployStatusLevel(),
     ),
     ChangeNotifierProvider(
       create: (context) => conformworkdatasave(),

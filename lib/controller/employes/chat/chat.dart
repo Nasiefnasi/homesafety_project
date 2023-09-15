@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:homesefty/controller/employes/chat/chatmodel.dart';
-import 'package:homesefty/model/User/homepage/chat%20message/message.dart';
+import 'package:homesefty/MODEL/User/homepage/chat%20message/message.dart';
 
 class EmployeChating extends ChangeNotifier {
   String? time;

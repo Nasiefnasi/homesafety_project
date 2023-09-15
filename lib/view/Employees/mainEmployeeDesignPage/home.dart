@@ -4,10 +4,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:homesefty/VIEW/Employees/pendingWork/PandingWorkmodel.dart';
 import 'package:homesefty/controller/employes/chat/chat.dart';
 import 'package:homesefty/view/Employees/mainEmployeeDesignPage/ratingPage.dart';
-
-import 'package:homesefty/view/Employees/modelPage/PandingWorkmodel.dart';
 import 'package:homesefty/view/Employees/modelPage/employeRatingModelPage.dart';
 import 'package:homesefty/core/size/colors&size.dart';
 import 'package:homesefty/view/Employees/profilePage/profilepagedetails.dart';
@@ -29,9 +28,7 @@ class _EmployesHomeState extends State<EmployesHome> {
     // ignore: no_leading_underscores_for_local_identifiers
     var _mediaqury = MediaQuery.of(context);
     return Consumer<EmployeChating>(builder: (context, value, child) {
-      return
-   
-      Scaffold(
+      return Scaffold(
         resizeToAvoidBottomInset: false,
         // backgroundColor: const Color.fromARGB(255, 22, 58, 61),
         drawer: const NewDrawer(),
@@ -105,7 +102,7 @@ class _EmployesHomeState extends State<EmployesHome> {
                 ),
               ),
             ),
-    
+
             Container(
               decoration: const BoxDecoration(
                   color: Color.fromARGB(8, 18, 255, 69),
@@ -145,7 +142,7 @@ class _EmployesHomeState extends State<EmployesHome> {
                 ),
               ),
             ),
-    
+
             Expanded(
               child: SizedBox(
                 child: StreamBuilder<QuerySnapshot>(
@@ -184,13 +181,12 @@ class _EmployesHomeState extends State<EmployesHome> {
                                     if (snapshot.hasData) {
                                       return ListView.builder(
                                         itemBuilder: (context, index) {
+                                          final data =
+                                              snapshot.data!.docs[index];
+                                          final datas = data.data()
+                                              as Map<String, dynamic>;
+                                          // value.getreceiverId(data['userid']);
 
-    
-                                          final data = snapshot.data!.docs[index];
-                                          final datas =
-                                              data.data() as Map<String, dynamic>;
-                                              // value.getreceiverId(data['userid']);
-                                              
                                           return Padding(
                                             padding: EdgeInsets.only(top: 10),
                                             child: PandingworkStatusPPage(
@@ -252,7 +248,7 @@ class _EmployesHomeState extends State<EmployesHome> {
           ],
         )),
       );
-   } );
+    });
   }
 }
 

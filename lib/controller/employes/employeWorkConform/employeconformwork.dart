@@ -14,7 +14,6 @@ class conformworkdatasave extends ChangeNotifier {
   String? employephonenumber;
   String? workdatas;
   userdetails(
-    
     String? date,
     String? userimag,
     String? usernames,
@@ -22,7 +21,6 @@ class conformworkdatasave extends ChangeNotifier {
     String? employeesid,
     String? userid,
   ) {
-    
     workdatas = date;
     userimagurl = userimag;
     useraddress = useradd;
@@ -53,6 +51,7 @@ class conformworkdatasave extends ChangeNotifier {
         userimageurl: userimagurl,
         username: username);
     db.collection('conformwork').add(conformwork.tomap());
-   
+    db.collection('History').add(conformwork.tomap());
+    
   }
 }

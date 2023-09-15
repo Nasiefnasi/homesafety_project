@@ -1,8 +1,10 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:homesefty/view/Employees/bottomNavBar/bottomNavBarModel.dart';
 import 'package:homesefty/view/User/designPage/history.dart';
+import 'package:homesefty/view/User/designPage/homePage/selectWork.dart';
 import 'package:homesefty/view/User/drewer/drawer.dart';
 import 'package:homesefty/view/User/designPage/homePage/homepage.dart';
 import 'package:homesefty/view/User/designPage/paymentRequest.dart';
@@ -14,7 +16,8 @@ class BottoNavBar extends StatelessWidget {
   List<Widget> pageList = [
     const UserHomePage(),
     const UserPaymentRequestPage(),
-    const UserHistoryPage(),
+    // const UserHistoryPage(),
+    const SelectWork()
   ];
 
   @override
@@ -63,8 +66,11 @@ class BottoNavBar extends StatelessWidget {
                               ? Icons.currency_rupee_sharp
                               : Icons.payment_outlined),
                       Bottomnavigation(
-                          ontap: () {
+                          ontap: ()async {
+                            
+                            
                             value.pageIndex = 2;
+                          
                           },
                           icon: value.pageIndex == 2
                               ? Icons.history_edu

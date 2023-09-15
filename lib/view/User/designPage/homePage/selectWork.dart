@@ -1,11 +1,9 @@
-// ignore_for_file: unused_local_variable
+// ignore_for_file: unused_local_variable, avoid_unnecessary_containers
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:homesefty/core/size/colors&size.dart';
-import 'package:homesefty/view/Employees/mainEmployeeDesignPage/workConformationpage.dart';
-import 'package:homesefty/view/Employees/modelPage/newWorks.dart';
 
 class SelectWork extends StatelessWidget {
   const SelectWork({super.key});
@@ -14,22 +12,64 @@ class SelectWork extends StatelessWidget {
   Widget build(BuildContext context) {
     FirebaseAuth auth = FirebaseAuth.instance;
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: const Text("History"),
+        centerTitle: true,
+      ),
       body: SafeArea(
           child: Column(
         children: [
           Expanded(
             child: Container(
-              child: StreamBuilder(
+              child:
+
+                  //  StreamBuilder<QuerySnapshot>(
+                  //                   stream: FirebaseFirestore.instance
+                  //                       .collection('conformwork')
+                  //                       .where("employid",
+                  //                           isEqualTo: auth.currentUser?.uid)
+                  //                       .snapshots(),
+                  //                   builder: (context, snapshot) {
+                  //                     if (snapshot.connectionState ==
+                  //                         ConnectionState.waiting) {
+                  //                       return CircularProgressIndicator();
+                  //                     }
+                  //                     if (snapshot.connectionState ==
+                  //                         ConnectionState.active) {
+                  //                       if (snapshot.hasData) {
+                  //                         return ListView.builder(
+                  //                           itemBuilder: (context, index) {
+                  //                             final data =
+                  //                                 snapshot.data!.docs[index];
+                  //                             final datas = data.data()
+                  //                                 as Map<String, dynamic>;
+                  //                             // value.getreceiverId(data['userid']);
+
+                  //                             return Padding(
+                  //                               padding: EdgeInsets.only(top: 10),
+                  //                               child: PandingworkStatusPPage(
+                  //                                   data: datas),
+                  //                             );
+                  //                           },
+                  //                           itemCount: snapshot.data!.docs.length,
+                  //                           shrinkWrap: false,
+                  //                         );
+                  //                       } else {
+                  //                         return const Text('error');
+                  //                       }
+                  //                     }
+                  //                     return Text('Error');
+                  //                   },
+                  //                 ),
+
+                  StreamBuilder(
                 stream: FirebaseFirestore.instance
-                    .collection('SelectWork')
-                    .doc("selct")
-                    .collection('Electronics')
-                    .where('userid', isEqualTo: auth.currentUser!.uid)
+                    .collection('History')
+                    .where("userid", isEqualTo: auth.currentUser?.uid)
                     .snapshots(),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
-                    return const CircularProgressIndicator();
+                    return Expanded(child: const CircularProgressIndicator());
                   }
                   if (snapshot.connectionState == ConnectionState.active) {
                     if (snapshot.hasData) {
@@ -38,16 +78,7 @@ class SelectWork extends StatelessWidget {
                           final datass = snapshot.data!.docs[index];
                           final document =
                               datass.data() as Map<String, dynamic>;
-                          return GestureDetector(
-                              onTap: () {
-                                // Navigator.push(
-                                //     context,
-                                //     MaterialPageRoute(
-                                //       builder: (context) =>
-                                //           WorkConformationpage(datas: document),
-                                //     ));
-                              },
-                              child: SelectWorkmodel(details: document));
+                          return SelectWorkmodel(details: document);
                         },
                         itemCount: snapshot.data!.docs.length,
                       );
@@ -100,7 +131,7 @@ class SelectWorkmodel extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(8.0),
                     child: SizedBox(
                         width: 80,
                         height: 90,
@@ -109,7 +140,7 @@ class SelectWorkmodel extends StatelessWidget {
                           borderRadius:
                               BorderRadius.circular(20), // Image border
                           child: SizedBox.fromSize(
-                            size: Size.fromRadius(48), // Image radius
+                            size: const Size.fromRadius(48), // Image radius
                             child: Image.network(details['userimagurl'],
                                 fit: BoxFit.cover),
                           ),
@@ -131,21 +162,21 @@ class SelectWorkmodel extends StatelessWidget {
                         hight20,
                         Text(
                           'Name :  ${details['username']}',
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 15,
                           ),
                         ),
                         hight10,
                         Text(
                           'Location :  ${details['address']}',
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 15,
                           ),
                         ),
                         hight10,
                         Text(
                           'Time :   ${details['date']}',
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 15,
                           ),
                         ),

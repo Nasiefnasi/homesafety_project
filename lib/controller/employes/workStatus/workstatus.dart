@@ -1,34 +1,32 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-
-class Workstatus  {
-  bool? startLevel = false;
-  // bool? endLevel = false;
+class Workstatus {
+  String?  startLevel;
+  String? endLevel ;
   String? employid;
-  String? notcompleted;
+
   String? userId;
-  Workstatus(
-      {this.startLevel, 
-      // this.endLevel,
-      this.employid,
-      this.userId,
-      this.notcompleted});
+  Workstatus({
+    this.startLevel,
+    this.endLevel,
+    this.employid,
+    this.userId,
+  });
 
   factory Workstatus.formMap(DocumentSnapshot map) {
     return Workstatus(
-        startLevel: map['startLevel'],
-        // endLevel: map["endLevel"],
-        employid: map["employid"],
-        userId: map["userId"],
-        notcompleted: map["notcompleted"]);
+      startLevel: map['startLevel'],
+      endLevel: map["endLevel"],
+      employid: map["employid"],
+      userId: map["userId"],
+    );
   }
   Map<String, dynamic> tomap() {
     return {
       'startLevel': startLevel,
-      // 'endLevel': endLevel,
+      'endLevel': endLevel,
       'employid': employid,
       'userId': userId,
-      'notcompleted': notcompleted,
     };
   }
 }

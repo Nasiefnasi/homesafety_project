@@ -1,21 +1,28 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:homesefty/controller/employes/workStatus/level.dart';
 import 'package:homesefty/controller/user/chatpage/chating.dart';
 import 'package:homesefty/core/size/colors&size.dart';
 import 'package:homesefty/view/Employees/mainEmployeeDesignPage/chatPage.dart';
 import 'package:homesefty/view/User/designPage/chatinguser.dart';
 import 'package:provider/provider.dart';
 
-class UserStatusLevel extends StatelessWidget {
+class UserStatusLevel extends StatefulWidget {
   UserStatusLevel({super.key, required this.datas});
   final Map<String, dynamic> datas;
-  // final Names;
-  // final date;
 
+  @override
+  State<UserStatusLevel> createState() => _UserStatusLevelState();
+}
+
+class _UserStatusLevelState extends State<UserStatusLevel> {
+  // final Names;
   @override
   Widget build(BuildContext context) {
     FirebaseAuth auth = FirebaseAuth.instance;
+    String uid = "${widget.datas['employid']}${auth.currentUser!.uid}";
     // ignore: no_leading_underscores_for_local_identifiers
     void _showbottomStatusLeve() {
       showModalBottomSheet(
@@ -32,18 +39,72 @@ class UserStatusLevel extends StatelessWidget {
                 color: Color.fromARGB(255, 241, 246, 242),
                 borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
             width: double.infinity,
-            height: 200,
+            height: 250,
             child: Column(children: [
               hight20,
-              Text(
-                'Status Level',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              GestureDetector(
+                onTap: () async {},
+                child: const Text(
+                  'Start ',
+                  style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w800,
+                      color: Color.fromARGB(255, 255, 160, 7)),
+                ),
               ),
               hight20,
-              Container(
-                  height: 100,
-                  width: 500,
-                  child: Image.asset('asset/animation/status 2.png'))
+              Stack(
+                alignment: Alignment.center,
+                children: [
+                  const Center(
+                    child: Padding(
+                      padding: EdgeInsets.only(right: 230),
+                      child: Text(
+                        ' Not\nCompleted',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w800,
+                            color: Colors.red),
+                      ),
+                    ),
+                  ),
+                  const Center(
+                    child: Padding(
+                      padding: EdgeInsets.only(left: 200),
+                      child: Text(
+                        'Working',
+                        style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w800,
+                            color: Color.fromARGB(255, 12, 63, 140)),
+                      ),
+                    ),
+                  ),
+                  Consumer<EmployStatusLevel>(builder: (context, value, child) {
+                    return Container(
+                        height: 100,
+                        width: 100,
+                        child: AnimatedRotation(
+                            turns: value.turne,
+                            duration: const Duration(seconds: 5),
+                            child: Image.asset(
+                              "asset/animation/arrow-01.png",
+                              fit: BoxFit.cover,
+                            )));
+                  }),
+                ],
+              ),
+              hight20,
+              const Center(
+                child: Text(
+                  'Work Completed',
+                  style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w800,
+                      color: Color.fromARGB(255, 2, 102, 2)),
+                ),
+              ),
             ]),
           );
         },
@@ -64,20 +125,22 @@ class UserStatusLevel extends StatelessWidget {
             child: ListTile(
               leading: CircleAvatar(
                 radius: 40,
-                backgroundColor: Color.fromARGB(255, 29, 26, 1),
+                backgroundColor: const Color.fromARGB(255, 29, 26, 1),
                 child: CircleAvatar(
                   radius: 30.0,
-                  backgroundImage: NetworkImage(datas['employimageurl']),
+                  backgroundImage: NetworkImage(widget.datas['employimageurl']),
                   backgroundColor: const Color.fromARGB(0, 111, 8, 8),
                 ),
               ),
               title: Text(
-                '${datas['employename']} ',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                '${widget.datas['employename']} ',
+                style:
+                    const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
               ),
               subtitle: Text(
-                'Date: ${datas['workdate']}',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                'Date: ${widget.datas['workdate']}',
+                style:
+                    const TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
               ),
               trailing: IconButton(
                   onPressed: () async {
@@ -91,8 +154,14 @@ class UserStatusLevel extends StatelessWidget {
                             Row(
                               children: [
                                 TextButton(
-                                    onPressed: () {
-                                      _showbottomStatusLeve();
+                                    onPressed: () async {
+                                      await Provider.of<EmployStatusLevel>(
+                                              context,
+                                              listen: false)
+                                          .getfetchData(widget.datas['employid']
+                                              .toString());
+
+                                      Get.put(_showbottomStatusLeve());
                                     },
                                     child: const Text(
                                       "Status Level",
@@ -106,17 +175,19 @@ class UserStatusLevel extends StatelessWidget {
                                       // await value.getuserreceiverId(
                                       //     datas['employid'].toString());
                                       print(
-                                          "${datas['employid'].toString()}UUUUUUUUUUUUUUUUUUUUUUUUUUUUUeeereeeeeeeeeeeeeeeeeeeeeeeeeeeefasdfsadf");
+                                          "${widget.datas['employid'].toString()}UUUUUUUUUUUUUUUUUUUUUUUUUUUUUeeereeeeeeeeeeeeeeeeeeeeeeeeeeeefasdfsadf");
 
                                       Navigator.of(context)
                                           .push(MaterialPageRoute(
                                         builder: (context) {
                                           return USerChatPage(
-                                              receiverUserEmail: 
-                                             datas['employename'].toString(),
-                                                 
-                                              receiverUserId:
-                                                   datas['employid'].toString(),);
+                                            receiverUserEmail: widget
+                                                .datas['employename']
+                                                .toString(),
+                                            receiverUserId: widget
+                                                .datas['employid']
+                                                .toString(),
+                                          );
                                         },
                                       ));
                                     },
