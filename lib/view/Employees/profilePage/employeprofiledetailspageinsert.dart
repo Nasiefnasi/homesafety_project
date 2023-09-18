@@ -1,4 +1,4 @@
-// ignore_for_file: unused_local_variable, duplicate_ignore
+// ignore_for_file: unused_local_variable, duplicate_ignore, non_constant_identifier_names, no_leading_underscores_for_local_identifiers
 
 import 'dart:io';
 
@@ -6,9 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 // import 'package:homesefty/controller/employes/getxemployessprofile/heroemployes.dart';
 import 'package:homesefty/controller/getxemployessprofile/heroemployes.dart';
-import 'package:homesefty/controller/user/allwork/selectwork.dart';
+// import 'package:homesefty/controller/user/allwork/selectwork.dart';
 import 'package:homesefty/core/size/colors&size.dart';
-import 'package:homesefty/core/textFromFild/Location.dart';
+// import 'package:homesefty/core/textFromFild/Location.dart';
 import 'package:homesefty/core/textFromFild/textFormfiledWidget.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
@@ -220,7 +220,7 @@ class _EmployeProfilePageState extends State<EmployeProfilePage> {
                     contros: employcontrl.experience,
                     hinttext: 'Experience',
                   ),
-                  DistrictSelectionWidget(),
+                  const DistrictSelectionWidget(),
                   // DetailsProfilepage(
                   //   contros: employcontrl.district,
                   //   hinttext: 'District',

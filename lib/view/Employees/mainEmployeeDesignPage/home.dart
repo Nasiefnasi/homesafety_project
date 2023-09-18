@@ -1,16 +1,16 @@
-// ignore_for_file: non_constant_identifier_names, prefer_typing_uninitialized_variables
+// ignore_for_file: non_constant_identifier_names, prefer_typing_uninitialized_variables, unused_local_variable, avoid_print
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+// import 'package:get/get.dart';
 import 'package:homesefty/VIEW/Employees/pendingWork/PandingWorkmodel.dart';
 import 'package:homesefty/controller/employes/chat/chat.dart';
 import 'package:homesefty/view/Employees/mainEmployeeDesignPage/ratingPage.dart';
 import 'package:homesefty/view/Employees/modelPage/employeRatingModelPage.dart';
 import 'package:homesefty/core/size/colors&size.dart';
 import 'package:homesefty/view/Employees/profilePage/profilepagedetails.dart';
-import 'package:homesefty/view/User/userpersonaletailspage/userpersonaldetails.dart';
+// import 'package:homesefty/view/User/userpersonaletailspage/userpersonaldetails.dart';
 import 'package:provider/provider.dart';
 
 class EmployesHome extends StatefulWidget {
@@ -46,39 +46,39 @@ class _EmployesHomeState extends State<EmployesHome> {
             child: Column(
           children: [
             hight10,
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Container(
-                decoration: const BoxDecoration(
-                    color: Color.fromARGB(205, 3, 110, 120),
-                    borderRadius: BorderRadius.all(Radius.circular(50))),
-                // ignore: sort_child_properties_last
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: Row(
-                    children: [
-                      const Text(
-                        'Active',
-                        style: TextStyle(
-                            fontWeight: FontWeight.w600,
-                            fontSize: 25,
-                            color: Colors.white),
-                      ),
-                      const Spacer(),
-                      Switch(
-                          value: ischange,
-                          onChanged: (value) {
-                            setState(() {
-                              ischange = value;
-                            });
-                          })
-                    ],
-                  ),
-                ),
-                height: _mediaqury.size.height * .08,
-                width: double.infinity,
-              ),
-            ),
+            // Padding(
+            //   padding: const EdgeInsets.all(8.0),
+            //   child: Container(
+            //     decoration: const BoxDecoration(
+            //         color: Color.fromARGB(205, 3, 110, 120),
+            //         borderRadius: BorderRadius.all(Radius.circular(50))),
+            //     // ignore: sort_child_properties_last
+            //     child: Padding(
+            //       padding: const EdgeInsets.symmetric(horizontal: 20),
+            //       child: Row(
+            //         children: [
+            //           const Text(
+            //             'Active',
+            //             style: TextStyle(
+            //                 fontWeight: FontWeight.w600,
+            //                 fontSize: 25,
+            //                 color: Colors.white),
+            //           ),
+            //           const Spacer(),
+            //           Switch(
+            //               value: ischange,
+            //               onChanged: (value) {
+            //                 setState(() {
+            //                   ischange = value;
+            //                 });
+            //               })
+            //         ],
+            //       ),
+            //     ),
+            //     height: _mediaqury.size.height * .08,
+            //     width: double.infinity,
+            //   ),
+            // ),
             hight10,
             // Container(
             //   child: ListView.builder(
@@ -107,7 +107,7 @@ class _EmployesHomeState extends State<EmployesHome> {
               decoration: const BoxDecoration(
                   color: Color.fromARGB(8, 18, 255, 69),
                   borderRadius: BorderRadius.all(Radius.circular(1))),
-              height: _mediaqury.size.height * .3,
+              height: _mediaqury.size.height * .25,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
                 itemBuilder: (context, index) {
@@ -154,7 +154,7 @@ class _EmployesHomeState extends State<EmployesHome> {
                         .snapshots(),
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
-                        return CircularProgressIndicator();
+                        return const CircularProgressIndicator();
                       }
                       if (snapshot.connectionState == ConnectionState.active) {
                         if (snapshot.hasData) {
@@ -174,7 +174,7 @@ class _EmployesHomeState extends State<EmployesHome> {
                                 builder: (context, snapshot) {
                                   if (snapshot.connectionState ==
                                       ConnectionState.waiting) {
-                                    return CircularProgressIndicator();
+                                    return const CircularProgressIndicator();
                                   }
                                   if (snapshot.connectionState ==
                                       ConnectionState.active) {
@@ -188,7 +188,7 @@ class _EmployesHomeState extends State<EmployesHome> {
                                           // value.getreceiverId(data['userid']);
 
                                           return Padding(
-                                            padding: EdgeInsets.only(top: 10),
+                                            padding: const EdgeInsets.only(top: 10),
                                             child: PandingworkStatusPPage(
                                                 data: datas),
                                           );
@@ -200,7 +200,7 @@ class _EmployesHomeState extends State<EmployesHome> {
                                       return const Text('error');
                                     }
                                   }
-                                  return Text('Error');
+                                  return const Text('Error');
                                 },
                               ),
                             ),
@@ -219,10 +219,10 @@ class _EmployesHomeState extends State<EmployesHome> {
                           //   },
                           // );
                         } else {
-                          return Text('data');
+                          return const Text('data');
                         }
                       } else {
-                        return Text("eror");
+                        return const Text("eror");
                       }
                     }),
               ),
@@ -287,12 +287,12 @@ class NewDrawer extends StatelessWidget {
               },
             ));
           },
-          leading: Icon(
+          leading: const Icon(
             Icons.person,
             size: 35,
             color: Colors.white,
           ),
-          title: Text(
+          title: const Text(
             'Personal Details',
             style: TextStyle(
               fontSize: 20,

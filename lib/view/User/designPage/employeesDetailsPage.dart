@@ -1,10 +1,10 @@
 // import 'dart:js';
 
-// ignore_for_file: no_leading_underscores_for_local_identifiers, file_names
+// ignore_for_file: no_leading_underscores_for_local_identifiers, file_names, use_build_context_synchronously
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
+// import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:homesefty/controller/user/allwork/selectwork.dart';
@@ -13,7 +13,7 @@ import 'package:homesefty/core/size/colors&size.dart';
 import 'package:provider/provider.dart';
 
 class EmployeesDetailsPage extends StatelessWidget {
-EmployeesDetailsPage({super.key, required this.data});
+const EmployeesDetailsPage({super.key, required this.data});
   final Map<String, dynamic> data;
 
   @override
@@ -141,11 +141,7 @@ EmployeesDetailsPage({super.key, required this.data});
                                 snapshot.data() as Map<String, dynamic>;
                             value.userdetails(
                                 data['fullname'], data['imageUrl'], data['id']);
-                            print('Full Name: ${data['fullname']}');
-                            print(
-                                'jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj');
                           } else {
-                            print("document snapshot is error");
                           }
 
                           // final datsa = (FirebaseFirestore.instance

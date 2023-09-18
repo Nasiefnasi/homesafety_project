@@ -9,7 +9,7 @@ class USerChatPage extends StatefulWidget {
   final String receiverUserEmail;
   final String receiverUserId;
 
-  USerChatPage(
+  const USerChatPage(
       {super.key,
       required this.receiverUserEmail,
       required this.receiverUserId});
@@ -21,7 +21,7 @@ class USerChatPage extends StatefulWidget {
 class _USerChatPageState extends State<USerChatPage> {
   // String ? receiverIds;
   // void reseve()async{
-    
+
   //   final DocumentSnapshot snapshot =
   //                             await FirebaseFirestore.instance
   //                                 .collection('conformwork')
@@ -44,10 +44,11 @@ class _USerChatPageState extends State<USerChatPage> {
   final TextEditingController messageController = TextEditingController();
   final UserChating chatservises = UserChating();
   final FirebaseAuth auth = FirebaseAuth.instance;
-  
+
   void sendMessage() async {
     if (messageController.text.isNotEmpty) {
-      await chatservises.senduserMessage(messageController.text,widget.receiverUserId);
+      await chatservises.senduserMessage(
+          messageController.text, widget.receiverUserId);
       messageController.clear();
     }
   }
@@ -71,11 +72,9 @@ class _USerChatPageState extends State<USerChatPage> {
   }
 
   Widget bulidmessageList() {
-    
     return StreamBuilder(
       stream: chatservises.getuserMessagess(
-         auth.currentUser!.uid, widget.receiverUserId
-          ),
+          auth.currentUser!.uid, widget.receiverUserId),
       builder: (context, snapshot) {
         if (snapshot.hasError) {
           return Text("Error${snapshot.error}");
@@ -83,7 +82,9 @@ class _USerChatPageState extends State<USerChatPage> {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Text("Loading.....");
         }
+        
         return ListView(
+           reverse: true,
           children: snapshot.data!.docs
               .map((document) => bulidmessageItem(document))
               .toList(),

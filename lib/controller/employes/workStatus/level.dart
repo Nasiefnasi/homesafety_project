@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_brace_in_string_interps, empty_catches
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
@@ -43,7 +45,7 @@ class EmployStatusLevel extends ChangeNotifier {
       onendChanged = false;
       Get.snackbar("Work Not Completed ", "");
     } else {
-      onendChanged =  true;
+      onendChanged = true;
       Get.snackbar("Work Completed ", "Enter Your Payment");
     }
     notifyListeners();
@@ -64,14 +66,6 @@ class EmployStatusLevel extends ChangeNotifier {
     await db.collection("WorkstatusLevel").doc(id).set(status.tomap());
   }
 
-
-
-
-
-
-
-
- 
   Future<void> getfetchData(String emploiD) async {
     String idu = "${emploiD}${auth.currentUser!.uid}";
     try {
@@ -89,29 +83,26 @@ class EmployStatusLevel extends ChangeNotifier {
         getdetails = data;
         if (data['endLevel'] == "true") {
           turne = 1 / 4;
-         
+
           notifyListeners();
         } else if (data['startLevel'] == "false") {
           turne = 3 / 4;
           notifyListeners();
         } else if (data['startLevel'] == 'true') {
-           turne = 0.0;
+          turne = 0.0;
           notifyListeners();
         }
 
         // Use the data as needed
-        print("Data retrieved: $data");
       } else {
-        print("Document does not exist.");
       }
     } catch (e) {
-      print("Error fetching data: $e");
     }
   }
 
   Future<dynamic> getUserData(String usersIds) async {
     // String idu = "${emploiD}${auth.currentUser!.uid}";
-    String id = "$usersIds";
+    String id = usersIds;
     try {
       // Reference the Firestore collection and document
       DocumentSnapshot documentSnapshot = await FirebaseFirestore.instance
@@ -124,15 +115,15 @@ class EmployStatusLevel extends ChangeNotifier {
         // Access the data from the document
         Map<String, dynamic> data =
             documentSnapshot.data() as Map<String, dynamic>;
-        detailssss = data ['startLevel'];
-notifyListeners();
-        
+        detailssss = data['startLevel'];
+        notifyListeners();
+
         // if (data['startLevel'] == 'true') {
         //   turne = 0.0;
         //   notifyListeners();
         // } else if (data['startLevel'] == "false") {
         //   turne = 3 / 4;
-          // notifyListeners();
+        // notifyListeners();
         // } else if (data['endLevel'] == "true") {
         //   turne = 1 / 4;
         //   notifyListeners();
@@ -141,25 +132,10 @@ notifyListeners();
         // Use the data as needed
         // print("Data retrieved: $data");
       } else {
-        print("Document does not exist.");
       }
     } catch (e) {
-      print("Error fetching data: $e");
     }
   }
-
-
- 
-
-
-
-
-
-
-
-
-
-
 }
 // bool isClicked = false;
 // void vv(){

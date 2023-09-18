@@ -14,7 +14,7 @@ class Employeslist extends StatelessWidget {
     
          Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Container(
+          child: SizedBox(
             width: double.infinity,
             height: 70,
             // color: Colors.amber,
@@ -24,10 +24,10 @@ class Employeslist extends StatelessWidget {
                 shadowColor: Colors.teal,
                 elevation: 5,
                 color: const Color.fromARGB(255, 233, 230, 230),
-                child: Row(
+                child: const Row(
                   children: [
                     Width10,
-                    const CircleAvatar(
+                    CircleAvatar(
                       radius: 25,
                       child: CircleAvatar(
                         radius: 23,
@@ -35,19 +35,19 @@ class Employeslist extends StatelessWidget {
                       ),
                     ),
                     Width10,
-                    Container(
+                    SizedBox(
                       // color: Colors.amber,
                       width: 150,
-                      child: const Text(
+                      child: Text(
                         'User Name',
                         style: TextStyle(color: Colors.black, fontSize: 20),
                       ),
                     ),
-                    const Spacer(),
-                    Container(
+                    Spacer(),
+                    SizedBox(
                       // color: Colors.amber,
                       width: 100,
-                      child: const Text(
+                      child: Text(
                         'Work',
                         style: TextStyle(
                             fontSize: 15,
@@ -55,7 +55,7 @@ class Employeslist extends StatelessWidget {
                             color: Color.fromARGB(255, 4, 112, 40)),
                       ),
                     ),
-                    const SizedBox(
+                    SizedBox(
                       width: 5,
                     )
                   ],

@@ -1,4 +1,4 @@
-// ignore_for_file: file_names
+// ignore_for_file: file_names, annotate_overrides, prefer_final_fields, use_build_context_synchronously
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -13,7 +13,7 @@ import 'package:homesefty/view/Employees/mainEmployeeDesignPage/home.dart';
 import 'package:provider/provider.dart';
 
 class WorkConformationpage extends StatefulWidget {
-  WorkConformationpage({
+  const WorkConformationpage({
     super.key,
     required this.datas,
   });
@@ -24,7 +24,6 @@ class WorkConformationpage extends StatefulWidget {
 }
 
 class _WorkConformationpageState extends State<WorkConformationpage> {
-  @override
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   Widget build(BuildContext context) {
     FirebaseAuth auth = FirebaseAuth.instance;
@@ -80,7 +79,7 @@ class _WorkConformationpageState extends State<WorkConformationpage> {
                                               Get.snackbar(
                                                 "${widget.datas['username']}",
                                                 "This Work is Rejected",
-                                                backgroundColor: Color.fromARGB(
+                                                backgroundColor: const Color.fromARGB(
                                                     244, 5, 85, 79),
                                               );
                                               value.comments.clear();
@@ -149,12 +148,12 @@ class _WorkConformationpageState extends State<WorkConformationpage> {
                               onPressed: () {},
                               icon: const Icon(Icons.message)),
                           Padding(
-                              padding: EdgeInsets.only(right: 10),
+                              padding: const EdgeInsets.only(right: 10),
                               child: ClipRRect(
                                 borderRadius:
                                     BorderRadius.circular(50), // Image border
                                 child: SizedBox.fromSize(
-                                  size: Size.fromRadius(40), // Image radius
+                                  size: const Size.fromRadius(40), // Image radius
                                   child: Image.network(
                                       widget.datas['userimagurl'],
                                       fit: BoxFit.cover),
@@ -176,7 +175,7 @@ class _WorkConformationpageState extends State<WorkConformationpage> {
                     ),
                   ),
                   EmployesWorkConformation(hinttext: widget.datas['username']),
-                  Padding(
+                  const Padding(
                     padding: EdgeInsets.only(left: 20),
                     child: Text(
                       "Address",
@@ -196,7 +195,7 @@ class _WorkConformationpageState extends State<WorkConformationpage> {
                   ),
                   EmployesWorkConformation(hinttext: widget.datas['phone']),
                   Padding(
-                    padding: EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(8.0),
                     child: SizedBox(
                       // color: Colors.amber,
                       height: mediaQury.size.height * .2,
@@ -208,7 +207,7 @@ class _WorkConformationpageState extends State<WorkConformationpage> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             hight20,
-                            Padding(
+                            const Padding(
                               padding: EdgeInsets.only(left: 20),
                               child: Text(
                                 'Schedule Time & Date',

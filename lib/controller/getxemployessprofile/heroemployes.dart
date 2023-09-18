@@ -194,6 +194,7 @@ class EmployesDetailsControl extends ChangeNotifier {
     } catch (e) {
       // Handle any errors that occur during the stream creation
       Get.snackbar("Error", "$e");
+      // ignore: prefer_const_constructors
       return Stream.empty();
     }
   }

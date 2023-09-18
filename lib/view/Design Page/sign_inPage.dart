@@ -1,4 +1,4 @@
-// ignore_for_file: file_names
+// ignore_for_file: file_names, sort_child_properties_last
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -8,8 +8,8 @@ import 'package:homesefty/core/size/colors&size.dart';
 
 import 'package:homesefty/core/textFromFild/textFormfiledWidget.dart';
 import 'package:homesefty/view/Design%20Page/loginpage.dart';
-import 'package:homesefty/view/Employees/profilePage/employeprofiledetailspageinsert.dart';
-import 'package:homesefty/view/User/userpersonaletailspage/presonalDetalsInsertpage.dart';
+// import 'package:homesefty/view/Employees/profilePage/employeprofiledetailspageinsert.dart';
+// import 'package:homesefty/view/User/userpersonaletailspage/presonalDetalsInsertpage.dart';
 import 'package:lottie/lottie.dart';
 // import 'package:provider/provider.dart';
 

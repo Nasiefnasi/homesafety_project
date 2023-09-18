@@ -1,4 +1,4 @@
-// ignore_for_file: avoid_print
+// ignore_for_file: avoid_print, use_build_context_synchronously, non_constant_identifier_names
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -128,7 +128,7 @@ class Authcontroller extends GetxController {
         // user = userdocument['fullname'];
         await Navigator.pushAndRemoveUntil(
             context,
-            MaterialPageRoute(builder: (context) => HiddenDrawer()),
+            MaterialPageRoute(builder: (context) => const HiddenDrawer()),
             (route) => false);
       } else {
         await Navigator.pushAndRemoveUntil(
@@ -147,7 +147,7 @@ class Authcontroller extends GetxController {
       //       MaterialPageRoute(builder: (context) => UserHomePage()),
       //       (route) => false);
       // }
-      // ignore: use_build_context_synchronously
+    
       // if(loginemail.text ==  emplyData ){
 
       // }else if (loginemail.text == ){

@@ -1,4 +1,4 @@
-// ignore_for_file: must_be_immutable, unnecessary_string_interpolations
+// ignore_for_file: must_be_immutable, unnecessary_string_interpolations, unused_local_variable
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -18,7 +18,7 @@ class EmployeesProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // ignore: unused_local_variable
+    
 
     var mediaqury = MediaQuery.of(context).size;
     return Scaffold(
@@ -48,7 +48,6 @@ class EmployeesProfilePage extends StatelessWidget {
                   children: [
                     IconButton(
                         onPressed: () {
-                          print(name);
                           Map<String, dynamic> personalDetails = {
                             'name': data['fullname']
                                 .toString(),
@@ -156,7 +155,7 @@ class ShowDetailWidget extends StatelessWidget {
             elevation: 5,
             child: Padding(
                 padding: const EdgeInsets.all(15),
-                child: Text(
+                child: Text(overflow: TextOverflow.ellipsis,maxLines: 5,
                   text,
                   style: const TextStyle(fontSize: 15),
                 ))),

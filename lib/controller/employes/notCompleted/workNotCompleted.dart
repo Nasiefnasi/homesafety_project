@@ -1,3 +1,5 @@
+// ignore_for_file: unused_element, unnecessary_import, file_names
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
@@ -20,7 +22,6 @@ class WorkNotCompleted extends ChangeNotifier {
     String userid,
     String? usernames,
     String? employnames,
-  
     String? userurls,
     String? employUrls,
   ) async {
@@ -49,7 +50,7 @@ class WorkNotCompleted extends ChangeNotifier {
                 child: TextField(
                   controller: comments,
                   autofocus: true,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     labelText: 'Enter your Comment here',
                     hintText: 'Why Not completed ',
                   ),
@@ -75,5 +76,4 @@ class WorkNotCompleted extends ChangeNotifier {
       },
     );
   }
-  
 }

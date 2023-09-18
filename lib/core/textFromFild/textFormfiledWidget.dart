@@ -1,7 +1,9 @@
-// ignore_for_file: prefer_typing_uninitialized_variables
+// ignore_for_file: prefer_typing_uninitialized_variables, unused_import, non_constant_identifier_names, duplicate_ignore, file_names
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+// ignore: unnecessary_import
+import 'package:flutter/services.dart';
 // import 'package:homesefty/controller/employes/getxemployessprofile/heroemployes.dart';
 import 'package:homesefty/controller/getxemployessprofile/heroemployes.dart';
 import 'package:homesefty/controller/user/allwork/selectwork.dart';
@@ -72,7 +74,7 @@ class TextFormfildWidget extends StatelessWidget {
 //       padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
 //       child: Container(
 //         width: widths ?? double.infinity,
-        
+
 //         child: Card(
 //           shape:
 //               RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
@@ -80,7 +82,7 @@ class TextFormfildWidget extends StatelessWidget {
 //           elevation: 5,
 //           child: Padding(
 //             padding: EdgeInsets.all(15),
-//             child: TextFormField( 
+//             child: TextFormField(
 //               validator:  (value) {
 //                   if (value == null || value.isEmpty) {
 //                     return validatormessage ;
@@ -105,38 +107,41 @@ class DetailsProfilepage extends StatelessWidget {
     required this.hinttext,
     this.line,
     this.widths,
-    this.contros, this.validatormessage, this.keybord,
+    this.contros,
+    this.validatormessage,
+    this.keybord,
   });
   final hinttext;
   final line;
   final widths;
   final contros;
   final validatormessage;
-   final keybord;
+  final keybord;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
-      child: Container(
+      child: SizedBox(
         width: widths ?? double.infinity,
-        
         child: Card(
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
           shadowColor: Colors.blue,
           elevation: 5,
           child: Padding(
-            padding: EdgeInsets.all(15),
-            child: TextFormField( validator:  (value) {
-                  if (value == null || value.isEmpty) {
-                    return validatormessage ;
-                  }
-                  return null;
-                },
+            padding: const EdgeInsets.all(15),
+            child: TextFormField( 
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return validatormessage;
+                }
+                return null;
+              },
+              keyboardType: keybord,
               controller: contros,
               decoration:
-                  InputDecoration( border: InputBorder.none, hintText: hinttext),
+                  InputDecoration(border: InputBorder.none, hintText: hinttext),
               maxLines: line ?? 1,
             ),
           ),
@@ -147,9 +152,9 @@ class DetailsProfilepage extends StatelessWidget {
 }
 
 class ChosseOptionPage extends StatefulWidget {
-
-  const ChosseOptionPage({super.key,});
-  
+  const ChosseOptionPage({
+    super.key,
+  });
 
   @override
   State<ChosseOptionPage> createState() => _ChosseOptionPageState();
@@ -157,7 +162,7 @@ class ChosseOptionPage extends StatefulWidget {
 
 class _ChosseOptionPageState extends State<ChosseOptionPage> {
   String? valuechoose;
-   String? sex;
+  String? sex;
   List<String> listitem = ["male", "Fmale", "gender"];
   @override
   Widget build(BuildContext context) {
@@ -187,9 +192,8 @@ class _ChosseOptionPageState extends State<ChosseOptionPage> {
               onChanged: (Newvalue) {
                 setState(() {
                   valuechoose = Newvalue;
-                   Provider.of<EmployesDetailsControl>(context, listen: false).getSex(valuechoose!);
-        
-
+                  Provider.of<EmployesDetailsControl>(context, listen: false)
+                      .getSex(valuechoose!);
                 });
               },
             ),
@@ -199,26 +203,39 @@ class _ChosseOptionPageState extends State<ChosseOptionPage> {
     );
   }
 }
+
 class DistrictSelectionWidget extends StatefulWidget {
-
-  const DistrictSelectionWidget({super.key, });
-
-
+  const DistrictSelectionWidget({
+    super.key,
+  });
 
   @override
-  State<DistrictSelectionWidget> createState() => _DistrictSelectionWidgetState();
+  State<DistrictSelectionWidget> createState() =>
+      _DistrictSelectionWidgetState();
 }
 
 class _DistrictSelectionWidgetState extends State<DistrictSelectionWidget> {
   String? valuechoose;
-  
-  
 
-   String? sex;
-  List<String> listitem = [ 'Alappuzha', 'Ernakulam', 'Kozhikode', 'Palakkad', 'Kollam', 'Kannur', 'Kasaragod', 'Idukki', 'Kottayam', 'Thrissur', 'Pathanamthitta', 'Malappuram', 'Wayanad', 'Thiruvananthapuram'];
+  String? sex;
+  List<String> listitem = [
+    'Alappuzha',
+    'Ernakulam',
+    'Kozhikode',
+    'Palakkad',
+    'Kollam',
+    'Kannur',
+    'Kasaragod',
+    'Idukki',
+    'Kottayam',
+    'Thrissur',
+    'Pathanamthitta',
+    'Malappuram',
+    'Wayanad',
+    'Thiruvananthapuram'
+  ];
   @override
   Widget build(BuildContext context) {
- 
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: SizedBox(
@@ -245,10 +262,9 @@ class _DistrictSelectionWidgetState extends State<DistrictSelectionWidget> {
               onChanged: (Newvalue) {
                 setState(() {
                   valuechoose = Newvalue;
-                 
-                   Provider.of<SelectWorkPage>(context, listen: false).selectdistrict(valuechoose!);
-        
 
+                  Provider.of<SelectWorkPage>(context, listen: false)
+                      .selectdistrict(valuechoose!);
                 });
               },
             ),
@@ -456,7 +472,7 @@ class _DistrictSelectionWidgetState extends State<DistrictSelectionWidget> {
 //     //               ),
 //     //               radius: 35,
 //     //             ),
-                
+
 //     //             SizedBox(
 //     //               width: 120,
 //     //               child: Text(
@@ -509,7 +525,7 @@ class _EmployesWorkConformationState extends State<EmployesWorkConformation> {
       padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
       child: SizedBox(
         width: widget.widths ?? double.infinity,
-        // height: widget.line ?? 2, 
+        // height: widget.line ?? 2,
         height: widget.line,
         child: Card(
             shape:
@@ -531,15 +547,18 @@ class _EmployesWorkConformationState extends State<EmployesWorkConformation> {
 }
 
 class NotCompletedListModel extends StatelessWidget {
-  const NotCompletedListModel({super.key});
+  const NotCompletedListModel({super.key, required this.data});
+  final Map<String, dynamic> data;
 
   @override
   Widget build(BuildContext context) {
+    // ignore: unused_local_variable
+    var mediaqury = MediaQuery.of(context).size;
     return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Container(
+      padding: const EdgeInsets.all(10.0),
+      child: SizedBox(
         width: double.infinity,
-        height: 70,
+        // height: mediaqury.height *.15,
         // color: Colors.amber,
         child: Card(
             shape:
@@ -547,39 +566,60 @@ class NotCompletedListModel extends StatelessWidget {
             shadowColor: Colors.teal,
             elevation: 5,
             color: const Color.fromARGB(255, 233, 230, 230),
-            child: Row(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Width10,
-                const CircleAvatar(
-                  radius: 25,
-                  child: CircleAvatar(
-                    radius: 23,
-                    backgroundColor: Colors.white,
-                  ),
+                Row(
+                  children: [
+                    Width10,
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: CircleAvatar(
+                          radius: 25,
+                          child: CircleAvatar(
+                            radius: 33,
+                            backgroundImage: NetworkImage(data['usernameurl']),
+                            backgroundColor: Colors.transparent,
+                          )),
+                    ),
+                    Width10,
+                    SizedBox(
+                      // color: Colors.amber,
+                      width: 150,
+                      child: Text(
+                        data['username'],
+                        style: const TextStyle(color: Colors.black, fontSize: 20),
+                      ),
+                    ),
+                    const Spacer(),
+                    const Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: SizedBox(
+                        // color: Colors.amber,
+                        width: 100,
+                        child: Text(
+                          'Not completed',
+                          style: TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.red),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 5,
+                    ),
+                  ],
                 ),
-                Width10,
-                Container(
-                  // color: Colors.amber,
-                  width: 150,
-                  child: const Text(
-                    'User Name',
-                    style: TextStyle(color: Colors.black, fontSize: 20),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Card(
+                    color: const Color.fromARGB(255, 187, 187, 184),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(data['comment']),
+                    ),
                   ),
-                ),
-                const Spacer(),
-                Container(
-                  // color: Colors.amber,
-                  width: 100,
-                  child: const Text(
-                    'Not completed',
-                    style: TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.red),
-                  ),
-                ),
-                const SizedBox(
-                  width: 5,
                 )
               ],
             )),
@@ -596,7 +636,7 @@ class SuccessfulPaymentListModel extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: Container(
+      child: SizedBox(
         width: double.infinity,
         height: 80,
         // color: Colors.amber,
@@ -609,21 +649,21 @@ class SuccessfulPaymentListModel extends StatelessWidget {
             child: Row(
               children: [
                 Width20,
-                Column(
+                const Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Container(
+                    SizedBox(
                       // color: Colors.amber,
                       width: 150,
-                      child: const Text(
+                      child: Text(
                         'User Name',
                         style: TextStyle(color: Colors.black, fontSize: 20),
                       ),
                     ),
-                    Container(
+                    SizedBox(
                       // color: Colors.amber,
                       width: 150,
-                      child: const Text(
+                      child: Text(
                         'Work',
                         style: TextStyle(color: Colors.grey, fontSize: 15),
                       ),
@@ -631,10 +671,11 @@ class SuccessfulPaymentListModel extends StatelessWidget {
                   ],
                 ),
                 const Spacer(),
-                Container(
+                SizedBox(
                   // color: Colors.amber,
                   width: 70,
                   child: Text(
+                    // ignore: unnecessary_brace_in_string_interps
                     '+₹ ${indexss}',
                     style: const TextStyle(
                         fontSize: 15,

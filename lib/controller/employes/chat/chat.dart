@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:homesefty/controller/employes/chat/chatmodel.dart';
-import 'package:homesefty/MODEL/User/homepage/chat%20message/message.dart';
+// import 'package:homesefty/MODEL/User/homepage/chat%20message/message.dart';
 
 class EmployeChating extends ChangeNotifier {
   String? time;
@@ -12,7 +12,6 @@ class EmployeChating extends ChangeNotifier {
   String? resveridss;
   getreceiverId(String id) {
     resveridss = id;
-    print("${resveridss}hhhhhHhHHHHhHHHhhhhhhhhhhhhhhhhhhhhhhhhkl;h");
     
   }
 
@@ -69,8 +68,6 @@ class EmployeChating extends ChangeNotifier {
 
     String uid = "$currentUserId$resiverID";
 
-    print("${uid}...........................eeeeeeeeeee1");
-    print(auth.currentUser!.uid);
     // ids.sort();
     // String chatroomIds = ids.join("_");
 
@@ -95,8 +92,6 @@ class EmployeChating extends ChangeNotifier {
     // String uid = "$userId$otherUserid";
     // String chatroomIds = ids.join("_");
     String uid = "${auth.currentUser!.uid}$otherUserid";
-    print("${otherUserid}vbgbvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv");
-    print("${uid}...........................eeeeeeeeeeeeeeeee");
     return db
         .collection("chat_room")
         .doc(uid)

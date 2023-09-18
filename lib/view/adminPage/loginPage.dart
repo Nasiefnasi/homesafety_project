@@ -29,7 +29,7 @@ class AdminLoginPage extends StatelessWidget {
                 hight30,
                 hight30,
                 hight30,
-                Container(
+                SizedBox(
                   width: _mediaqury.size.width * 0.80,
                   height: _mediaqury.size.width * 0.50,
                   child:

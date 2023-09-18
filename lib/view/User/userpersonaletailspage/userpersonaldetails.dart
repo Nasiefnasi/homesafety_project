@@ -13,7 +13,7 @@ import 'package:homesefty/view/User/userpersonaletailspage/userprofileUpdatepage
 import 'package:provider/provider.dart';
 
 class PersonalDetailsPage extends StatefulWidget {
-  PersonalDetailsPage({super.key});
+  const PersonalDetailsPage({super.key});
 
   @override
   State<PersonalDetailsPage> createState() => _PersonalDetailsPageState();

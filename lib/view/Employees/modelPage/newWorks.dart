@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:homesefty/core/size/colors&size.dart';
 
 class NewworkModel extends StatelessWidget {
-  NewworkModel({super.key, required this.details});
+  const NewworkModel({super.key, required this.details});
   final Map<String, dynamic> details;
 
   @override
@@ -36,7 +36,7 @@ class NewworkModel extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(8.0),
                     child: SizedBox(
                         width: 80,
                         height: 90,
@@ -45,7 +45,7 @@ class NewworkModel extends StatelessWidget {
                           borderRadius:
                               BorderRadius.circular(20), // Image border
                           child: SizedBox.fromSize(
-                            size: Size.fromRadius(48), // Image radius
+                            size: const Size.fromRadius(48), // Image radius
                             child: Image.network(details['userimagurl'],
                                 fit: BoxFit.cover),
                           ),
@@ -67,28 +67,28 @@ class NewworkModel extends StatelessWidget {
                         hight20,
                         Text(
                           'Name :  ${details['username']}',
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 15,
                           ),
                         ),
                         hight10,
                         Text(
                           'Location :  ${details['address']}',
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 15,
                           ),
                         ),
                         hight10,
                         Text(
                           'Time :   ${details['date']}',
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 15,
                           ),
                         ),
                         hight10,
                         Text(
                           'Works:  ${details['work']} ',
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 15,
                           ),
                         ),

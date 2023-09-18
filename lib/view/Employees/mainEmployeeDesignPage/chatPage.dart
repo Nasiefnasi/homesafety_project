@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -10,7 +12,7 @@ class EmployChatPage extends StatefulWidget {
   final String receiverUserEmail;
   final String receiverUserId;
 
-  EmployChatPage(
+  const EmployChatPage(
       {super.key,
       required this.receiverUserEmail,
       required this.receiverUserId});

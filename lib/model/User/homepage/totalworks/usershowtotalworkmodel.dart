@@ -1,8 +1,6 @@
 // ignore_for_file: prefer_typing_uninitialized_variables
 
 import 'package:flutter/material.dart';
-import 'package:homesefty/view/User/designPage/setDatenadtime.dart';
-import 'package:lottie/lottie.dart';
 
 class UserHomePageWorks extends StatelessWidget {
   const UserHomePageWorks({
@@ -25,7 +23,7 @@ class UserHomePageWorks extends StatelessWidget {
         clipBehavior: Clip.hardEdge,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
-          color:  Color.fromARGB(255, 224, 221, 222),
+          color:  const Color.fromARGB(255, 224, 221, 222),
         ),
         child: Wrap(
           alignment: WrapAlignment.center,

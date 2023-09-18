@@ -1,16 +1,18 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+// import 'package:cloud_firestore/cloud_firestore.dart';
+// ignore_for_file: unused_local_variable
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:homesefty/controller/employes/workStatus/level.dart';
 import 'package:homesefty/controller/user/chatpage/chating.dart';
 import 'package:homesefty/core/size/colors&size.dart';
-import 'package:homesefty/view/Employees/mainEmployeeDesignPage/chatPage.dart';
+// import 'package:homesefty/view/Employees/mainEmployeeDesignPage/chatPage.dart';
 import 'package:homesefty/view/User/designPage/chatinguser.dart';
 import 'package:provider/provider.dart';
 
 class UserStatusLevel extends StatefulWidget {
-  UserStatusLevel({super.key, required this.datas});
+  const UserStatusLevel({super.key, required this.datas});
   final Map<String, dynamic> datas;
 
   @override
@@ -36,7 +38,6 @@ class _UserStatusLevelState extends State<UserStatusLevel> {
         builder: (context) {
           return Container(
             decoration: const BoxDecoration(
-                color: Color.fromARGB(255, 241, 246, 242),
                 borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
             width: double.infinity,
             height: 250,
@@ -82,7 +83,7 @@ class _UserStatusLevelState extends State<UserStatusLevel> {
                     ),
                   ),
                   Consumer<EmployStatusLevel>(builder: (context, value, child) {
-                    return Container(
+                    return SizedBox(
                         height: 100,
                         width: 100,
                         child: AnimatedRotation(
@@ -119,7 +120,6 @@ class _UserStatusLevelState extends State<UserStatusLevel> {
         child: Card(
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-          color: Colors.white,
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: ListTile(
@@ -166,7 +166,8 @@ class _UserStatusLevelState extends State<UserStatusLevel> {
                                     child: const Text(
                                       "Status Level",
                                       style: TextStyle(
-                                          color: Color.fromARGB(255, 3, 108, 6),
+                                          color:
+                                              Color.fromARGB(255, 22, 162, 27),
                                           fontSize: 20),
                                     )),
                                 const Divider(thickness: 2),
@@ -174,8 +175,6 @@ class _UserStatusLevelState extends State<UserStatusLevel> {
                                     onPressed: () async {
                                       // await value.getuserreceiverId(
                                       //     datas['employid'].toString());
-                                      print(
-                                          "${widget.datas['employid'].toString()}UUUUUUUUUUUUUUUUUUUUUUUUUUUUUeeereeeeeeeeeeeeeeeeeeeeeeeeeeeefasdfsadf");
 
                                       Navigator.of(context)
                                           .push(MaterialPageRoute(
@@ -194,7 +193,8 @@ class _UserStatusLevelState extends State<UserStatusLevel> {
                                     child: const Text(
                                       "   Chat",
                                       style: TextStyle(
-                                          color: Color.fromARGB(255, 3, 108, 6),
+                                          color:
+                                              Color.fromARGB(255, 22, 162, 27),
                                           fontSize: 20),
                                     )),
                               ],

@@ -1,4 +1,4 @@
-// ignore_for_file: must_be_immutable, file_names
+// ignore_for_file: must_be_immutable, file_names, prefer_typing_uninitialized_variables, use_key_in_widget_constructors
 
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
@@ -33,7 +33,7 @@ class AdminHomePage extends StatelessWidget {
           Row(
             children: [
               Center(
-                child: Container(
+                child: SizedBox(
                   // color: Colors.amber,
                   width: 110,
                   height: 50,
@@ -112,7 +112,7 @@ class AdminHomePage extends StatelessWidget {
             width: double.infinity,
             color: const Color.fromARGB(103, 158, 158, 158),
             child: Padding(
-              padding: EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(8.0),
               child: SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: Row(
@@ -132,7 +132,7 @@ class AdminHomePage extends StatelessWidget {
                       ontap: () {
                         Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) {
-                            return Employeslist();
+                            return const Employeslist();
                           },
                         ));
                       },
@@ -142,7 +142,7 @@ class AdminHomePage extends StatelessWidget {
                       ontap: () {
                         Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) {
-                            return CompletedWork();
+                            return const CompletedWork();
                           },
                         ));
                       },
@@ -152,7 +152,7 @@ class AdminHomePage extends StatelessWidget {
                       ontap: () {
                         Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) {
-                            return  Adminwallet();
+                            return  const Adminwallet();
                           },
                         ));
                       },
@@ -165,9 +165,9 @@ class AdminHomePage extends StatelessWidget {
           ),
           Expanded(
             child: Padding(
-              padding: EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(8.0),
               child: Container(
-                  color: Color.fromARGB(36, 227, 23, 23),
+                  color: const Color.fromARGB(36, 227, 23, 23),
                   width: double.infinity,
                   child: Center(child: PieChartWidget())),
             ),
@@ -368,12 +368,12 @@ class PieChartWidget extends StatelessWidget {
           sections: [
             PieChartSectionData(
               value: 30,
-              color: Color.fromARGB(255, 39, 180, 4),
+              color: const Color.fromARGB(255, 39, 180, 4),
               title: 'All User',
             ),
             PieChartSectionData(
               value: 20,
-              color: Color.fromARGB(255, 254, 234, 6),
+              color: const Color.fromARGB(255, 254, 234, 6),
               title: 'All Empolyes',
             ),
             PieChartSectionData(

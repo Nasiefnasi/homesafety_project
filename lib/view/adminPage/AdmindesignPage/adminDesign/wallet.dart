@@ -7,7 +7,7 @@ class Adminwallet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Wallet"),),
+      appBar: AppBar(title: const Text("Wallet"),),
       body: SafeArea(
           child: Column(crossAxisAlignment: CrossAxisAlignment.start,
             children: [

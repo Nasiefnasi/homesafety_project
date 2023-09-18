@@ -1,8 +1,9 @@
-// ignore_for_file: no_leading_underscores_for_local_identifiers, use_build_context_synchronously, unused_local_variable, unused_element, must_be_immutable
+// ignore_for_file: no_leading_underscores_for_local_identifiers, use_build_context_synchronously, unused_local_variable, unused_element, must_be_immutable, file_names, prefer_final_fields, unrelated_type_equality_checks
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:homesefty/VIEW/Employees/payment/paymentRequestPage.dart';
 // import 'package:get/get.dart';
 // import 'package:homesefty/VIEW/Employees/pendingWork/pendingworkForm.dart';
 import 'package:homesefty/controller/employes/chat/chat.dart';
@@ -11,7 +12,7 @@ import 'package:homesefty/controller/employes/workStatus/level.dart';
 // import 'package:flutter_chat_ui/flutter_chat_ui.dart';
 import 'package:homesefty/core/size/colors&size.dart';
 import 'package:homesefty/view/Employees/mainEmployeeDesignPage/chatPage.dart';
-import 'package:homesefty/view/Employees/mainEmployeeDesignPage/paymentRequestPage.dart';
+// import 'package:homesefty/view/Employees/mainEmployeeDesignPage/paymentRequestPage.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 
@@ -75,7 +76,7 @@ class _PandingworkStatusPPageState extends State<PandingworkStatusPPage> {
                       Get.snackbar(
                         "${widget.data['username']}",
                         "This Work is Rejected",
-                        backgroundColor: Color.fromARGB(244, 5, 85, 79),
+                        backgroundColor: const Color.fromARGB(244, 5, 85, 79),
                       );
                       value.comments.clear();
 
@@ -371,7 +372,7 @@ class _PandingworkStatusPPageState extends State<PandingworkStatusPPage> {
                                         context,
                                         MaterialPageRoute(
                                           builder: (context) =>
-                                              const PaymentRequest(),
+                                               PaymentRequestpage(datas:widget.data )
                                         ),
                                       );
                                     },
@@ -435,9 +436,6 @@ class _PandingworkStatusPPageState extends State<PandingworkStatusPPage> {
                       onPressed: () async {
                         await value
                             .getreceiverId(widget.data['userid'].toString());
-                        print(
-                            "${widget.data['userid'].toString()}eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeereeeeeeeeeeeeeeeeeeeeeeeeeeeefasdfsadf");
-                        print(widget.data['userid'].toString());
                         Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) => EmployChatPage(
                               receiverUserEmail:

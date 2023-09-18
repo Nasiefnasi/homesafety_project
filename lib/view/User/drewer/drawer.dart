@@ -3,9 +3,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:homesefty/VIEW/User/designPage/homePage/selectWork.dart';
 import 'package:homesefty/controller/user/getxController/authcontroler/authcontroler.dart';
 import 'package:homesefty/core/size/colors&size.dart';
-import 'package:homesefty/view/User/designPage/homePage/selectWork.dart';
+// import 'package:homesefty/view/User/designPage/homePage/selectWork.dart';
 import 'package:homesefty/view/User/userpersonaletailspage/userpersonaldetails.dart';
 
 class UserNewDrawer extends StatelessWidget {
@@ -48,7 +49,7 @@ class UserNewDrawer extends StatelessWidget {
         hight20,
         ListTile(
           onTap: () {
-            Get.to(PersonalDetailsPage());
+            Get.to(const PersonalDetailsPage());
           },
           leading: const Icon(
             Icons.person,
@@ -63,20 +64,21 @@ class UserNewDrawer extends StatelessWidget {
             ),
           ),
         ),
-        ListTile(onTap: () {
-            Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-              return SelectWork();
-            },));
-          
-          
-        },
-          leading: Icon(
+        ListTile(
+          onTap: () {
+            Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) {
+                return const UserWorkNotCompleted();
+              },
+            ));
+          },
+          leading: const Icon(
             Icons.webhook_rounded,
             size: 25,
             color: Colors.white,
           ),
-          title: Text(
-            'History',
+          title: const Text(
+            'Not Completed',
             style: TextStyle(
               fontSize: 18,
               color: Colors.white,

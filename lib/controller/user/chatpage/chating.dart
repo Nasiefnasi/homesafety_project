@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:homesefty/controller/employes/chat/chatmodel.dart';
-import 'package:homesefty/MODEL/User/homepage/chat%20message/message.dart';
+// import 'package:homesefty/MODEL/User/homepage/chat%20message/message.dart';
 
 class                                                                                                 UserChating extends ChangeNotifier {
   String? time;
@@ -83,10 +83,9 @@ class                                                                           
     List<String> ids = [currentUserId, resiverIDs.toString()];
 
     ids.sort();
+    // ignore: unused_local_variable
     String chatroomIds = ids.join("_");
     String uid = "$resiverIDs$currentUserId";
-    print("${uid}...........................uuuuuuuuu");
-    print(auth.currentUser!.uid);
     await db
         .collection("chat_room")
         .doc(uid)
@@ -96,8 +95,6 @@ class                                                                           
 
   Stream<QuerySnapshot> getuserMessagess(String userId, String otherUserid) {
     String uid = "$otherUserid${auth.currentUser!.uid}";
-    print("${uid}...........................uuuuuuuuuuuu");
-    print(auth.currentUser!.uid);
     // List<String> ids = [userId, otherUserid];
     // ids.sort();
     // String uid = "$otherUserid$userId";

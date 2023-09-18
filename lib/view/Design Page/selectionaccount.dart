@@ -1,5 +1,7 @@
 // import 'dart:js';
 
+// ignore_for_file: unused_element, sort_child_properties_last
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:homesefty/view/Employees/profilePage/employeprofiledetailspageinsert.dart';

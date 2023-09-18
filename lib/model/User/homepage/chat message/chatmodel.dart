@@ -1,3 +1,5 @@
+// ignore_for_file: unused_import
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -11,7 +13,7 @@ class ChatBubble extends StatelessWidget {
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8),
-          color: Color.fromARGB(255, 8, 82, 11)),
+          color: const Color.fromARGB(255, 8, 82, 11)),
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Text(
