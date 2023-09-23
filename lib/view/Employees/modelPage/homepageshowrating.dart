@@ -3,13 +3,13 @@
 import 'package:flutter/material.dart';
 import 'package:homesefty/core/size/colors&size.dart';
 
-class RatingEmployessPage extends StatelessWidget {
- RatingEmployessPage({
+class EmployHomepageRating extends StatelessWidget {
+ EmployHomepageRating({
     super.key,
-    required this.datas, 
+    required this.datas,  
     
   });
-
+ 
   final Map<String, dynamic> datas;
 
   // double rating = 0;
@@ -85,7 +85,7 @@ class RatingEmployessPage extends StatelessWidget {
                   width: double.infinity,
                   height: 63,
                   child: Center(
-                    child: Text(maxLines: 7, overflow: TextOverflow.ellipsis,textAlign:TextAlign.left ,
+                    child: Text(maxLines:  5,overflow: TextOverflow.ellipsis,textAlign:TextAlign.left ,
                      datas['feedback'].toString() ,
                       style: const TextStyle(color: Color.fromARGB(255, 108, 106, 106)),
                     ),

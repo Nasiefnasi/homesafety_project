@@ -3,13 +3,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:homesefty/controller/user/chatpage/chating.dart';
+import 'package:homesefty/controller/user/chatpage/chating.dart'; 
 import 'package:homesefty/core/size/colors&size.dart';
 // import 'package:homesefty/model/User/homepage/homeScreeenTotalWork.dart';
 import 'package:homesefty/model/User/homepage/statusleve.dart';
 import 'package:homesefty/view/User/designPage/homePage/HomePageTotalWork.dart';
 // import 'package:homesefty/view/User/designPage/homePage/homeScreeenTotalWork.dart';
 import 'package:homesefty/view/User/drewer/drawer.dart';
+import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 
 class UserHomePage extends StatelessWidget {
@@ -22,31 +23,11 @@ class UserHomePage extends StatelessWidget {
       builder: (context, value, child) {
         return Scaffold(
           drawer: UserNewDrawer(colorss: Colors.accents),
-          appBar: AppBar(
-              centerTitle: true,
-              title: const Text(
-                "HOME SAFETY",
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-              actions: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Image.asset('asset/animation/LOGO-01.png'),
-                )
-              ]),
           body: SafeArea(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 hight20,
-                // Padding(
-                //   padding: const EdgeInsets.symmetric(horizontal: 10),
-                //   child: SizedBox(
-                //     width: 80,
-                //     height: 80,
-                //     child: Image.asset('asset/animation/LOGO-01.png'),
-                //   ),
-                // ),
                 SizedBox(
                   width: double.infinity,
                   height: mediaqury.size.height * .10,
@@ -82,7 +63,7 @@ class UserHomePage extends StatelessWidget {
                       decoration: const BoxDecoration(
                           color: Colors.amber,
                           borderRadius:
-                              BorderRadius.vertical(top: Radius.circular(10))), 
+                              BorderRadius.vertical(top: Radius.circular(10))),
                       child: StreamBuilder<QuerySnapshot>(
                         stream: FirebaseFirestore.instance
                             .collection('conformwork')
@@ -92,6 +73,16 @@ class UserHomePage extends StatelessWidget {
                           if (snapshot.connectionState ==
                               ConnectionState.waiting) {
                             return const CircularProgressIndicator();
+                          }
+                          if (!snapshot.hasData ||
+                              snapshot.data!.docs.isEmpty) {
+                            return Expanded(
+                                child: Container(
+                                    color: Colors.white,
+                                    child: Center(
+                                        child: Lottie.asset(
+                                      'asset/animation/Animation - 1695375830883.json',
+                                    ))));
                           }
                           if (snapshot.connectionState ==
                               ConnectionState.active) {

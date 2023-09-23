@@ -18,7 +18,7 @@ class BottoNavBar extends StatelessWidget {
   List<Widget> pageList = [
     const UserHomePage(),
     const UserPaymentRequestPage(),
-    const UserWorkNotCompleted()
+    const UserSideHistory()
   ];
 
   @override
@@ -26,6 +26,18 @@ class BottoNavBar extends StatelessWidget {
     return Consumer<NavBar>(
       builder: (context, value, child) {
         return Scaffold(
+          appBar: AppBar(
+              centerTitle: true,
+              title: const Text(
+                "HOME SAFETY",
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              actions: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Image.asset('asset/animation/LOGO-01.png'),
+                )
+              ]),
             drawer: UserNewDrawer(),
             body: pageList[value.pageIndex],
             // backgroundColor: Color.fromARGB(0, 76, 76, 76),

@@ -43,11 +43,11 @@ class AdminLoginPage extends StatelessWidget {
                   "Login",
                   style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                 ),
-                hight10, 
+                hight10,
                 const Text(
                   "please login to continue using our app",
                   style: TextStyle(color: kGreycolor),
-                ),    
+                ),
                 hight20,
                 const TextFormfildWidget(
                     hinttext: 'E-mail', Iconss: Icon(Icons.mail)),

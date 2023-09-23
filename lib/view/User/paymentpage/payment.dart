@@ -5,6 +5,11 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 
 class RozzerPayResponse {
+  String? amun;
+  String? empid;
+  String? userName;
+  String?userimag;
+
   User? user = FirebaseAuth.instance.currentUser;
 
   Razorpay razorpay = Razorpay();
@@ -17,9 +22,15 @@ class RozzerPayResponse {
     );
 
     if (user != null) {
-      FirebaseFirestore.instance.collection('usersaaaaaaa').doc(user?.uid).set({
+      FirebaseFirestore.instance
+          .collection('AfterpaymentUserDetails')
+          .doc(user?.uid)
+          .set({
         'userid': user!.uid,
-        'amount': response.paymentId,
+        "userName": userName,
+        'amount_perice': amun,
+        'emoployid': empid,
+        'amount ': response.paymentId,
         'timestamp': FieldValue.serverTimestamp(),
       });
     }
@@ -39,14 +50,22 @@ class RozzerPayResponse {
     );
   }
 
-  makePayment() async {
+  makePayment(String amount, String employName, String emploid,String username,String userimages) async {
+    userName = username.toString();
+    amun = amount;
+    empid = emploid;
+    userimag = userimages;
+    int? price = int.tryParse(amount);
+    int? onamound = price! * 100;
+
     var options = {
-      'key': 'rzp_test_Djkb2wONIbXz3v',
-      'amount': 20000,
-      'name': 'Fathima Hospital',
-      'description': 'doctors',
+      'key': 'rzp_test_5GZdL4kxKRGHek',
+      "userImageUrl":userimag,
+      'amount': onamound,
+      'name': 'Home safety',
+      'description': employName,
       'prefill': {
-        'contact': '+919074957353',
+        'contact': '+917561000296',
         'email': 'contact@protocoderpoint.cpm',
       },
     };

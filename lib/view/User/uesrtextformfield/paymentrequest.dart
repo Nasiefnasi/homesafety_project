@@ -4,69 +4,22 @@ import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+
 import 'package:homesefty/VIEW/Employees/profilePage/profilepagedetails.dart';
 import 'package:homesefty/VIEW/User/paymentpage/payment.dart';
+
+import 'package:homesefty/controller/user/feedback/feedback.dart';
 import 'package:homesefty/core/size/colors&size.dart';
 import 'package:homesefty/core/textFromFild/textFormfiledWidget.dart';
+import 'package:provider/provider.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 
 // import 'package:homesefty/core/textFromFild/textFormfiledWidget.dart';
 //
-class UserPaymentRequestListModels extends StatefulWidget {
+class UserPaymentRequestListModels extends StatelessWidget {
   const UserPaymentRequestListModels({super.key, required this.data});
 
   final Map<String, dynamic> data;
-
-  @override
-  State<UserPaymentRequestListModels> createState() =>
-      _UserPaymentRequestListModelsState();
-}
-
-class _UserPaymentRequestListModelsState
-    extends State<UserPaymentRequestListModels> {
-  // void _handlePaymentSuccess(PaymentSuccessResponse response) {
-  //   Fluttertoast.showToast(
-  //       msg: "Success Payment :${response.paymentId} ", timeInSecForIosWeb: 4);
-  // }
-
-  // void _handlePaymentError(PaymentFailureResponse response) {
-  //   Fluttertoast.showToast(
-  //       msg: "ERROR HERE :${response.message} ", timeInSecForIosWeb: 4);
-  // }
-
-  // void _handleExternalWallet(ExternalWalletResponse response) {
-  //   Fluttertoast.showToast(
-  //       msg: "EXTERNAL WALLET IS  :${response.walletName} ",
-  //       timeInSecForIosWeb: 4);
-  // }
-
-  // void makePayment() async {
-  //   var options = {
-  //     'key': 'rzp_test_5GZdL4kxKRGHek',
-  //     'amount': 200,
-  //     'name': 'Nasief',
-  //     'description': 'enter the work',
-  //     'prefill': {'contact': '7561000296', 'email': 'nasinasief@gmail.com'}
-  //   };
-
-  //   try{
-  //     _razorpay?.open(options);
-  //   }catch(e){
-  //     debugPrint(e.toString());
-
-  //   }
-  // }
-
-  // Razorpay? _razorpay;
-  // @override
-  // void initState() {
-  //   // TODO: implement initState
-  //   super.initState();
-  //   _razorpay = Razorpay();
-  //   _razorpay?.on(Razorpay.EVENT_PAYMENT_SUCCESS, _handlePaymentSuccess);
-  //   _razorpay?.on(Razorpay.EVENT_PAYMENT_ERROR, _handlePaymentError);
-  //   _razorpay?.on(Razorpay.EVENT_EXTERNAL_WALLET, _handleExternalWallet);
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -93,7 +46,7 @@ class _UserPaymentRequestListModelsState
                       // color: Colors.amber,
                       width: 150,
                       child: Text(
-                        widget.data['employName'],
+                        data['employName'],
                         style: const TextStyle(
                             color: Colors.black,
                             fontSize: 20,
@@ -106,7 +59,7 @@ class _UserPaymentRequestListModelsState
                         // color: Colors.amber,
                         width: 150,
                         child: Text(
-                          widget.data['work'],
+                          data['work'],
                           style:
                               const TextStyle(color: Colors.grey, fontSize: 15),
                         ),
@@ -129,13 +82,13 @@ class _UserPaymentRequestListModelsState
                     onPressed: () {
                       Navigator.push(context, MaterialPageRoute(
                         builder: (context) {
-                          return UserPaymentPage(datas: widget.data);
+                          return UserPaymentPage(datas: data);
                         },
                       ));
                     },
                     child: Text(
                       // ignore: unnecessary_brace_in_string_interps
-                      '+₹ ${widget.data['payment']}',
+                      '+₹ ${data['payment']}',
                       style: const TextStyle(
                           fontSize: 15,
                           fontWeight: FontWeight.bold,
@@ -143,19 +96,6 @@ class _UserPaymentRequestListModelsState
                     ),
                   ),
                 ),
-
-                // SizedBox(
-                //   // color: Colors.amber,
-                //   width: 70,
-                //   child: Text(
-                //     // ignore: unnecessary_brace_in_string_interps
-                //     '+₹ ${indexss}',
-                //     style: const TextStyle(
-                //         fontSize: 15,
-                //         fontWeight: FontWeight.bold,
-                //         color: Color.fromARGB(255, 10, 102, 13)),
-                //   ),
-                // ),
                 const SizedBox(
                   width: 5,
                 )
@@ -175,7 +115,9 @@ class UserPaymentPage extends StatefulWidget {
 }
 
 class _UserPaymentPageState extends State<UserPaymentPage> {
-   void _handlePaymentSuccess(PaymentSuccessResponse response) {
+  final _formKey = GlobalKey<FormState>();
+
+  void _handlePaymentSuccess(PaymentSuccessResponse response) {
     Fluttertoast.showToast(
         msg: "Success Payment :${response.paymentId} ", timeInSecForIosWeb: 4);
   }
@@ -191,7 +133,7 @@ class _UserPaymentPageState extends State<UserPaymentPage> {
         timeInSecForIosWeb: 4);
   }
 
-   makePayment() async {
+  makePayment() async {
     var options = {
       'key': 'rzp_test_5GZdL4kxKRGHek',
       'amount': 200,
@@ -200,11 +142,10 @@ class _UserPaymentPageState extends State<UserPaymentPage> {
       'prefill': {'contact': '+917561000296', 'email': 'nasinasief@gmail.com'}
     };
 
-    try{
+    try {
       _razorpay?.open(options);
-    }catch(e){
+    } catch (e) {
       debugPrint(e.toString());
-
     }
   }
 
@@ -218,6 +159,7 @@ class _UserPaymentPageState extends State<UserPaymentPage> {
     _razorpay?.on(Razorpay.EVENT_PAYMENT_ERROR, _handlePaymentError);
     _razorpay?.on(Razorpay.EVENT_EXTERNAL_WALLET, _handleExternalWallet);
   }
+
   double rating = 0;
   @override
   Widget build(BuildContext context) {
@@ -258,7 +200,7 @@ class _UserPaymentPageState extends State<UserPaymentPage> {
                             child: Row(children: [
                               Text(
                                 'Data',
-                                style: TextStyle(   
+                                style: TextStyle(
                                     fontWeight: FontWeight.w500,
                                     color: Colors.grey,
                                     fontSize: 20),
@@ -324,212 +266,141 @@ class _UserPaymentPageState extends State<UserPaymentPage> {
     }
 
     var mediaqury = MediaQuery.of(context).size;
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      appBar: AppBar(
-        centerTitle: true,
-      ),
-      body: SafeArea(
-          child: ListView(
-        children: [
-          Column(
-            // mainAxisAlignment: MainAxisAlignment.start,
-            // crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Container(
-                      height: mediaqury.height * .3,
-                      padding: const EdgeInsets.all(8), // Border width
-                      decoration: BoxDecoration(
-                          color: Color.fromARGB(255, 3, 74, 8),
-                          borderRadius: BorderRadius.circular(40)),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(40),
-                        child: SizedBox.fromSize(
-                          size: const Size.fromRadius(80), // Image radius
-                          child: Image.network(widget.datas['employImageUrl'],
-                              fit: BoxFit.cover),
+    return Consumer<Rating>(builder: (context, value, child) {
+      return Scaffold(
+        resizeToAvoidBottomInset: false,
+        appBar: AppBar(
+          centerTitle: true,
+        ),
+        body: SafeArea(
+            child: ListView(
+          children: [
+            Column(
+              // mainAxisAlignment: MainAxisAlignment.start,
+              // crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Container(
+                        height: mediaqury.height * .3,
+                        padding: const EdgeInsets.all(8), // Border width
+                        decoration: BoxDecoration(
+                            color: const Color.fromARGB(255, 3, 74, 8),
+                            borderRadius: BorderRadius.circular(40)),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(40),
+                          child: SizedBox.fromSize(
+                            size: const Size.fromRadius(80), // Image radius
+                            child: Image.network(widget.datas['employImageUrl'],
+                                fit: BoxFit.cover),
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                ],
-              ),
-
-              hight10,
-              SizedBox(
-                width: double.infinity,
-                height: 80,
-                child: Padding(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
-                  child: ElevatedButton(
-                      style: const ButtonStyle(
-                          backgroundColor: MaterialStatePropertyAll(
-                              Color.fromARGB(255, 4, 91, 8))),
-                      onPressed: () async {
-                        // await makePayment();
-                       await RozzerPayResponse().makePayment();
-
-
-
-                        
-                        // await Paymentafter();
-                        // await Future.delayed(const Duration(seconds: 2));
-
-                        // await rating();
-                        // showDialog(
-                        //     context: context,
-                        //     builder: (_) => AlertDialog(
-                        //           title: Padding(
-                        //             padding: const EdgeInsets.symmetric(
-                        //                 horizontal: 10),
-                        //             child: SizedBox(
-                        //               width: double.infinity,
-                        //               height: 36,
-                        //               child: RatingBar.builder(
-                        //                 itemSize: 25,
-                        //                 minRating: 0,
-                        //                 glowColor: Colors.black,
-                        //                 itemBuilder: (context, index) =>
-                        //                     const Icon(
-                        //                   Icons.star,
-                        //                   color: Colors.amber,
-                        //                 ),
-                        //                 onRatingUpdate: (rating) =>
-                        //                     setState(() {
-                        //                   this.rating = rating;
-                        //                 }),
-                        //               ),
-                        //             ),
-                        //           ),
-                        //           content: TextFormField(
-                        //               decoration: const InputDecoration(
-                        //                   hintText: 'rating')),
-                        //         ));
-                      },
-                      child: Text('Pay  ${widget.datas['payment']}',
-                          style: TextStyle(
-                              fontSize: 30, fontWeight: FontWeight.w500))),
+                  ],
                 ),
-              ),
-          
-              ShowDetailWidget(text: widget.datas['employName']),
-              ShowDetailWidget(text: widget.datas['work']),
-              
-           
-              ShowDetailWidget(
-                  text: widget.datas['description'], cusmeheight: 150),
-              
-              ShowDetailWidget(text: widget.datas['payment']),
-              hight10,
-            ],
-          ),
-        ],
-      )),
-    );
+                hight10,
+                SizedBox(
+                  width: double.infinity,
+                  height: 80,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 15, horizontal: 15),
+                    child: ElevatedButton(
+                        style: const ButtonStyle(
+                            backgroundColor: MaterialStatePropertyAll(
+                                Color.fromARGB(255, 4, 91, 8))),
+                        onPressed: () async {
+                          // await makePayment();
+                          await RozzerPayResponse().makePayment(
+                            widget.datas['payment'],
+                            widget.datas['employName'],
+                            widget.datas['employid'],
+                            widget.datas['username'],
+                             widget.datas['userImageUrl'],
+                          );
+
+                          // await Paymentafter();
+                          await Future.delayed(const Duration(seconds: 2));
+
+                          // await rating();
+                          await showDialog(
+                            context: context,
+                            builder: (_) => AlertDialog(
+                              title: const Text('Feedback'),
+                              content: SingleChildScrollView(
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Form(
+                                      key:
+                                          _formKey, // Ensure _formKey is defined earlier in your code
+                                      child: TextFormField(
+                                        controller: value.feedbackss,
+                                        validator: (value) {
+                                          if (value!.isEmpty) {
+                                            return "Please enter the Feedback";
+                                          } else if (value.length < 5) {
+                                            return "Enter at least 5 characters";
+                                          }
+                                          return null; // Return null for no validation error
+                                        },
+                                        decoration: const InputDecoration(
+                                          hintText: 'Feedback',
+                                        ),
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                        height:
+                                            20), // Adjust the spacing as needed
+                                    TextButton(
+                                      onPressed: () async {
+                                        if (_formKey.currentState!.validate()) {
+                                          // Perform your action here when the form is valid
+                                          await value.addratingfeedback(
+                                            widget.datas['userid'],
+                                            widget.datas['employid'],
+                                            widget.datas['employImageUrl'],
+                                            widget.datas['userImageUrl'],
+                                            widget.datas['username'],
+                                          );
+                                          value.feedbackss.clear();
+
+                                          // Close the AlertDialog
+                                          Navigator.of(context).pop();
+                                        }
+                                      },
+                                      child: const Text("Submit"),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+
+                          
+                          );
+                        },
+                        child: Text('Pay  ${widget.datas['payment']}',
+                            style: const TextStyle(
+                                fontSize: 30, fontWeight: FontWeight.w500))),
+                  ),
+                ),
+                ShowDetailWidget(text: widget.datas['employName']),
+                ShowDetailWidget(text: widget.datas['work']),
+                ShowDetailWidget(
+                    text: widget.datas['description'], cusmeheight: 150),
+                ShowDetailWidget(text: widget.datas['payment']),
+                hight10,
+              ],
+            ),
+          ],
+        )),
+      );
+    });
   }
 }
 
 
-// class UserPaymentPage extends StatefulWidget {
-//   const UserPaymentPage({Key? key, required this.datas}) : super(key: key);
-
-//   final Map<String, dynamic> datas;
-
-//   @override
-//   _UserPaymentPageState createState() => _UserPaymentPageState();
-// }
-
-// class _UserPaymentPageState extends State<UserPaymentPage> {
-//   // Initialize Razorpay
-//   Razorpay? _razorpay;
-
-//   @override
-//   void initState() {
-//     super.initState();
-//     _razorpay = Razorpay();
-//     _razorpay?.on(Razorpay.EVENT_PAYMENT_SUCCESS, _handlePaymentSuccess);
-//     _razorpay?.on(Razorpay.EVENT_PAYMENT_ERROR, _handlePaymentError);
-//     _razorpay?.on(Razorpay.EVENT_EXTERNAL_WALLET, _handleExternalWallet);
-//   }
-
-//   @override
-//   void dispose() {
-//     // Clear the Razorpay instance to avoid memory leaks
-//     _razorpay?.clear();
-//     super.dispose();
-//   }
-
-//   // Callback function for successful payments
-//   void _handlePaymentSuccess(PaymentSuccessResponse response) {
-//     Fluttertoast.showToast(
-//       msg: "Payment Successful\nPayment ID: ${response.paymentId}",
-//       timeInSecForIosWeb: 4,
-//     );
-//   }
-
-//   // Callback function for payment errors
-//   void _handlePaymentError(PaymentFailureResponse response) {
-//     Fluttertoast.showToast(
-//       msg: "Payment Error\nError Message: ${response.message}",
-//       timeInSecForIosWeb: 4,
-//     );
-//   }
-
-//   // Callback function for external wallet payments
-//   void _handleExternalWallet(ExternalWalletResponse response) {
-//     Fluttertoast.showToast(
-//       msg: "External Wallet Used\nWallet Name: ${response.walletName}",
-//       timeInSecForIosWeb: 4,
-//     );
-//   }
-
-//   // Function to initiate the payment
-//   void makePayment() {
-//     var options = {
-//       'key': 'rzp_test_5GZdL4kxKRGHek',
-//       'amount': 200 * 100, // Amount should be in paise
-//       'name': 'Nasief',
-//       'description': 'Enter the work',
-//       'prefill': {
-//         'contact': '+917561000296',
-//         'email': 'nasinasief@gmail.com',
-//       },
-//     };
-
-//     try {
-//       _razorpay?.open(options);
-//     } catch (e) {
-//       debugPrint(e.toString());
-//     }
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: Text('Payment Page'),
-//       ),
-//       body: Center(
-//         child: Column(
-//           mainAxisAlignment: MainAxisAlignment.center,
-//           children: [
-//             ElevatedButton(
-//               onPressed: () {
-//                 // Call the makePayment function when the button is pressed
-//                 makePayment();
-//               },
-//               child: Text('Make Payment'),
-//             ),
-//             // You can add more UI elements here as needed
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }

@@ -3,14 +3,18 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-// import 'package:get/get.dart';
+
+import 'package:homesefty/VIEW/Employees/modelPage/employeRatingModelPage.dart';
+import 'package:homesefty/VIEW/Employees/modelPage/homepageshowrating.dart';
 import 'package:homesefty/VIEW/Employees/pendingWork/PandingWorkmodel.dart';
+import 'package:homesefty/VIEW/Employees/ratingloopfuntion.dart';
 import 'package:homesefty/controller/employes/chat/chat.dart';
-import 'package:homesefty/view/Employees/mainEmployeeDesignPage/ratingPage.dart';
-import 'package:homesefty/view/Employees/modelPage/employeRatingModelPage.dart';
+
 import 'package:homesefty/core/size/colors&size.dart';
+// import 'package:homesefty/view/Employees/mainEmployeeDesignPage/ratingPage.dart';
 import 'package:homesefty/view/Employees/profilePage/profilepagedetails.dart';
-// import 'package:homesefty/view/User/userpersonaletailspage/userpersonaldetails.dart';
+import 'package:lottie/lottie.dart';
+// import 'package:homesefty/view/Use r/userpersonaletailspage/userpersonaldetails.dart';
 import 'package:provider/provider.dart';
 
 class EmployesHome extends StatefulWidget {
@@ -28,9 +32,10 @@ class _EmployesHomeState extends State<EmployesHome> {
     // ignore: no_leading_underscores_for_local_identifiers
     var _mediaqury = MediaQuery.of(context);
     return Consumer<EmployeChating>(builder: (context, value, child) {
+
       return Scaffold(
         resizeToAvoidBottomInset: false,
-        // backgroundColor: const Color.fromARGB(255, 22, 58, 61),
+        // backgroundColor: const Color.fromARGB(255, 22, 58, 61) ,
         drawer: const NewDrawer(),
         // appBar: AppBar(
         //   backgroundColor: Color.fromARGB(255, 9, 88, 97),
@@ -103,31 +108,68 @@ class _EmployesHomeState extends State<EmployesHome> {
               ),
             ),
 
-            Container(
-              decoration: const BoxDecoration(
-                  color: Color.fromARGB(8, 18, 255, 69),
-                  borderRadius: BorderRadius.all(Radius.circular(1))),
-              height: _mediaqury.size.height * .25,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (context, index) {
-                  return SizedBox(
-                      width: _mediaqury.size.width * 1,
-                      child: GestureDetector(
-                          onTap: () {
-                            Navigator.push(context, MaterialPageRoute(
-                              builder: (context) {
-                                return const RatingPag();
-                              },
-                            ));
-                          },
-                          child: const RatingEmployessPage()));
-                },
-                itemCount: 10,
-                shrinkWrap: false,
-              ),
-              // color: const Color.fromARGB(71, 21, 236, 129),
-            ),
+            Consumer<frrrating>(builder: (context, values, child) {
+              return Container(
+                decoration: const BoxDecoration(
+                    color: Color.fromARGB(0, 4, 80, 82),
+                    borderRadius: BorderRadius.all(Radius.circular(1))),
+                height: _mediaqury.size.height * .25,
+                child: StreamBuilder(
+                  stream: FirebaseFirestore.instance
+                      .collection("EmployFeedback")
+                      .where('Employid', isEqualTo: auth.currentUser!.uid)
+                      .snapshots(),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    }
+                    if (snapshot.hasError) {
+                      return Center(child: Lottie.asset('asset/animation/Animation - 1695118467452.json'));
+                    }
+                    if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+                      return Center(child: Lottie.asset('asset/animation/Animation - 1695375830883.json'));
+                    }
+
+                    return ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemBuilder: (context, index) {
+                        values.datalis(snapshot.data!.docs.length);
+                        int limit = snapshot.data!.docs.length;
+
+                      
+                        // for(int num in )
+                        final data = snapshot.data!.docs[index];
+                        final doucment = data.data();
+                        return SizedBox(
+                            width: _mediaqury.size.width,
+                            child: GestureDetector(
+                                onTap: () {
+                                  // Navigator.push(context, MaterialPageRoute(
+                                  //   builder: (context) {
+                                  //     return const RatingPag();
+                                  //   },
+                                  // ));
+                                },
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Card(
+                                      child:
+                                          EmployHomepageRating(datas: doucment,)),
+                                )));
+                      },
+                      itemCount: snapshot.data!.docs.length > 10
+                          ? 10
+                          : snapshot.data!.docs.length,
+                      shrinkWrap: false,
+                    );
+                  },
+                ),
+                // color: const Color.fromARGB(71, 21, 236, 129),
+              );
+            }),
+
             hight10,
             const Padding(
               padding: EdgeInsets.all(8.0),
@@ -175,6 +217,15 @@ class _EmployesHomeState extends State<EmployesHome> {
                                   if (snapshot.connectionState ==
                                       ConnectionState.waiting) {
                                     return const CircularProgressIndicator();
+                                  }if(!snapshot.hasData||snapshot.data!.docs.isEmpty){
+                                    return  Padding(
+                                      padding: const EdgeInsets.all(20.0),
+                                      child: Center(child: Padding(
+                                        padding: const EdgeInsets.all(40),
+                                        child: Lottie.asset('asset/animation/animation_llucpusx (1).json'),
+                                      )),
+                                    ) ;
+
                                   }
                                   if (snapshot.connectionState ==
                                       ConnectionState.active) {
@@ -188,7 +239,8 @@ class _EmployesHomeState extends State<EmployesHome> {
                                           // value.getreceiverId(data['userid']);
 
                                           return Padding(
-                                            padding: const EdgeInsets.only(top: 10),
+                                            padding:
+                                                const EdgeInsets.only(top: 10),
                                             child: PandingworkStatusPPage(
                                                 data: datas),
                                           );
@@ -197,10 +249,10 @@ class _EmployesHomeState extends State<EmployesHome> {
                                         shrinkWrap: false,
                                       );
                                     } else {
-                                      return const Text('error');
+                                      return Center(child: Lottie.asset('asset/animation/Animation - 1695118467452.json')) ;
                                     }
                                   }
-                                  return const Text('Error');
+                                  return Center(child: Lottie.asset('asset/animation/Animation - 1695118467452.json')) ;;
                                 },
                               ),
                             ),

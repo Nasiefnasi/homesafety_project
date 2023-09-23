@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_typing_uninitialized_variables, unused_import, non_constant_identifier_names, duplicate_ignore, file_names
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 // ignore: unnecessary_import
 import 'package:flutter/services.dart';
@@ -9,6 +10,7 @@ import 'package:homesefty/controller/getxemployessprofile/heroemployes.dart';
 import 'package:homesefty/controller/user/allwork/selectwork.dart';
 // import 'package:flutter_chat_ui/flutter_chat_ui.dart';
 import 'package:homesefty/core/size/colors&size.dart';
+import 'package:lottie/lottie.dart';
 // import 'package:homesefty/view/Employees/mainEmployeeDesignPage/chatPage.dart';
 import 'package:provider/provider.dart';
 
@@ -131,7 +133,7 @@ class DetailsProfilepage extends StatelessWidget {
           elevation: 5,
           child: Padding(
             padding: const EdgeInsets.all(15),
-            child: TextFormField( 
+            child: TextFormField(
               validator: (value) {
                 if (value == null || value.isEmpty) {
                   return validatormessage;
@@ -546,6 +548,146 @@ class _EmployesWorkConformationState extends State<EmployesWorkConformation> {
   }
 }
 
+class UserNotCompletedListModel extends StatelessWidget {
+  const UserNotCompletedListModel({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    FirebaseAuth auth = FirebaseAuth.instance;
+    // ignore: unused_local_variable
+    var mediaqury = MediaQuery.of(context).size;
+    return Scaffold(
+      body: StreamBuilder(
+        stream: FirebaseFirestore.instance
+            .collection("NotCompleted")
+            .where('userId', isEqualTo: auth.currentUser!.uid)
+            .snapshots(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          }
+          if (snapshot.hasError) {
+            return Center(
+                child: Lottie.asset(
+                    'asset/animation/Animation - 1695118467452.json'));
+          }
+          if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+            return Center(
+                child: Lottie.asset(
+                    'asset/animation/Animation - 1695375830883.json'));
+          }
+          // final data = snapshot.data!.docs
+          return ListView.builder(
+            itemCount: snapshot.data!.docs.length,
+            itemBuilder: (context, index) {
+              final data = snapshot.data!.docs[index];
+              final document = data.data();
+              return UserWorkNotComplet(data: document);
+            },
+          );
+        },
+      ),
+    );
+  }
+}
+
+class UserWorkNotComplet extends StatelessWidget {
+  const UserWorkNotComplet({
+    super.key,
+    required this.data,
+  });
+  final Map<String, dynamic> data;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(10.0),
+      child: SizedBox(
+        width: double.infinity,
+
+        // height: mediaqury.height *.15,
+
+        // color: Colors.amber,
+
+        child: Card(
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+            shadowColor: Colors.teal,
+            elevation: 5,
+            color: const Color.fromARGB(255, 233, 230, 230),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    Width10,
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: CircleAvatar(
+                          radius: 25,
+                          child: CircleAvatar(
+                            radius: 33,
+                            backgroundImage:
+                                NetworkImage(data['employenameurl']),
+                            backgroundColor: Colors.transparent,
+                          )),
+                    ),
+                    Width10,
+                    SizedBox(
+                      // color: Colors.amber,
+
+                      width: 150,
+
+                      child: Text(
+                        data['employename'],
+                        style:
+                            const TextStyle(color: Colors.black, fontSize: 20),
+                      ),
+                    ),
+                    const Spacer(),
+                    const Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: SizedBox(
+                        // color: Colors.amber,
+
+                        width: 100,
+
+                        child: Text(
+                          'Not completed',
+                          style: TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.red),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 5,
+                    ),
+                  ],
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Card(
+                    color: const Color.fromARGB(255, 187, 187, 184),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        data['comment'],
+                        textAlign: TextAlign.start,
+                      ),
+                    ),
+                  ),
+                )
+              ],
+            )),
+      ),
+    );
+  }
+}
+
 class NotCompletedListModel extends StatelessWidget {
   const NotCompletedListModel({super.key, required this.data});
   final Map<String, dynamic> data;
@@ -588,7 +730,8 @@ class NotCompletedListModel extends StatelessWidget {
                       width: 150,
                       child: Text(
                         data['username'],
-                        style: const TextStyle(color: Colors.black, fontSize: 20),
+                        style:
+                            const TextStyle(color: Colors.black, fontSize: 20),
                       ),
                     ),
                     const Spacer(),
@@ -617,7 +760,10 @@ class NotCompletedListModel extends StatelessWidget {
                     color: const Color.fromARGB(255, 187, 187, 184),
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Text(data['comment']),
+                      child: Text(
+                        data['comment'].toString(),
+                        textAlign: TextAlign.start,
+                      ),
                     ),
                   ),
                 )
@@ -629,8 +775,9 @@ class NotCompletedListModel extends StatelessWidget {
 }
 
 class SuccessfulPaymentListModel extends StatelessWidget {
-  const SuccessfulPaymentListModel({super.key, this.indexss});
-  final indexss;
+  const SuccessfulPaymentListModel({super.key, required this.data});
+
+  final Map<String, dynamic> data;
 
   @override
   Widget build(BuildContext context) {
@@ -649,18 +796,25 @@ class SuccessfulPaymentListModel extends StatelessWidget {
             child: Row(
               children: [
                 Width20,
-                const Column(
+                CircleAvatar(
+                  radius: 25.0,
+                  backgroundImage:
+                      NetworkImage(data['userImageUrl'].toString()),
+                ),
+                Width10,
+                Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     SizedBox(
                       // color: Colors.amber,
                       width: 150,
                       child: Text(
-                        'User Name',
-                        style: TextStyle(color: Colors.black, fontSize: 20),
+                        data['userName'].toString(),
+                        style:
+                            const TextStyle(color: Colors.black, fontSize: 20),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       // color: Colors.amber,
                       width: 150,
                       child: Text(
@@ -676,7 +830,7 @@ class SuccessfulPaymentListModel extends StatelessWidget {
                   width: 70,
                   child: Text(
                     // ignore: unnecessary_brace_in_string_interps
-                    '+₹ ${indexss}',
+                    '+₹ ${data['amount_perice'].toString()}',
                     style: const TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.bold,

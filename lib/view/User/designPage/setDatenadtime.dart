@@ -7,6 +7,7 @@ import 'package:homesefty/controller/user/allwork/selectwork.dart';
 import 'package:homesefty/core/size/colors&size.dart';
 import 'package:homesefty/core/textFromFild/textFormfiledWidget.dart';
 import 'package:homesefty/view/User/designPage/employeesDetailsPage.dart';
+import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 
 class ScheduleTimeAndDate extends StatefulWidget {
@@ -30,7 +31,7 @@ class _ScheduleTimeAndDateState extends State<ScheduleTimeAndDate> {
               context: context,
               initialDate: dateTimes,
               firstDate: DateTime(2000),
-              lastDate: DateTime(2025))
+              lastDate: DateTime(2030))
           .then((value) {
         setState(() {
           dateTimes = value!;
@@ -200,7 +201,12 @@ class _ScheduleTimeAndDateState extends State<ScheduleTimeAndDate> {
                       .snapshots(),
                   builder: (context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
-                      return const CircularProgressIndicator();
+                      return Center(child: const CircularProgressIndicator());
+                    }
+                    if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+                      return Center(
+                          child: Lottie.asset(
+                              'asset/animation/Animation - 1695375830883.json'));
                     }
                     if (snapshot.connectionState == ConnectionState.active) {
                       if (snapshot.hasData) {

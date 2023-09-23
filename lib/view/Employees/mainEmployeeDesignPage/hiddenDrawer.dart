@@ -3,10 +3,11 @@
 import 'package:flutter/material.dart';
 // import 'package:flutter_chat_ui/flutter_chat_ui.dart';
 import 'package:hidden_drawer_menu/hidden_drawer_menu.dart';
+import 'package:homesefty/VIEW/Employees/mainEmployeeDesignPage/ratingPage.dart';
 import 'package:homesefty/view/Employees/mainEmployeeDesignPage/home.dart';
 import 'package:homesefty/view/Employees/mainEmployeeDesignPage/newWorkPage.dart';
 import 'package:homesefty/view/Employees/mainEmployeeDesignPage/notcompletedlist.dart';
-import 'package:homesefty/view/Employees/mainEmployeeDesignPage/ratingPage.dart';
+// import 'package:homesefty/view/Employees/mainEmployeeDesignPage/ratingPage.dart';
 import 'package:homesefty/view/Employees/mainEmployeeDesignPage/walletPage.dart';
 
 class HiddenDrawer extends StatefulWidget {
@@ -51,7 +52,9 @@ class _HiddenDrawerState extends State<HiddenDrawer> {
                 fontSize: 20),
             selectedStyle: const TextStyle(color: Colors.white, fontSize: 30),
           ),
-          const RatingPag()),
+          const RatingPag()
+          // RatingPag()
+          ),
       ScreenHiddenDrawer(
           ItemHiddenMenu(
             name: 'Not completed',

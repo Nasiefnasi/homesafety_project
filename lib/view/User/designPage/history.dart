@@ -1,25 +1,25 @@
-import 'package:flutter/material.dart';
-import 'package:homesefty/core/textFromFild/textFormfiledWidget.dart';
+// import 'package:flutter/material.dart';
+// import 'package:homesefty/core/textFromFild/textFormfiledWidget.dart';
 
-class UserHistoryPage extends StatelessWidget {
-  const UserHistoryPage({super.key});
+// class UserHistoryPage extends StatelessWidget {
+//   const UserHistoryPage({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: const Text('History'),
-      ),
-      body: SafeArea(
-          child: ListView.builder(
-        itemBuilder: (context, index) {
-          return SuccessfulPaymentListModel(
-            indexss: index + 51 * 2,
-          );
-        },
-        itemCount: 10,
-      )),
-    );
-  }
-}
+//   Map<string,dynami>data
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(
+//         centerTitle: true,
+//         title: const Text('History'),
+//       ),
+//       body: SafeArea(
+//           child: ListView.builder(
+//         itemBuilder: (context, index) {
+//           return SuccessfulPaymentListModel(data: );
+//         },
+//         itemCount: 10,
+//       )),
+//     );
+//   }
+// }

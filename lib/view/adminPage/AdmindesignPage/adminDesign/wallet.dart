@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:homesefty/core/textFromFild/textFormfiledWidget.dart';
+
 
 class Adminwallet extends StatelessWidget {
   const Adminwallet({super.key});
@@ -20,11 +20,11 @@ class Adminwallet extends StatelessWidget {
                 padding: EdgeInsets.all(8.0),
                 child: Text("paymet status",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),),
               ),
-              Expanded(
-                child: ListView.builder( itemCount: 10, itemBuilder: (context, index) {
-                  return SuccessfulPaymentListModel(indexss: index*19,);
-                },),
-              )
+              // Expanded(
+              //   child: ListView.builder( itemCount: 10, itemBuilder: (context, index) {
+              //     return SuccessfulPaymentListModel(indexss: index*19,);
+              //   },),
+              // )
             ],
           )),
     );

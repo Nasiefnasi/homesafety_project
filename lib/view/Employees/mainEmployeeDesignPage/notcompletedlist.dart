@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:homesefty/core/textFromFild/textFormfiledWidget.dart';
 import 'package:homesefty/view/Employees/mainEmployeeDesignPage/home.dart';
+import 'package:lottie/lottie.dart';
 
 class NotCompletedlist extends StatelessWidget {
   const NotCompletedlist({super.key});
@@ -29,10 +30,10 @@ class NotCompletedlist extends StatelessWidget {
           if (snapshot.hasError) {
             return Text("Error: ${snapshot.error}"); // Handle errors.
           }
-          if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-            return const Text(
-                "No data available"); // Handle case where no data is available.
-          }
+         if(!snapshot.hasData||snapshot.data!.docs.isEmpty){
+                    return Center(child: Lottie.asset('asset/animation/Animation - 1695375830883.json'));
+
+                  }
           return ListView.builder(
             itemBuilder: (context, index) {
               final data = snapshot.data!.docs[index];
