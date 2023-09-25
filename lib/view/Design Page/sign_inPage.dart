@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:homesefty/VIEW/Design%20Page/Hive/user_model.dart';
 // import 'package:get/get.dart';
 import 'package:homesefty/controller/user/getxController/authcontroler/authcontroler.dart';
 import 'package:homesefty/core/size/colors&size.dart';
@@ -11,6 +12,7 @@ import 'package:homesefty/view/Design%20Page/loginpage.dart';
 // import 'package:homesefty/view/Employees/profilePage/employeprofiledetailspageinsert.dart';
 // import 'package:homesefty/view/User/userpersonaletailspage/presonalDetalsInsertpage.dart';
 import 'package:lottie/lottie.dart';
+import 'package:provider/provider.dart';
 // import 'package:provider/provider.dart';
 
 class SignPage extends StatelessWidget {
@@ -107,6 +109,7 @@ class SignPage extends StatelessWidget {
                         // Provider.of<Authcontroler>(context,listen: false).singup(context);
                         // await cortl.signup();
                         _showbottomsheett(context);
+                      
                       },
                       child: cortl.loading.value
                           ? const CircularProgressIndicator(

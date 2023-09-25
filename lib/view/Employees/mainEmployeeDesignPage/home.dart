@@ -3,12 +3,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:homesefty/VIEW/Design%20Page/loginpage.dart';
 
 import 'package:homesefty/VIEW/Employees/modelPage/employeRatingModelPage.dart';
 import 'package:homesefty/VIEW/Employees/modelPage/homepageshowrating.dart';
 import 'package:homesefty/VIEW/Employees/pendingWork/PandingWorkmodel.dart';
 import 'package:homesefty/VIEW/Employees/ratingloopfuntion.dart';
 import 'package:homesefty/controller/employes/chat/chat.dart';
+import 'package:homesefty/controller/user/getxController/authcontroler/authcontroler.dart';
 
 import 'package:homesefty/core/size/colors&size.dart';
 // import 'package:homesefty/view/Employees/mainEmployeeDesignPage/ratingPage.dart';
@@ -16,6 +19,7 @@ import 'package:homesefty/view/Employees/profilePage/profilepagedetails.dart';
 import 'package:lottie/lottie.dart';
 // import 'package:homesefty/view/Use r/userpersonaletailspage/userpersonaldetails.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class EmployesHome extends StatefulWidget {
   const EmployesHome({super.key});
@@ -122,7 +126,7 @@ class _EmployesHomeState extends State<EmployesHome> {
                   builder: (context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
                       return const Center(
-                        child: CircularProgressIndicator(),
+                        child: Center(child: CircularProgressIndicator()),
                       );
                     }
                     if (snapshot.hasError) {
@@ -252,7 +256,7 @@ class _EmployesHomeState extends State<EmployesHome> {
                                       return Center(child: Lottie.asset('asset/animation/Animation - 1695118467452.json')) ;
                                     }
                                   }
-                                  return Center(child: Lottie.asset('asset/animation/Animation - 1695118467452.json')) ;;
+                                  return Center(child: Lottie.asset('asset/animation/Animation - 1695118467452.json')) ;
                                 },
                               ),
                             ),
@@ -313,6 +317,8 @@ class NewDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final control = Get.put(Authcontroller());
+
     return Drawer(
       backgroundColor: const Color.fromARGB(255, 3, 55, 64),
       child: Column(children: [
@@ -380,7 +386,15 @@ class NewDrawer extends StatelessWidget {
             ),
           ),
         ),
-        const ListTile(
+        ListTile( onTap:()async {
+          control.signout(context);
+           SharedPreferences prefs = await SharedPreferences.getInstance();
+            prefs. remove("emailKey");
+             prefs.remove("passwordKey");
+        
+
+          
+        }, 
           leading: Icon(
             Icons.logout,
             size: 35,

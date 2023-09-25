@@ -11,11 +11,11 @@ import 'package:image_picker/image_picker.dart';
 import 'package:lottie/lottie.dart';
 
 // ignore: must_be_immutable
-class UpdateUserProfilePage extends StatelessWidget {
-  UpdateUserProfilePage({super.key, required this.details});
+class UpdateUsersProfilePage extends StatelessWidget {
+  UpdateUsersProfilePage({super.key, });
 
   var cotrol = Get.put(UserDetailscontroler());
-  final Map<String, dynamic> details;
+  // final Map<String, dynamic> details;
   final formkey = GlobalKey<FormState>();
 
   @override
@@ -84,7 +84,7 @@ class UpdateUserProfilePage extends StatelessWidget {
                           validatormessage: 'Enter Your Name',
                           keybord: TextInputType.name,
                           contros: cotrol.uesrfullname,
-                          hinttext: details['name']
+                          hinttext: 'Name'
                           // snapshot.data!.docs.first['state'],
                           ),
 
@@ -93,7 +93,7 @@ class UpdateUserProfilePage extends StatelessWidget {
                         line: 5,
                         keybord: TextInputType.streetAddress,
                         contros: cotrol.address,
-                        hinttext: details['address'],
+                        hinttext: "Address",
                         // hinttext:
                         // snapshot.data!.docs.first['fullname'].toString(),
                       ),
@@ -101,46 +101,31 @@ class UpdateUserProfilePage extends StatelessWidget {
                           validatormessage: 'Update Your Phone Number',
                           keybord: TextInputType.phone,
                           contros: cotrol.phonenumber,
-                          hinttext: details['phone']
+                          hinttext:'Phone Number'
                           //     snapshot.data!.docs.first['address'].toString(),
                           ),
                       DetailsProfilepage(
                           validatormessage: 'Enter Your email',
                           keybord: TextInputType.emailAddress,
                           contros: cotrol.email,
-                          hinttext: details['email']
+                          hinttext:'E-mail'
                           //     snapshot.data!.docs.first['phonenumber'].toString(),
                           ),
                       DetailsProfilepage(
                           validatormessage: 'Enter Your district',
                           keybord: TextInputType.text,
                           contros: cotrol.district,
-                          hinttext: details['district']
+                          hinttext: 'District'
                           // snapshot.data!.docs.first['email'].toString(),
                           ),
                       DetailsProfilepage(
                           validatormessage: 'Enter Your state',
                           keybord: TextInputType.text,
                           contros: cotrol.state,
-                          hinttext: details['state']
+                          hinttext: 'state'
                           //     snapshot.data!.docs.first['district'].toString(),
                           ),
 
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 10),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            SizedBox(
-                              width: mediaqury.width * .4,
-                              child: ElevatedButton(
-                                onPressed: () {},
-                                child: const Text('Current Location'),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
                       hight30,
 
                       SizedBox(
@@ -201,14 +186,22 @@ class UpdateUserProfilePage extends StatelessWidget {
         state.isEmpty) {
       return;
     } else {
+      await cotrol.updateuserdetails(context);
       Get.snackbar("Profile Update", "Successfull");
-    }
-    await cotrol.updateuserdetails(context);
+         await cotrol.updateuserdetails(context);
     cotrol.uesrfullname.clear();
     cotrol.address.clear();
     cotrol.email.clear();
     cotrol.phonenumber.clear();
     cotrol.district.clear();
     cotrol.state.clear();
+    }
+    // await cotrol.updateuserdetails(context);
+    // cotrol.uesrfullname.clear();
+    // cotrol.address.clear();
+    // cotrol.email.clear();
+    // cotrol.phonenumber.clear();
+    // cotrol.district.clear();
+    // cotrol.state.clear();
   }
 }

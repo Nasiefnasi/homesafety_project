@@ -2,10 +2,8 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
 import 'package:flutter/material.dart';
 import 'package:homesefty/controller/employes/chat/chat.dart';
-// import 'package:homesefty/controller/user/chatpage/chating.dart';
 import 'package:homesefty/model/User/homepage/chat%20message/chatmodel.dart';
 
 class EmployChatPage extends StatefulWidget {
@@ -24,21 +22,6 @@ class EmployChatPage extends StatefulWidget {
 class _EmployChatPageState extends State<EmployChatPage> {
   String? receiverIdes;
   String? thisisid;
-  // void reeseve() async {
-  //   final DocumentSnapshot snapshot =
-  //       await FirebaseFirestore.instance.collection('conformwork').doc().get();
-  //   if (snapshot.exists) {
-  //     // ignore: unused_local_variable
-  //     final Map<String, dynamic> data = snapshot.data() as Map<String, dynamic>;
-  //     receiverIdes = data['userid'];
-  //     // value.userdetails(
-  //     //     data['fullname'], data['imageUrl'], data['id']);
-  //     // print('Full Name: ${data['fullname']}');
-  //     print('jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj');
-  //   } else {
-  //     print("document snapshot is error");
-  //   }
-  // }
 
   final TextEditingController messageController = TextEditingController();
   final EmployeChating chatservises = EmployeChating();
@@ -62,53 +45,7 @@ class _EmployChatPageState extends State<EmployChatPage> {
         ),
       ),
       body: Column(children: [
-        // StreamBuilder<QuerySnapshot>(
-        //                 stream: FirebaseFirestore.instance
-        //                     .collection('conformwork')
-        //                     .where("userid", isEqualTo: auth.currentUser?.uid)
-        //                     .snapshots(),
-        //                 builder: (context, snapshot) {
-        //                   if (snapshot.connectionState ==
-        //                       ConnectionState.waiting) {
-        //                     return CircularProgressIndicator();
-        //                   }
-        //                   if (snapshot.connectionState ==
-        //                       ConnectionState.active) {
-        //                     if (snapshot.hasData) {
-        //                        final datass = snapshot.data!.docs.first;
-
-        //                       return Text("${datass['employid']}pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp");
-        //                     } else {
-        //                       return Text("Error");
-        //                     }
-        //                   } else {
-        //                     return Text("Error");
-        //                   }
-        //                 },
-        // //               ),
-        // StreamBuilder<QuerySnapshot>(
-        //   stream: FirebaseFirestore.instance
-        //       .collection('conformwork')
-        //       .where("userid", isEqualTo: auth.currentUser?.uid)
-        //       .snapshots(),
-        //   builder: (context, snapshot) {
-        //     if (snapshot.connectionState == ConnectionState.waiting) {
-        //       return CircularProgressIndicator();
-        //     }
-        //     if (snapshot.hasError) {
-        //       return Text('Error: ${snapshot.error}');
-        //     }
-        //     if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-        //       return Text("No matching documents");
-        //     }
-
-        //     // Access the first document if it exists
-        //     final datass = snapshot.data!.docs.first;
-        //     thisisid = datass['employid'].toString();
-        //     return Text(
-        //         "${datass['employid']}pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp");
-        //   },
-        // ),
+        
 
         Expanded(
           child: bulidmessageList(),

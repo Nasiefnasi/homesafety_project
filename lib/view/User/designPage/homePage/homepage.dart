@@ -24,28 +24,31 @@ class UserHomePage extends StatelessWidget {
         return Scaffold(
           drawer: UserNewDrawer(colorss: Colors.accents),
           body: SafeArea(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+            child: ListView(
+              // crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                hight20,
+                hight30,
                 SizedBox(
-                  width: double.infinity,
-                  height: mediaqury.size.height * .10,
+                  // width: double.infinity,
+                  // height: mediaqury.size.height * .13,
                   // color: Colors.amber,
                   child: const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 10),
+                    padding: EdgeInsets.symmetric(horizontal: 10,),
                     child: Text(
-                      'Which service do you \nneed?',
+                      'Which service do you need?',
                       style:
                           TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                     ),
                   ),
                 ),
-                SizedBox(
-                    width: mediaqury.size.width * 9,
-                    // color: Colors.red,
-                    height: mediaqury.size.height * .35,
-                    child: homeScreeenTotalWork(mediaqury: mediaqury)),
+                hight10,
+                Builder(
+                  builder: (context) {
+                    return SizedBox(
+                      child: homeScreeenTotalWork(mediaqury: mediaqury),
+                    );
+                  }
+                ),
                 const Padding(
                   padding: EdgeInsets.all(8.0),
                   child: Text(
@@ -56,55 +59,56 @@ class UserHomePage extends StatelessWidget {
                         color: Color.fromARGB(255, 40, 116, 42)),
                   ),
                 ),
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Container(
-                      decoration: const BoxDecoration(
-                          color: Colors.amber,
-                          borderRadius:
-                              BorderRadius.vertical(top: Radius.circular(10))),
-                      child: StreamBuilder<QuerySnapshot>(
-                        stream: FirebaseFirestore.instance
-                            .collection('conformwork')
-                            .where("userid", isEqualTo: auth.currentUser?.uid)
-                            .snapshots(),
-                        builder: (context, snapshot) {
-                          if (snapshot.connectionState ==
-                              ConnectionState.waiting) {
-                            return const CircularProgressIndicator();
-                          }
-                          if (!snapshot.hasData ||
-                              snapshot.data!.docs.isEmpty) {
-                            return Expanded(
-                                child: Container(
-                                    color: Colors.white,
-                                    child: Center(
-                                        child: Lottie.asset(
-                                      'asset/animation/Animation - 1695375830883.json',
-                                    ))));
-                          }
-                          if (snapshot.connectionState ==
-                              ConnectionState.active) {
-                            if (snapshot.hasData) {
-                              return ListView.builder(
+                Spacer(),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    decoration: const BoxDecoration(
+                        color: Colors.amber,
+                        borderRadius:
+                            BorderRadius.vertical(top: Radius.circular(10))),
+                    child: StreamBuilder<QuerySnapshot>(
+                      stream: FirebaseFirestore.instance
+                          .collection('conformwork')
+                          .where("userid", isEqualTo: auth.currentUser?.uid)
+                          .snapshots(),
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return Center(child: const CircularProgressIndicator());
+                        }
+                        if (!snapshot.hasData ||
+                            snapshot.data!.docs.isEmpty) {
+                          return Expanded(
+                              child: Container(
+                                  color: Colors.white,
+                                  child: Center(
+                                      child: Lottie.asset(
+                                    'asset/animation/Animation - 1695375830883.json',
+                                  ))));
+                        }
+                        if (snapshot.connectionState ==
+                            ConnectionState.active) {
+                          if (snapshot.hasData) {
+                            return Container(width: double.infinity,height: 600,color: Colors.amber,
+                              child: ListView.builder(
                                 itemBuilder: (context, index) {
                                   final datass = snapshot.data!.docs[index];
                                   final document =
                                       datass.data() as Map<String, dynamic>;
-
+                            
                                   return UserStatusLevel(datas: document);
                                 },
                                 itemCount: snapshot.data!.docs.length,
-                              );
-                            } else {
-                              return const Text("Error");
-                            }
+                              ),
+                            );
                           } else {
-                            return const Text("Error");
+                            return Center(child: const Text("Error"));
                           }
-                        },
-                      ),
+                        } else {
+                          return Center(child: const Text("Error"));
+                        }
+                      },
                     ),
                   ),
                 )

@@ -3,12 +3,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:homesefty/VIEW/User/designPage/homePage/selectWork.dart';
+import 'package:homesefty/VIEW/User/userpersonaletailspage/userprofileUpdatepage.dart';
+// import 'package:homesefty/VIEW/User/designPage/homePage/selectWork.dart';
 import 'package:homesefty/controller/user/getxController/authcontroler/authcontroler.dart';
 import 'package:homesefty/core/size/colors&size.dart';
 import 'package:homesefty/core/textFromFild/textFormfiledWidget.dart';
 // import 'package:homesefty/view/User/designPage/homePage/selectWork.dart';
 import 'package:homesefty/view/User/userpersonaletailspage/userpersonaldetails.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class UserNewDrawer extends StatelessWidget {
   UserNewDrawer({
@@ -38,7 +40,19 @@ class UserNewDrawer extends StatelessWidget {
                 return const Text("Error");
               }
               if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-                return const Text("No ata");
+                return Container(
+                  decoration: BoxDecoration(
+                      border: Border.all(
+                        width: 6,
+                        color: Colors.white,
+                      ),
+                      color: Color.fromARGB(255, 246, 137, 3),
+                      borderRadius: BorderRadius.circular(20)),
+                  width: 160,
+                  height: 160,
+                  child:  Center(child: Text("No Image")),
+                  
+                );
               }
               return Container(
                   decoration: BoxDecoration(
@@ -62,7 +76,14 @@ class UserNewDrawer extends StatelessWidget {
         hight20,
         ListTile(
           onTap: () {
-            Get.to(const PersonalDetailsPage());
+             Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) {
+                return  const  PersonalDetailsPage();
+              },
+            ));
+           
+          //  final datas= FirebaseFirestore.instance.collection('userdetails');
+          // datas==null?  Get.to(const PersonalDetailsPage()):Get.to( UpdateUsersProfilePage());
           },
           leading: const Icon(
             Icons.person,
@@ -84,7 +105,7 @@ class UserNewDrawer extends StatelessWidget {
           onTap: () {
             Navigator.of(context).push(MaterialPageRoute(
               builder: (context) {
-                return  UserNotCompletedListModel();
+                return  const UserNotCompletedListModel();
               },
             ));
           },
@@ -163,8 +184,8 @@ class UserNewDrawer extends StatelessWidget {
                               'Dark Theme',
                               style: TextStyle(fontWeight: FontWeight.bold),
                             ),
-                            onTap: () {
-                              Get.changeTheme(ThemeData.dark());
+                            onTap: ()async {
+                            Get.changeTheme(ThemeData.dark());
                             },
                           ),
                         ],
@@ -188,8 +209,14 @@ class UserNewDrawer extends StatelessWidget {
           ),
         ),
         ListTile(
-          onTap: () {
+          onTap: ()async {
             control.signout(context);
+
+            SharedPreferences prefs = await SharedPreferences.getInstance();
+            prefs. remove("emailKey");
+             prefs.remove("passwordKey");
+             control.loginemail.clear();
+             control.loginpassword.clear();
           },
           leading: const Icon(
             Icons.logout,
@@ -209,153 +236,3 @@ class UserNewDrawer extends StatelessWidget {
   }
 }
 
-// ignore_for_file: file_names
-
-// package:homesefty/view/Employees/mainEmployeeDesignPage/walletPage.dart';
-
-// class UserHiddenSide extends StatefulWidget {
-//   const UserHiddenSide({super.key});
-
-//   @override
-//   State<UserHiddenSide> createState() => _UserHiddenSideState();
-// }
-
-// class _UserHiddenSideState extends State<UserHiddenSide> {
-//   List<ScreenHiddenDrawer> _page = [];
-
-//   @override
-//   void initState() {
-//     super.initState();
-//     _page = [ 
-      
-//       ScreenHiddenDrawer(
-//           ItemHiddenMenu(
-//             name: 'Personal Details',
-//             baseStyle: const TextStyle(
-//                 color: Color.fromARGB(217, 255, 255, 255),
-//                 fontWeight: FontWeight.bold,
-//                 fontSize: 20),
-//             selectedStyle: const TextStyle(color: Colors.white, fontSize: 30),
-//           ),
-//           const PersonalDetailsPage()),
-//       ScreenHiddenDrawer(
-//           ItemHiddenMenu(
-//             name: 'Not Completed',
-//             baseStyle: const TextStyle(
-//                 color: Color.fromARGB(217, 255, 255, 255),
-//                 fontWeight: FontWeight.bold,
-//                 fontSize: 20),
-//             selectedStyle: const TextStyle(color: Colors.white, fontSize: 30),
-//           ),
-//           const UserWorkNotCompleted()),
-//       ScreenHiddenDrawer(
-//           ItemHiddenMenu(
-//             name: 'Terms and Conditions',
-//             baseStyle: const TextStyle(
-//                 color: Color.fromARGB(217, 255, 255, 255),
-//                 fontWeight: FontWeight.bold,
-//                 fontSize: 20),
-//             selectedStyle: const TextStyle(color: Colors.white, fontSize: 30),
-//           ),
-//           Container(color: Colors.amber,height: 80,width: 80,)
-//           // RatingPag()
-//           ),
-//       ScreenHiddenDrawer(
-//           ItemHiddenMenu(
-//             name:  'About',
-//             baseStyle: const TextStyle(
-//                 color: Color.fromARGB(217, 255, 255, 255),
-//                 fontWeight: FontWeight.bold,
-//                 fontSize: 20),
-//             selectedStyle: const TextStyle(color: Colors.white, fontSize: 30),
-//           ),
-//          Container(color: Colors.amber,height: 80,width: 80,)),
-//       // ScreenHiddenDrawer(
-//       //     ItemHiddenMenu(
-//       //       name: 'Wallet',
-//       //       baseStyle: const TextStyle(
-//       //           color: Color.fromARGB(217, 255, 255, 255),
-//       //           fontWeight: FontWeight.bold,
-//       //           fontSize: 20),
-//       //       selectedStyle: const TextStyle(color: Colors.white, fontSize: 30),
-//       //     ),
-//       //     const WalletPage()),
-//     ];
-//   }
-
-//   // ScreenHiddenDrawer notcompleted() {
-//   //   return ScreenHiddenDrawer(
-//   //       ItemHiddenMenu(
-//   //         name: 'Not completed',
-//   //         baseStyle: const TextStyle(
-//   //             color: Color.fromARGB(217, 255, 255, 255),
-//   //             fontWeight: FontWeight.bold,
-//   //             fontSize: 20),
-//   //         selectedStyle: const TextStyle(color: Colors.white, fontSize: 30),
-//   //       ),
-//   //       const NotCompletedlist());
-//   // }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return HiddenDrawerMenu(actionsAppBar: [
-
-
-
-
-
-
-
-//       ListTile( 
-//           onTap: () {
-//             Get.bottomSheet(
-//                 Wrap(
-//                   children: [
-
-//                     ListTile(
-//                       leading: const Icon(Icons.abc),
-//                       title: const Text('Light Theme',
-//                           style: TextStyle(fontWeight: FontWeight.bold)),
-//                       onTap: () {
-//                         Get.changeTheme(ThemeData.light());
-//                       },
-//                     ),
-//                     ListTile(
-//                       leading: const Icon(Icons.abc),
-//                       title: const Text(
-//                         'Dark Theme',
-//                         style: TextStyle(fontWeight: FontWeight.bold),
-//                       ),
-//                       onTap: () {
-//                         Get.changeTheme(ThemeData.dark());
-//                       },
-//                     ),
-//                   ],
-//                 ),
-//                 backgroundColor: Colors.amber);
-//           },
-//           leading: const Icon(
-//             Icons.sunny,
-//             size: 25,
-//             color: Colors.white,
-//           ),
-//           title: const Text(
-//             'Theme change',
-//             style: TextStyle(
-//               fontSize: 18,
-//               color: Colors.white,
-//             ),
-//           ),
-//         ),
-
-
-
-
-//     ],
-//         slidePercent: 60,
-//         backgroundColorAppBar: const Color.fromARGB(255, 9, 88, 97),
-//         initPositionSelected: 0,
-//         screens: _page,
-//         backgroundColorMenu: const Color.fromARGB(255, 8, 99, 109));
-//   }
-// }

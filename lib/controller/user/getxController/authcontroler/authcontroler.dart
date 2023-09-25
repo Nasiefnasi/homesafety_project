@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+// import 'package:hive/hive.dart';
 import 'package:homesefty/controller/user/getxController/authcontroler/usermodel.dart';
 import 'package:homesefty/view/Design%20Page/loginpage.dart';
 import 'package:homesefty/view/Employees/mainEmployeeDesignPage/hiddenDrawer.dart';
@@ -12,6 +13,7 @@ import 'package:homesefty/view/Employees/profilePage/employeprofiledetailspagein
 import 'package:homesefty/view/User/designPage/navBar/navbar.dart';
 // import 'package:homesefty/view/User/designPage/navBar/navbar.dart';
 import 'package:homesefty/view/User/userpersonaletailspage/presonalDetalsInsertpage.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 // import 'package:homesefty/view/adminPage/AdmindesignPage/adminDesign/AdminHomePage.dart';
 
 class Authcontroller extends GetxController {
@@ -24,12 +26,31 @@ class Authcontroller extends GetxController {
   TextEditingController loginemail = TextEditingController();
   TextEditingController loginpassword = TextEditingController();
   TextEditingController resetmail = TextEditingController();
+  String? afteremail;
+  String? afterpassword;
   var loading = false.obs;
 
   String? user;
 
   // setp 2 create the funtion
   // create account with email and password
+
+// late Box box1;
+
+//    void createBox() async {
+//     box1 = await Hive.openBox('logindata');
+//     await getdata();
+//   }
+
+//   getdata() async {
+//     if (box1.get("email") != null) {
+//      loginemail = box1.get("email");
+//     }
+//     if (box1.get("Password") != null) {
+//       loginpassword = box1.get("Password");
+//     }
+//   }
+
   usersignup(String value) async {
     try {
       loading.value = true;
@@ -97,7 +118,11 @@ class Authcontroller extends GetxController {
 
   signout(BuildContext context) async {
     await auth.signOut();
-    Navigator.popUntil(context, (route) => false);
+    Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(
+          builder: (context) => LoginPage(),
+        ),
+        (route) => false);
   }
 
   // if (value == 'user') {
@@ -105,12 +130,54 @@ class Authcontroller extends GetxController {
   //     } else {
   //       Get.to(HiddenDrawer());
   //     }
+  // late Box box1;
+  // void createBox() async {
+  //   box1 = await Hive.openBox('logindata');
+
+  // }
+
+  // getdata() async {
+  //   if (box1.get("email") != null) {
+  //     afteremail = box1.get("email");
+  //   }
+  //   if (box1.get("Password") != null) {
+  //     afterpassword = box1.get("Password");
+  //   }
+  // }
 
   signIn(BuildContext context) async {
     try {
+      //  box1 = await Hive.openBox('logindata');
+      //     box1.put("email", loginemail.text);
+      //     box1.put("Password", loginpassword.text);
+// getdata() async {
+//     if (box1.get("email") != null) {
+//       afteremail = box1.get("email");
+//     }
+//     if (box1.get("Password") != null) {
+//       afterpassword = box1.get("Password");
+//     }
+//   }
+      void getdetailsdatabase() async {
+        final prefs = await SharedPreferences.getInstance();
+        final savedEmail = prefs.getString("emailKey");
+        final savedPassword = prefs.getString("passwordKey");
+
+        if (savedEmail != null && savedPassword != null) {
+          afteremail = savedEmail.toString();
+          afterpassword = savedPassword.toString();
+        }
+      }
+
       loading.value = true;
       await auth.signInWithEmailAndPassword(
           email: loginemail.text, password: loginpassword.text);
+
+      final pref = await SharedPreferences.getInstance();
+      await pref.setString("emailKey", loginemail.text.toString());
+      await pref.setString("passwordKey", loginpassword.text.toString());
+
+      
 
       DocumentSnapshot<Map<String, dynamic>> emplyData = await FirebaseFirestore
           .instance
@@ -147,7 +214,7 @@ class Authcontroller extends GetxController {
       //       MaterialPageRoute(builder: (context) => UserHomePage()),
       //       (route) => false);
       // }
-    
+
       // if(loginemail.text ==  emplyData ){
 
       // }else if (loginemail.text == ){
@@ -185,64 +252,7 @@ class Authcontroller extends GetxController {
       loading.value = false;
     }
   }
-//    void _showbottomsheett(BuildContext context) {
-//     showModalBottomSheet(
-//       shape: const RoundedRectangleBorder(
-//         borderRadius: BorderRadius.only(
-//             topRight: Radius.circular(40.0), topLeft: Radius.circular(40.0)),
-//       ),
-//       elevation: 50,
-//       backgroundColor: const Color.fromARGB(38, 22, 23, 23),
-//       context: context,
-//       builder: (context) {
-//         return Container(
-//           decoration: const BoxDecoration(
-//               borderRadius: BorderRadius.only(
-//                   topRight: Radius.circular(50.0),
-//                   topLeft: Radius.circular(50.0)),
-//               color: Color.fromARGB(255, 254, 254, 254)),
-//           height: 150,
-//           child: Row(
-//             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-//             children: [
-//               SizedBox(
-//                   height: 50,
-//                   width: 150,
-//                   child: ElevatedButton(
-//                       onPressed: () {
-//                         Get.to(EmployeProfilePage());
-//                       },
-//                       child: Text('Employess'),
-//                       style: ButtonStyle(
-//                           backgroundColor: MaterialStatePropertyAll(
-//                               Color.fromARGB(255, 8, 105, 134)),
-//                           shape:
-//                               MaterialStateProperty.all<RoundedRectangleBorder>(
-//                                   RoundedRectangleBorder(
-//                             borderRadius: BorderRadius.circular(10),
-//                           ))))),
-//               SizedBox(
-//                   height: 50,
-//                   width: 150,
-//                   child: ElevatedButton(
-//                       onPressed: () {
-//                         Get.to(UserpersonalDetailesPage());
-//                       },
-//                       child: Text('User'),
-//                       style: ButtonStyle(
-//                           backgroundColor:
-//                               MaterialStatePropertyAll(Colors.amber),
-//                           shape:
-//                               MaterialStateProperty.all<RoundedRectangleBorder>(
-//                                   RoundedRectangleBorder(
-//                             borderRadius: BorderRadius.circular(10),
-//                           ))))),
-//             ],
-//           ),
-//         );
-//       },
-//     );
-//   }
+
 
   StreamBuilder() async* {}
 }

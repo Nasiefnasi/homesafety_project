@@ -21,7 +21,7 @@ class homeScreeenTotalWork extends StatelessWidget {
     return SizedBox(
       width: mediaqury.size.width * 9,
       // color: Colors.red,
-      height: mediaqury.size.height * .35,
+      height: mediaqury.size.height * .36,
       child: GridView.count(
           crossAxisCount: 3,
           crossAxisSpacing: 4.0,

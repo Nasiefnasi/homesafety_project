@@ -1,14 +1,11 @@
-// ignore_for_file: unused_local_variable, duplicate_ignore, non_constant_identifier_names, no_leading_underscores_for_local_identifiers
+// ignore_for_file: no_leading_underscores_for_local_identifiers, non_constant_identifier_names
 
 import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-// import 'package:homesefty/controller/employes/getxemployessprofile/heroemployes.dart';
 import 'package:homesefty/controller/getxemployessprofile/heroemployes.dart';
-// import 'package:homesefty/controller/user/allwork/selectwork.dart';
 import 'package:homesefty/core/size/colors&size.dart';
-// import 'package:homesefty/core/textFromFild/Location.dart';
 import 'package:homesefty/core/textFromFild/textFormfiledWidget.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
@@ -22,12 +19,7 @@ class EmployeProfilePage extends StatefulWidget {
 
 class _EmployeProfilePageState extends State<EmployeProfilePage> {
   final formkey = GlobalKey<FormState>();
-  // void addToWorks(String name) {
-  //   Provider.of<EmployesDetailsControl>(context, listen: false)
-  //       .works
-  //       .add({'name': name});
-  //   setState(() {});
-  // }
+
 
   List<Map> categories = [
     {'name': 'election', 'ischecked': false},
@@ -35,7 +27,6 @@ class _EmployeProfilePageState extends State<EmployeProfilePage> {
     {'name': 'driver', 'ischecked': false},
     {'name': 'cook', 'ischecked': false},
     {'name': 'cook', 'ischecked': false},
-    
   ];
   @override
   Widget build(BuildContext context) {
@@ -79,10 +70,12 @@ class _EmployeProfilePageState extends State<EmployeProfilePage> {
                     ),
                   ),
                   DetailsProfilepage(
+                    keybord: TextInputType.name,
                     contros: employcontrl.name,
                     hinttext: 'Full Name',
                   ),
                   DetailsProfilepage(
+                    keybord: TextInputType.number,
                     contros: employcontrl.phone,
                     hinttext: 'Phone Number',
                   ),
@@ -100,6 +93,7 @@ class _EmployeProfilePageState extends State<EmployeProfilePage> {
                   ),
 
                   DetailsProfilepage(
+                    keybord: TextInputType.streetAddress,
                     contros: employcontrl.address,
                     hinttext: 'Address ',
                     line: 3,
@@ -150,10 +144,9 @@ class _EmployeProfilePageState extends State<EmployeProfilePage> {
                                   Provider.of<EmployesDetailsControl>(context,
                                           listen: false)
                                       .getworklist(favorite);
-                                  // if (favorite['ischecked'] == true) {
-                                  //   List<String> data = favorite['name'];
+                                
 
-                                  // }
+                                
 
                                   return Card(
                                     color: Colors.amber,
@@ -167,7 +160,7 @@ class _EmployeProfilePageState extends State<EmployeProfilePage> {
                                       child: Row(
                                         mainAxisSize: MainAxisSize.min,
                                         children: [
-                                          // employcontrl.works.add({'name': favorite['name']}),
+                                       
                                           Text(
                                             favorite['name'],
                                             style: const TextStyle(
@@ -178,27 +171,16 @@ class _EmployeProfilePageState extends State<EmployeProfilePage> {
                                           const SizedBox(
                                             width: 5,
                                           ),
-                                          // TextButton(
-                                          //     onPressed: () {},
-                                          //     child: const Text('data')),
+                                          
                                           GestureDetector(
                                               onTap: () {
                                                 setState(() {
                                                   favorite['ischecked'] =
                                                       !favorite['ischecked'];
                                                   if (favorite['ischecked']) {
-                                                    // Provider.of<EmployesDetailsControl>(
-                                                    //         context,
-                                                    //         listen: false)
-                                                    //     .getworklist(
-                                                    //         favorite['name']);
+                                              
                                                   }
-                                                  // else {
-                                                  //   employcontrl.works
-                                                  //       .removeWhere((work) =>
-                                                  //           work['name'] ==
-                                                  //           favorite['name']);
-                                                  // }
+                                               
                                                 });
                                               },
                                               child: const Icon(
@@ -212,42 +194,23 @@ class _EmployeProfilePageState extends State<EmployeProfilePage> {
                               }).toList(),
                             ),
                           ],
-                        ),  
+                        ),
                       ),
                     ),
                   ),
                   DetailsProfilepage(
+                    keybord: TextInputType.text,
                     contros: employcontrl.experience,
                     hinttext: 'Experience',
                   ),
                   const DistrictSelectionWidget(),
-                  // DetailsProfilepage(
-                  //   contros: employcontrl.district,
-                  //   hinttext: 'District',
-                  // ),
+
                   DetailsProfilepage(
+                    keybord: TextInputType.streetAddress,
                     contros: employcontrl.state,
                     hinttext: 'State',
                   ),
-                  // const DetailsProfilepage(
-                  //   hinttext: 'hinttext',
-                  // ),
-                  // const LicationPage(),
-                  // Padding(
-                  //   padding: const EdgeInsets.symmetric(horizontal: 10),
-                  //   child: Row(
-                  //     mainAxisAlignment: MainAxisAlignment.end,
-                  //     children: [
-                  //       SizedBox(
-                  //         width: _mediaqury.width * .4,
-                  //         child: ElevatedButton(
-                  //           onPressed: () {},
-                  //           child: const Text('Current Location'),
-                  //         ),
-                  //       ),
-                  //     ],
-                  //   ),
-                  // ),
+
                   hight30,
 
                   SizedBox(
@@ -308,7 +271,6 @@ class _EmployeProfilePageState extends State<EmployeProfilePage> {
     final cdistrics =
         Provider.of<EmployesDetailsControl>(context, listen: false)
             .district
-           
             .toString();
     final cstate = Provider.of<EmployesDetailsControl>(context, listen: false)
         .state
@@ -333,9 +295,10 @@ class _EmployeProfilePageState extends State<EmployeProfilePage> {
     return Column(
         children: categories.map(
       (favoritevalu) {
-        return CheckboxListTile(checkColor: Colors.amber,
+        return CheckboxListTile(
+          checkColor: Colors.amber,
           checkboxShape:
-              RoundedRectangleBorder( borderRadius: BorderRadius.circular(50)),
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
           title: Text(favoritevalu['name']),
           value: favoritevalu['ischecked'],
           onChanged: (val) {
@@ -348,26 +311,39 @@ class _EmployeProfilePageState extends State<EmployeProfilePage> {
     ).toList());
   }
 }
+
 class DistrictSelectionWidget extends StatefulWidget {
-
-  const DistrictSelectionWidget({super.key, });
-
-
+  const DistrictSelectionWidget({
+    super.key,
+  });
 
   @override
-  State<DistrictSelectionWidget> createState() => _DistrictSelectionWidgetState();
+  State<DistrictSelectionWidget> createState() =>
+      _DistrictSelectionWidgetState();
 }
 
 class _DistrictSelectionWidgetState extends State<DistrictSelectionWidget> {
   String? valuechoose;
-  
-  
 
-   String? sex;
-  List<String> listitem = [ 'Alappuzha', 'Ernakulam', 'Kozhikode', 'Palakkad', 'Kollam', 'Kannur', 'Kasaragod', 'Idukki', 'Kottayam', 'Thrissur', 'Pathanamthitta', 'Malappuram', 'Wayanad', 'Thiruvananthapuram'];
+  String? sex;
+  List<String> listitem = [
+    'Alappuzha',
+    'Ernakulam',
+    'Kozhikode',
+    'Palakkad',
+    'Kollam',
+    'Kannur',
+    'Kasaragod',
+    'Idukki',
+    'Kottayam',
+    'Thrissur',
+    'Pathanamthitta',
+    'Malappuram',
+    'Wayanad',
+    'Thiruvananthapuram',
+  ];
   @override
   Widget build(BuildContext context) {
- 
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: SizedBox(
@@ -390,14 +366,12 @@ class _DistrictSelectionWidgetState extends State<DistrictSelectionWidget> {
                   child: Text(valueitem),
                 );
               }).toList(),
-              // ignore: non_constant_identifier_names
               onChanged: (Newvalue) {
                 setState(() {
                   valuechoose = Newvalue;
-                 
-                   Provider.of<EmployesDetailsControl>(context, listen: false).selectdestrict(valuechoose!);
-        
 
+                  Provider.of<EmployesDetailsControl>(context, listen: false)
+                      .selectdestrict(valuechoose!);
                 });
               },
             ),

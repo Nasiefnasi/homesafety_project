@@ -4,12 +4,13 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:homesefty/VIEW/User/userpersonaletailspage/userprofileUpdatepage.dart';
 import 'package:homesefty/controller/user/allwork/selectwork.dart';
 import 'package:homesefty/controller/user/getxController/gextuserprofile/userdetailsstoredb.dart';
 import 'package:homesefty/view/User/drewer/drawer.dart';
 // import 'package:homesefty/view/User/designPage/homePage/homepage.dart';
 
-import 'package:homesefty/view/User/userpersonaletailspage/userprofileUpdatepage.dart';
+// import 'package:homesefty/view/User/userpersonaletailspage/userprofileUpdatepage.dart';
 import 'package:provider/provider.dart';
 
 class PersonalDetailsPage extends StatefulWidget {
@@ -47,6 +48,25 @@ class _PersonalDetailsPageState extends State<PersonalDetailsPage> {
             if (snapshot.hasError) {
               return const Text('Error');
             }
+            if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+              return GestureDetector(onTap: ()async {
+             Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) {
+               return UpdateUsersProfilePage();
+             },))  ;
+              },
+                child: Center(
+                    child: Card(elevation: 5,
+                        child: Container(
+                          width: mediaqury.width * .7,
+                          height: mediaqury.height * .2,
+                          decoration: const BoxDecoration(
+                            borderRadius: BorderRadius.all(Radius.circular(20)),
+                          ),
+                          child: Center(child: Text("Enter Your Details ",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 24),)),
+                        ),
+                        color: Color.fromARGB(255, 225, 225, 225))),
+              );
+            }
             return ListView(
               children: [
                 Row(
@@ -69,7 +89,7 @@ class _PersonalDetailsPageState extends State<PersonalDetailsPage> {
                                 snapshot.data!.docs.first['state'].toString(),
                           };
                           Get.to(
-                            UpdateUserProfilePage(details: personalDetails),
+                            UpdateUsersProfilePage(),
                           );
                         },
                         icon: const Icon(

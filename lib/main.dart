@@ -1,13 +1,14 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:homesefty/MODEL/User/firbasedetails/firbaseget.dart';
+import 'package:homesefty/VIEW/Design%20Page/Hive/user_model.dart';
 import 'package:homesefty/VIEW/Employees/ratingloopfuntion.dart';
 import 'package:homesefty/controller/employes/chat/chat.dart';
 import 'package:homesefty/controller/employes/employeWorkConform/employeconformwork.dart';
 import 'package:homesefty/controller/employes/notCompleted/workNotCompleted.dart';
 import 'package:homesefty/controller/employes/payment%20request/employPayRequest.dart';
 import 'package:homesefty/controller/employes/workStatus/level.dart';
-// import 'package:homesefty/controller/employes/getxemployessprofile/heroemployes.dart';
 import 'package:homesefty/controller/getxemployessprofile/heroemployes.dart';
 import 'package:homesefty/controller/user/allwork/selectwork.dart';
 import 'package:homesefty/controller/user/chatpage/chating.dart';
@@ -19,8 +20,16 @@ import 'package:provider/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+
   await Firebase.initializeApp();
   runApp(MultiProvider(providers: [
+    ChangeNotifierProvider(
+      create: (context) => UserPersonalDetailget(),
+    ),
+    ChangeNotifierProvider(
+      create: (context) => Shared_preferences(),
+    ),
     ChangeNotifierProvider(
       create: (context) => frrrating(),
     ),
@@ -67,6 +76,6 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         // home: EmployeProfilePage(),col
         home: LoginPage());
-    //  home: BottoNavBar());
+    //  home: BottoNavBar());ZZ
   }
 }
