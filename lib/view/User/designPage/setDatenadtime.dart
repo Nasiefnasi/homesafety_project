@@ -55,7 +55,7 @@ class _ScheduleTimeAndDateState extends State<ScheduleTimeAndDate> {
               const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 10),
                 child: Text(
-                  'Select the date',
+                  'Select ',
                   style: TextStyle(
                       fontSize: 20,
                       color: Colors.grey,
@@ -65,8 +65,8 @@ class _ScheduleTimeAndDateState extends State<ScheduleTimeAndDate> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 5),
                 child: SizedBox(
-                  // color: Colors.amber,
-                  height: _mediaQury.height * .15,
+                  
+
                   width: double.infinity,
                   child: Card(
                     color: Colors.grey[300],
@@ -129,6 +129,7 @@ class _ScheduleTimeAndDateState extends State<ScheduleTimeAndDate> {
                             ),
                           ],
                         ),
+                        hight10,
                       ],
                     ),
                   ),

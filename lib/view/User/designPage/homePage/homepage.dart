@@ -5,10 +5,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:homesefty/controller/user/chatpage/chating.dart'; 
 import 'package:homesefty/core/size/colors&size.dart';
-// import 'package:homesefty/model/User/homepage/homeScreeenTotalWork.dart';
 import 'package:homesefty/model/User/homepage/statusleve.dart';
 import 'package:homesefty/view/User/designPage/homePage/HomePageTotalWork.dart';
-// import 'package:homesefty/view/User/designPage/homePage/homeScreeenTotalWork.dart';
 import 'package:homesefty/view/User/drewer/drawer.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
@@ -25,14 +23,11 @@ class UserHomePage extends StatelessWidget {
           drawer: UserNewDrawer(colorss: Colors.accents),
           body: SafeArea(
             child: ListView(
-              // crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 hight30,
-                SizedBox(
-                  // width: double.infinity,
-                  // height: mediaqury.size.height * .13,
-                  // color: Colors.amber,
-                  child: const Padding(
+                const SizedBox(
+                
+                  child: Padding(
                     padding: EdgeInsets.symmetric(horizontal: 10,),
                     child: Text(
                       'Which service do you need?',
@@ -59,7 +54,7 @@ class UserHomePage extends StatelessWidget {
                         color: Color.fromARGB(255, 40, 116, 42)),
                   ),
                 ),
-                Spacer(),
+                const Spacer(),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Container(
@@ -75,7 +70,7 @@ class UserHomePage extends StatelessWidget {
                       builder: (context, snapshot) {
                         if (snapshot.connectionState ==
                             ConnectionState.waiting) {
-                          return Center(child: const CircularProgressIndicator());
+                          return const Center(child: CircularProgressIndicator());
                         }
                         if (!snapshot.hasData ||
                             snapshot.data!.docs.isEmpty) {
@@ -103,10 +98,10 @@ class UserHomePage extends StatelessWidget {
                               ),
                             );
                           } else {
-                            return Center(child: const Text("Error"));
+                            return const Center(child: Text("Error"));
                           }
                         } else {
-                          return Center(child: const Text("Error"));
+                          return const Center(child: Text("Error"));
                         }
                       },
                     ),
