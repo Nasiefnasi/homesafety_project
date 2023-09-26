@@ -53,7 +53,7 @@ class Authcontroller extends GetxController {
 
   usersignup(String value) async {
     try {
-      loading.value = true;
+      // loading.value = true;
       await auth.createUserWithEmailAndPassword(
           email: email.text, password: password.text);
       Map<String, dynamic> userData = {'type': value};

@@ -69,8 +69,8 @@ class _PandingworkStatusPPageState extends State<PandingworkStatusPPage> {
                         widget.data['userid'],
                         widget.data['username'],
                         widget.data['employename'],
-                        widget.data['userimageurl'],
-                        widget.data['employimageurl'],
+                        widget.data['userimageurl']?? "https://www.biiainsurance.com/wp-content/uploads/2015/05/no-image.jpg",
+                        widget.data['employimageurl']?? "https://www.biiainsurance.com/wp-content/uploads/2015/05/no-image.jpg",
                       );
 
                       Get.snackbar(
@@ -456,7 +456,7 @@ class _PandingworkStatusPPageState extends State<PandingworkStatusPPage> {
                         child: CircleAvatar(
                           radius: 30.0,
                           backgroundImage:
-                              NetworkImage("${widget.data['userimageurl']}"),
+                              NetworkImage("${widget.data['userimageurl']?? "https://www.biiainsurance.com/wp-content/uploads/2015/05/no-image.jpg"}"),
                           backgroundColor: Colors.transparent,
                         )),
                   ),

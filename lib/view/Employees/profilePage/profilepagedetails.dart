@@ -86,7 +86,7 @@ class EmployeesProfilePage extends StatelessWidget {
                             width: 5,
                             color: const Color.fromARGB(255, 71, 33, 33))),
                     child: Image.network(
-                     data['imageUrl'].toString(),
+                     data['imageUrl']  ?? "https://www.biiainsurance.com/wp-content/uploads/2015/05/no-image.jpg",
                       fit: BoxFit.cover,
                     ),
                   ),

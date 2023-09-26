@@ -64,7 +64,7 @@ class _EmployeProdilrUpdatePageState extends State<EmployeProdilrUpdatePage> {
                             color: const Color.fromARGB(255, 71, 33, 33))),
                     child: Obx(
                       () => employcontrl.imageshow.value == ''
-                          ? const Center(child: Text('Select mage'))
+                           ? Center(child: Image.network( "https://www.biiainsurance.com/wp-content/uploads/2015/05/no-image.jpg"))
                           // :Image.network(cotrol.selectimagepath),
                           : Image.file(File(employcontrl.imageshow.value),
                               fit: BoxFit.cover),

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:homesefty/core/size/colors&size.dart';
 
 class EmployHomepageRating extends StatelessWidget {
- EmployHomepageRating({
+ const EmployHomepageRating({
     super.key,
     required this.datas,  
     
@@ -53,7 +53,7 @@ class EmployHomepageRating extends StatelessWidget {
                     ),
                     const Spacer(),
                     CircleAvatar(
-                      backgroundImage: NetworkImage(datas['userurl']),
+                      backgroundImage: NetworkImage(datas['userurl']?? "https://www.biiainsurance.com/wp-content/uploads/2015/05/no-image.jpg",),
                     )
                   ]),
                 ),

@@ -43,16 +43,22 @@ class _NewWorkPageState extends State<NewWorkPage> {
                     .where('employid', isEqualTo: auth.currentUser!.uid)
                     .snapshots(),
                 builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return const CircularProgressIndicator();
-                  }
-                  if(!snapshot.hasData||snapshot.data!.docs.isEmpty){
-                    return Center(child: Lottie.asset('asset/animation/Animation - 1695375830883.json'));
+                  if(snapshot.connectionState == ConnectionState.waiting){
+                    return Center(child: CircularProgressIndicator(),);
 
                   }
-                  if (snapshot.connectionState == ConnectionState.active) {
-                    if (snapshot.hasData) {
-                      return ListView.builder(
+                  if (snapshot.hasError) {
+                      return Center(
+                          child: Lottie.asset(
+                              'asset/animation/Animation - 1695118467452.json'));
+                    }
+                    if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+                      return Center(
+                          child: Lottie.asset(
+                              'asset/animation/Animation - 1695375830883.json'));
+                    }
+                    return 
+                    ListView.builder(
                         itemBuilder: (context, index) {
                           final datass = snapshot.data!.docs[index];
                           final document =
@@ -70,11 +76,6 @@ class _NewWorkPageState extends State<NewWorkPage> {
                         },
                         itemCount: snapshot.data!.docs.length,
                       );
-                    } else {
-                      return const Text('data');
-                    }
-                  }
-                  return const Text('Error');
                 },
               ),
             ),
@@ -84,3 +85,4 @@ class _NewWorkPageState extends State<NewWorkPage> {
     );
   }
 }
+

@@ -630,7 +630,7 @@ class UserWorkNotComplet extends StatelessWidget {
                           child: CircleAvatar(
                             radius: 33,
                             backgroundImage:
-                                NetworkImage(data['employenameurl']),
+                                NetworkImage(data['employenameurl']?? "https://www.biiainsurance.com/wp-content/uploads/2015/05/no-image.jpg"),
                             backgroundColor: Colors.transparent,
                           )),
                     ),
@@ -641,7 +641,7 @@ class UserWorkNotComplet extends StatelessWidget {
                       width: 150,
 
                       child: Text(
-                        data['employename'],
+                        data['employename'].toString(),
                         style:
                             const TextStyle(color: Colors.black, fontSize: 20),
                       ),
@@ -675,7 +675,7 @@ class UserWorkNotComplet extends StatelessWidget {
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
-                        data['comment'],
+                        data['comment'].toString(),
                         textAlign: TextAlign.start,
                       ),
                     ),
@@ -720,7 +720,7 @@ class NotCompletedListModel extends StatelessWidget {
                           radius: 25,
                           child: CircleAvatar(
                             radius: 33,
-                            backgroundImage: NetworkImage(data['usernameurl']),
+                            backgroundImage: NetworkImage(data['usernameurl'] ?? "https://www.biiainsurance.com/wp-content/uploads/2015/05/no-image.jpg",),
                             backgroundColor: Colors.transparent,
                           )),
                     ),
@@ -729,7 +729,7 @@ class NotCompletedListModel extends StatelessWidget {
                       // color: Colors.amber,
                       width: 150,
                       child: Text(
-                        data['username'],
+                        data['username'].toString(),
                         style:
                             const TextStyle(color: Colors.black, fontSize: 20),
                       ),
@@ -799,7 +799,7 @@ class SuccessfulPaymentListModel extends StatelessWidget {
                 CircleAvatar(
                   radius: 25.0,
                   backgroundImage:
-                      NetworkImage(data['userImageUrl'].toString()),
+                      NetworkImage(data['userImageUrl']?? "https://www.biiainsurance.com/wp-content/uploads/2015/05/no-image.jpg",),
                 ),
                 Width10,
                 Column(

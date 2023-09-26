@@ -4,9 +4,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:homesefty/VIEW/Design%20Page/loginpage.dart';
-
-import 'package:homesefty/VIEW/Employees/modelPage/employeRatingModelPage.dart';
 import 'package:homesefty/VIEW/Employees/modelPage/homepageshowrating.dart';
 import 'package:homesefty/VIEW/Employees/pendingWork/PandingWorkmodel.dart';
 import 'package:homesefty/VIEW/Employees/ratingloopfuntion.dart';
@@ -36,7 +33,6 @@ class _EmployesHomeState extends State<EmployesHome> {
     // ignore: no_leading_underscores_for_local_identifiers
     var _mediaqury = MediaQuery.of(context);
     return Consumer<EmployeChating>(builder: (context, value, child) {
-
       return Scaffold(
         resizeToAvoidBottomInset: false,
         // backgroundColor: const Color.fromARGB(255, 22, 58, 61) ,
@@ -130,10 +126,14 @@ class _EmployesHomeState extends State<EmployesHome> {
                       );
                     }
                     if (snapshot.hasError) {
-                      return Center(child: Lottie.asset('asset/animation/Animation - 1695118467452.json'));
+                      return Center(
+                          child: Lottie.asset(
+                              'asset/animation/Animation - 1695118467452.json'));
                     }
                     if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
-                      return Center(child: Lottie.asset('asset/animation/Animation - 1695375830883.json'));
+                      return Center(
+                          child: Lottie.asset(
+                              'asset/animation/Animation - 1695375830883.json'));
                     }
 
                     return ListView.builder(
@@ -142,7 +142,6 @@ class _EmployesHomeState extends State<EmployesHome> {
                         values.datalis(snapshot.data!.docs.length);
                         int limit = snapshot.data!.docs.length;
 
-                      
                         // for(int num in )
                         final data = snapshot.data!.docs[index];
                         final doucment = data.data();
@@ -159,8 +158,9 @@ class _EmployesHomeState extends State<EmployesHome> {
                                 child: Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: Card(
-                                      child:
-                                          EmployHomepageRating(datas: doucment,)),
+                                      child: EmployHomepageRating(
+                                    datas: doucment,
+                                  )),
                                 )));
                       },
                       itemCount: snapshot.data!.docs.length > 10
@@ -221,15 +221,18 @@ class _EmployesHomeState extends State<EmployesHome> {
                                   if (snapshot.connectionState ==
                                       ConnectionState.waiting) {
                                     return const CircularProgressIndicator();
-                                  }if(!snapshot.hasData||snapshot.data!.docs.isEmpty){
-                                    return  Padding(
+                                  }
+                                  if (!snapshot.hasData ||
+                                      snapshot.data!.docs.isEmpty) {
+                                    return Padding(
                                       padding: const EdgeInsets.all(20.0),
-                                      child: Center(child: Padding(
+                                      child: Center(
+                                          child: Padding(
                                         padding: const EdgeInsets.all(40),
-                                        child: Lottie.asset('asset/animation/animation_llucpusx (1).json'),
+                                        child: Lottie.asset(
+                                            'asset/animation/animation_llucpusx (1).json'),
                                       )),
-                                    ) ;
-
+                                    );
                                   }
                                   if (snapshot.connectionState ==
                                       ConnectionState.active) {
@@ -253,10 +256,14 @@ class _EmployesHomeState extends State<EmployesHome> {
                                         shrinkWrap: false,
                                       );
                                     } else {
-                                      return Center(child: Lottie.asset('asset/animation/Animation - 1695118467452.json')) ;
+                                      return Center(
+                                          child: Lottie.asset(
+                                              'asset/animation/Animation - 1695118467452.json'));
                                     }
                                   }
-                                  return Center(child: Lottie.asset('asset/animation/Animation - 1695118467452.json')) ;
+                                  return Center(
+                                      child: Lottie.asset(
+                                          'asset/animation/Animation - 1695118467452.json'));
                                 },
                               ),
                             ),
@@ -386,15 +393,13 @@ class NewDrawer extends StatelessWidget {
             ),
           ),
         ),
-        ListTile( onTap:()async {
-          control.signout(context);
-           SharedPreferences prefs = await SharedPreferences.getInstance();
-            prefs. remove("emailKey");
-             prefs.remove("passwordKey");
-        
-
-          
-        }, 
+        ListTile(
+          onTap: () async {
+            control.signout(context);
+            SharedPreferences prefs = await SharedPreferences.getInstance();
+            prefs.remove("emailKey");
+            prefs.remove("passwordKey");
+          },
           leading: Icon(
             Icons.logout,
             size: 35,

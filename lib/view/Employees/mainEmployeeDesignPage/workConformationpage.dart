@@ -73,8 +73,8 @@ class _WorkConformationpageState extends State<WorkConformationpage> {
                                                       widget.datas['userid'],
                                                       widget.datas['username'],
                                                       widget.datas['employName'],
-                                                      widget.datas['userimagurl'],
-                                                      widget.datas['employurl']);
+                                                      widget.datas['userimagurl'] ?? "https://www.biiainsurance.com/wp-content/uploads/2015/05/no-image.jpg",
+                                                      widget.datas['employurl'] ?? "https://www.biiainsurance.com/wp-content/uploads/2015/05/no-image.jpg");
 
                                               Get.snackbar(
                                                 "${widget.datas['username']}",
@@ -155,7 +155,7 @@ class _WorkConformationpageState extends State<WorkConformationpage> {
                                 child: SizedBox.fromSize(
                                   size: const Size.fromRadius(40), // Image radius
                                   child: Image.network(
-                                      widget.datas['userimagurl'],
+                                      widget.datas['userimagurl'] ?? "https://www.biiainsurance.com/wp-content/uploads/2015/05/no-image.jpg",
                                       fit: BoxFit.cover),
                                 ),
                               )
@@ -174,7 +174,7 @@ class _WorkConformationpageState extends State<WorkConformationpage> {
                       style: TextStyle(fontSize: 20, color: Colors.grey),
                     ),
                   ),
-                  EmployesWorkConformation(hinttext: widget.datas['username']),
+                  EmployesWorkConformation(hinttext: widget.datas['username'].toString()),
                   const Padding(
                     padding: EdgeInsets.only(left: 20),
                     child: Text(
@@ -183,7 +183,7 @@ class _WorkConformationpageState extends State<WorkConformationpage> {
                     ),
                   ),
                   EmployesWorkConformation(
-                    hinttext: widget.datas['address'],
+                    hinttext: widget.datas['address'].toString(),
                     line: 160,
                   ),
                   const Padding(
@@ -193,7 +193,7 @@ class _WorkConformationpageState extends State<WorkConformationpage> {
                       style: TextStyle(fontSize: 20, color: Colors.grey),
                     ),
                   ),
-                  EmployesWorkConformation(hinttext: widget.datas['phone']),
+                  EmployesWorkConformation(hinttext: widget.datas['phone'].toString()),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: SizedBox(
@@ -415,13 +415,13 @@ class _WorkConformationpageState extends State<WorkConformationpage> {
                                   snapshot.data() as Map<String, dynamic>;
                               value.employdetails(
                                 data['fullname'],
-                                data['imageUrl'],
+                                data['imageUrl'] ?? "https://www.biiainsurance.com/wp-content/uploads/2015/05/no-image.jpg",
                                 data['phonenumber'],
                               );
                             }
                             value.userdetails(
                                 widget.datas['date'],
-                                widget.datas['userimagurl'],
+                                widget.datas['userimagurl']?? "https://www.biiainsurance.com/wp-content/uploads/2015/05/no-image.jpg",
                                 widget.datas['username'],
                                 widget.datas['address'],
                                 widget.datas['employid'],

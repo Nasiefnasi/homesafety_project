@@ -46,7 +46,7 @@ class NewworkModel extends StatelessWidget {
                               BorderRadius.circular(20), // Image border
                           child: SizedBox.fromSize(
                             size: const Size.fromRadius(48), // Image radius
-                            child: Image.network(details['userimagurl'],
+                            child: Image.network(details['userimagurl'] ?? "https://www.biiainsurance.com/wp-content/uploads/2015/05/no-image.jpg",
                                 fit: BoxFit.cover),
                           ),
                         )

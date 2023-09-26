@@ -53,32 +53,14 @@ class RatingEmployessPage extends StatelessWidget {
                     ),
                     const Spacer(),
                     CircleAvatar(
-                      backgroundImage: NetworkImage(datas['userurl']),
+                      backgroundImage: NetworkImage(datas['userurl']?? "https://www.biiainsurance.com/wp-content/uploads/2015/05/no-image.jpg",),
                     )
                   ]),
                 ),
                 // color: Color.fromARGB(250, 244, 26, 11),
               ),
               hight30,
-              // Padding(
-              //   padding: const EdgeInsets.symmetric(horizontal: 10),
-              //   child: SizedBox(
-              //     width: double.infinity,
-              //     height: 36,
-              //     child: RatingBar.builder(
-              //       itemSize: 25,
-              //       minRating: 0,
-              //       glowColor: Colors.black,
-              //       itemBuilder: (context, index) => const Icon(
-              //         Icons.star,
-              //         color: Colors.amber,
-              //       ),
-              //       onRatingUpdate: (rating) => setState(() {
-              //         this.rating = rating;
-              //       }),
-              //     ),
-              //   ),
-              // ),
+   
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10),
                 child: SizedBox(

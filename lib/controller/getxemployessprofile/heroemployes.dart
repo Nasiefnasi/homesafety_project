@@ -72,7 +72,7 @@ class EmployesDetailsControl extends ChangeNotifier {
           .set(employeobj.ttomap());
       loading.value = false;
       Get.snackbar("Successful ", "Your Data");
-      Get.to(const HiddenDrawer());
+      Get.off(const HiddenDrawer());
     } catch (e) {
       // ignore: unnecessary_brace_in_string_interps
       Get.snackbar("Error", '${e}');

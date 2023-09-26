@@ -58,61 +58,11 @@ class _LoginPageState extends State<LoginPage> {
 
       crotl.signIn(context);
 
-      //  getemail = savedEmail.toString();
-      //  getpassword = savedPassword.toString();
+      
     }
   }
 
-  // late Box box1;
-  // @override
-  // void initState() {
-  //   // TODO: implement initState
-  //   super.initState();
-  // }
 
-  // void createBox() async {
-  //   box1 = await Hive.openBox('logindata');
-  //   getdata();
-  // }
-
-  // void getdata() async {
-  //   if (box1.get("email") != null) {
-  //     crotl.loginemail = box1.get("email");
-  //         // ischeking = true;
-  //         setState(() {
-
-  //         });
-
-  //   }
-  //   if (box1.get("Password") != null) {
-  //     crotl.loginpassword = box1.get("Password");
-  //   }
-  // }
-  // final crotl = Get.put(Authcontroller());
-
-  // late Box box1;
-  // bool ischeking = false; // Move this declaration here
-
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   createBox();
-  //   // Initialize the Hive box in initState
-  // }
-
-  // void createBox() async {
-  //   box1 = await Hive.openBox('logindata');
-
-  // }
-
-  // getdata() async {
-  //   if (box1.get("email") != null) {
-  //     crotl.loginemail = box1.get("email");
-  //   }
-  //   if (box1.get("Password") != null) {
-  //     crotl.loginpassword = box1.get("Password");
-  //   }
-  // }
 
   @override
   Widget build(BuildContext context) {

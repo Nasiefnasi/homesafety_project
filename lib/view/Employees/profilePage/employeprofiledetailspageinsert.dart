@@ -54,8 +54,8 @@ class _EmployeProfilePageState extends State<EmployeProfilePage> {
                             color: const Color.fromARGB(255, 71, 33, 33))),
                     child: Obx(
                       () => employcontrl.imageshow.value == ''
-                          ? const Center(child: Text('Select mage'))
-                          // :Image.network(cotrol.selectimagepath),
+                          // ? const Center(child: Text('Select mage'))
+                         ? Image.network( "https://www.biiainsurance.com/wp-content/uploads/2015/05/no-image.jpg")
                           : Image.file(File(employcontrl.imageshow.value),
                               fit: BoxFit.cover),
                     ),
